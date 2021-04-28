@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public enum CombatState { START, PLAYERTURN, ENEMYTURN, WIN, LOSE }
 
@@ -23,6 +24,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] float waitToStartTime = 2f;
     [SerializeField] float enemyWaitTime = 2.5f;
     [SerializeField] float enemyOffsetTime = 0.5f;
+    [SerializeField] float attackTime = 2f;
+    [SerializeField] float bufferTime = 1.5f;
 
     [Header("UI")]
     [SerializeField] TextMeshProUGUI combatText = null;
@@ -76,10 +79,30 @@ public class CombatManager : MonoBehaviour
         {
             return;
         }
+        StartCoroutine(PlayerAttack());
+    }
 
-
-        currentTarget.GetComponent<EnemyHealth>().takeDamage(100);
+    IEnumerator PlayerAttack()
+    {
         combatState = CombatState.ENEMYTURN;
+        currentTarget.GetComponent<EnemyHealth>().TakeDamage(80);
+        yield return new WaitForSeconds(attackTime);
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator EnemyTurn()
+    {
+        combatText.text = "Enemy Turn";
+
+        for (int i = 0; i < currentEnemies.Count; i++)
+        {
+            yield return new WaitForSeconds(bufferTime);
+            var scripts = currentEnemies[i].GetComponents<MonoBehaviour>();
+            IEnemyCombat[] attacks = (from a in scripts where a.GetType().GetInterfaces().Any(k => k == typeof(IEnemyCombat)) select (IEnemyCombat)a).ToArray();
+            attacks[0].DetermineAction();
+            yield return new WaitForSeconds(attackTime);
+        }
+        
     }
 
     public void EnemyDeath(GameObject enemy)
@@ -90,7 +113,18 @@ public class CombatManager : MonoBehaviour
         if (currentEnemies.Count == 0)
         {
             combatState = CombatState.WIN;
+            PlayerWon();
         }
+    }
+
+    private void PlayerWon()
+    {
+        Debug.Log("Player Wins");
+    }
+
+    public void PlayerLost()
+    {
+        Debug.Log("Player Lost");
     }
 
     public void SetTarget(GameObject newTarget)

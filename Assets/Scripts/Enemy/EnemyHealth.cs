@@ -14,7 +14,18 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void takeDamage(int damage)
+    public float getHealthPercent() { return ((float)currentHealth)/((float)maxHealth); }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
+
+    public void TakeDamage(int damage)
     {
         Debug.Log("Damage Dealt");
         currentHealth -= damage;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9171908757455000548}
   - component: {fileID: 5862657055213987844}
+  - component: {fileID: 1177431219499521763}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -82,3 +83,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1177431219499521763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6924071780320927752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78dbef3df2c97c44be4286cb4a78e8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingChips: 100
+  currentChips: 100
