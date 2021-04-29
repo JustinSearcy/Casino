@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] GameObject[] enemyPrefabs = null;
     [SerializeField] GameObject playerPrefab = null;
+    [SerializeField] GameObject targetingCircle = null;
 
     [Header("Transforms")]
     [SerializeField] Transform playerSpawn = null;
@@ -30,11 +31,16 @@ public class CombatManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI combatText = null;
     [SerializeField] GameObject playerMenu = null;
+    [SerializeField] GameObject attackMenu = null;
+    [SerializeField] GameObject itemMenu = null;
+    //Other Menu
 
     [Header("Misc")]
     [SerializeField] CombatState combatState;
     [SerializeField] List<GameObject> currentEnemies = null;
     [SerializeField] GameObject currentTarget = null;
+
+    PlayerActions actions;
 
     void Start()
     {
@@ -52,7 +58,9 @@ public class CombatManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitToStartTime);
         GameObject player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
+        FindObjectOfType<ChipCombatUI>().UpdateChipText(FindObjectOfType<ChipSystem>().getChips());
         LeanTween.moveX(player, playerPos.position.x, moveTime).setEaseOutBack();
+        actions = FindObjectOfType<PlayerActions>();
         yield return new WaitForSeconds(enemyWaitTime);
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
@@ -61,7 +69,7 @@ public class CombatManager : MonoBehaviour
             currentEnemies.Add(enemy);
             yield return new WaitForSeconds(enemyOffsetTime);
         }
-        currentTarget = currentEnemies[0];
+        SetTarget(currentEnemies[0]);
         yield return new WaitForSeconds(enemyOffsetTime);
         combatState = CombatState.PLAYERTURN;
         PlayerTurn();
@@ -73,20 +81,26 @@ public class CombatManager : MonoBehaviour
         playerMenu.SetActive(true);
     }
 
-    public void OnAttackButton()
+    public void OnAttackButton(int attackButton)
     {
         if(combatState != CombatState.PLAYERTURN && currentTarget != null)
         {
             return;
         }
-        StartCoroutine(PlayerAttack());
+        if(actions.currentActions[attackButton] != null)
+        {
+            StartCoroutine(PlayerAction(attackButton));
+        }
     }
 
-    IEnumerator PlayerAttack()
+    IEnumerator PlayerAction(int action)
     {
-        combatState = CombatState.ENEMYTURN;
-        currentTarget.GetComponent<EnemyHealth>().TakeDamage(80);
+        attackMenu.SetActive(false);
+        itemMenu.SetActive(false);
+        //disable other menu too
+        actions.currentActions[action].GetComponent<IAction>().StartAction(currentTarget);
         yield return new WaitForSeconds(attackTime);
+        combatState = CombatState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
 
@@ -97,12 +111,20 @@ public class CombatManager : MonoBehaviour
         for (int i = 0; i < currentEnemies.Count; i++)
         {
             yield return new WaitForSeconds(bufferTime);
-            var scripts = currentEnemies[i].GetComponents<MonoBehaviour>();
-            IEnemyCombat[] attacks = (from a in scripts where a.GetType().GetInterfaces().Any(k => k == typeof(IEnemyCombat)) select (IEnemyCombat)a).ToArray();
-            attacks[0].DetermineAction();
+            var enemyAttacks = currentEnemies[i].GetComponent<IEnemyCombat>();
+            string action = enemyAttacks.DetermineAction();
+            combatText.text = "Enemy uses " + action;
             yield return new WaitForSeconds(attackTime);
+            if(combatState == CombatState.LOSE)
+            {
+                break;
+            }
         }
-        
+        if(combatState == CombatState.ENEMYTURN)
+        {
+            combatState = CombatState.PLAYERTURN;
+            PlayerTurn();
+        }
     }
 
     public void EnemyDeath(GameObject enemy)
@@ -119,16 +141,18 @@ public class CombatManager : MonoBehaviour
 
     private void PlayerWon()
     {
-        Debug.Log("Player Wins");
+        combatText.text = "You Won";
     }
 
     public void PlayerLost()
     {
-        Debug.Log("Player Lost");
+        combatState = CombatState.LOSE;
+        combatText.text = "You Lost";
     }
 
     public void SetTarget(GameObject newTarget)
     {
         currentTarget = newTarget;
+        targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEnemyCombat
 {
-    void DetermineAction();
+    string DetermineAction();
 
     void ActionOne();
 
