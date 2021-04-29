@@ -98,7 +98,9 @@ public class CombatManager : MonoBehaviour
         attackMenu.SetActive(false);
         itemMenu.SetActive(false);
         //disable other menu too
-        actions.currentActions[action].GetComponent<IAction>().StartAction(currentTarget);
+        IAction currentAction = actions.currentActions[action].GetComponent<IAction>();
+        combatText.text = "You used " + currentAction.ActionName;
+        currentAction.StartAction(currentTarget);
         yield return new WaitForSeconds(attackTime);
         combatState = CombatState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
