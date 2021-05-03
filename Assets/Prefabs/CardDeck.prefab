@@ -131,7 +131,7 @@ MonoBehaviour:
   currentCards: []
   card: {fileID: 1281056156189878519, guid: 785601cb4a8b0454a9a8d93e52f24cfb, type: 3}
   cardEnter: {fileID: 1600948321}
-  moveOffsetTime: 0.5
-  moveTime: 0.4
+  moveOffsetTime: 0.2
+  moveTime: 0.25
   initialMoveTime: 0.75
-  cardPosY: 0
+  cardPosY: 1

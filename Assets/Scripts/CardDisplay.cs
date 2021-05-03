@@ -10,10 +10,14 @@ public class CardDisplay : MonoBehaviour
     [SerializeField] TextMeshPro valueTop = null;
     [SerializeField] TextMeshPro valueBottom = null;
 
+    public int cardValue = 0;
+    public bool hasChanged = false;
+
     public Card card;
 
     public void DisplayCard()
     {
+        cardValue = card.value;
         cardFront.GetComponent<SpriteRenderer>().sprite = card.cardFront;
         suit.GetComponent<SpriteRenderer>().sprite = card.suit;
         valueTop.text = card.display;

@@ -115,6 +115,10 @@ public class CombatManager : MonoBehaviour
         combatText.text = "You used " + currentAction.GetComponent<IAction>().ActionName;
         currentAction.GetComponent<IAction>().StartAction(currentTarget);
         yield return new WaitForSeconds(attackTime);
+    }
+
+    public void TurnEnd()
+    {
         combatState = CombatState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }

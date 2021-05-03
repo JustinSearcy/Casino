@@ -7,7 +7,7 @@ public class BasicDeck : MonoBehaviour
 {
     [SerializeField] List<Card> fullDeck = null;
     [SerializeField] List<Card> currentDeck = null;
-    [SerializeField] List<GameObject> currentCards = null;
+    public List<GameObject> currentCards = null;
     [SerializeField] GameObject card = null;
     [SerializeField] GameObject cardEnter = null;
     [SerializeField] float moveOffsetTime = 0.3f;
