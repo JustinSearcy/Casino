@@ -60,7 +60,7 @@ public class CombatManager : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         FindObjectOfType<ChipCombatUI>().UpdateChipText(FindObjectOfType<ChipSystem>().getChips());
         LeanTween.moveX(player, playerPos.position.x, moveTime).setEaseOutBack();
-        actions = FindObjectOfType<PlayerActions>();
+        PlayerSetUp();
         yield return new WaitForSeconds(enemyWaitTime);
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
@@ -73,6 +73,19 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(enemyOffsetTime);
         combatState = CombatState.PLAYERTURN;
         PlayerTurn();
+    }
+
+    private void PlayerSetUp()
+    {
+        actions = FindObjectOfType<PlayerActions>();
+        for (int i = 0; i < 3; i++)
+        {
+            if(actions.currentActions[i] != null)
+            {
+                attackMenu.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actions.currentActions[i].name;
+            }
+            //Disable button if no action available in slot?
+        }
     }
 
     private void PlayerTurn()
@@ -98,9 +111,9 @@ public class CombatManager : MonoBehaviour
         attackMenu.SetActive(false);
         itemMenu.SetActive(false);
         //disable other menu too
-        IAction currentAction = actions.currentActions[action].GetComponent<IAction>();
-        combatText.text = "You used " + currentAction.ActionName;
-        currentAction.StartAction(currentTarget);
+        GameObject currentAction = Instantiate(actions.currentActions[action]); //Delete action when done
+        combatText.text = "You used " + currentAction.GetComponent<IAction>().ActionName;
+        currentAction.GetComponent<IAction>().StartAction(currentTarget);
         yield return new WaitForSeconds(attackTime);
         combatState = CombatState.ENEMYTURN;
         StartCoroutine(EnemyTurn());

@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1600948321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600948322}
+  m_Layer: 0
+  m_Name: CardEnter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1600948322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600948321}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2189830170823779638}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8559024944031565653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2189830170823779638}
+  - component: {fileID: 7130265694353254139}
+  m_Layer: 0
+  m_Name: CardDeck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2189830170823779638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559024944031565653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1600948322}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7130265694353254139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559024944031565653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb9e1fe950cb8d4f8edae6dfd90cda9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullDeck:
+  - {fileID: 11400000, guid: f615e4634f2ef3a48b52152be3a616e3, type: 2}
+  - {fileID: 11400000, guid: 38b024375a0d0d844b3a3466809a4622, type: 2}
+  - {fileID: 11400000, guid: 2894a949d4aaffd47ace6760fd00d331, type: 2}
+  - {fileID: 11400000, guid: c185f3234d1ffd749bb122f8830083dc, type: 2}
+  - {fileID: 11400000, guid: f928744a7a0dfd04e85d6a7fe0c2da4c, type: 2}
+  - {fileID: 11400000, guid: 8a3fd86cf145a2045b04edb344aef3ab, type: 2}
+  - {fileID: 11400000, guid: 7df07f681ab9cc74b94682953635d385, type: 2}
+  - {fileID: 11400000, guid: 540b1586b2f36df4f8f0c032e8d40047, type: 2}
+  - {fileID: 11400000, guid: da37c449474256c439e8e22a795aa527, type: 2}
+  - {fileID: 11400000, guid: 0cac3aca27317af408cb7bea71b43b24, type: 2}
+  - {fileID: 11400000, guid: 4a9a2ca22b48720459edcb07c71861cd, type: 2}
+  - {fileID: 11400000, guid: 65ef86c34b9f7cf44b65fcb73c597bea, type: 2}
+  - {fileID: 11400000, guid: ace40953da7f66d4587894f1c7770490, type: 2}
+  - {fileID: 11400000, guid: e85e1a449da12aa439d2d3693ccbc489, type: 2}
+  - {fileID: 11400000, guid: 514b6d7390b395e4990be05996aa54d1, type: 2}
+  - {fileID: 11400000, guid: 961dee395223efc45a8afef22bfa2fd8, type: 2}
+  - {fileID: 11400000, guid: 93c1c9183f1ca8f4d964219a434a19f0, type: 2}
+  - {fileID: 11400000, guid: 1923afca77bbfd245b2ec683494aa1f5, type: 2}
+  - {fileID: 11400000, guid: 9ee2841cc73252b4e9540eeadbfd2b02, type: 2}
+  - {fileID: 11400000, guid: d549a00f9a739924daa6f2c9d3c9cea9, type: 2}
+  - {fileID: 11400000, guid: b299671f7e407624b8a82cb65aceff05, type: 2}
+  - {fileID: 11400000, guid: 1064b0f92bbc4ad45b5bc3cf385ee60f, type: 2}
+  - {fileID: 11400000, guid: 306396a5d1f09654388c2da27c1189d6, type: 2}
+  - {fileID: 11400000, guid: 62c6a0e35adbb9b4b881413eefdadb5d, type: 2}
+  - {fileID: 11400000, guid: 507aabb703219ce4d9e66d08c00db179, type: 2}
+  - {fileID: 11400000, guid: 1a29c99e1f55d764193db5a8a7192637, type: 2}
+  - {fileID: 11400000, guid: e7940fcb41476274fa29d5f1afc00f41, type: 2}
+  - {fileID: 11400000, guid: e9b492722a076524da1c88f083deec0f, type: 2}
+  - {fileID: 11400000, guid: 41d86fb9b582d664e98bfdba4086707f, type: 2}
+  - {fileID: 11400000, guid: 98344c4bae5f4b449980c3dd57f7e1aa, type: 2}
+  - {fileID: 11400000, guid: cda1a784316603945913b2bca056410f, type: 2}
+  - {fileID: 11400000, guid: ab5c3610bc7f0be4482a5ccf8e75cbde, type: 2}
+  - {fileID: 11400000, guid: 8b6c2ab17e4c51f45806572852ed2c45, type: 2}
+  - {fileID: 11400000, guid: 571d145d2a5c7be4b86d39d3e3894d5d, type: 2}
+  - {fileID: 11400000, guid: 83795e87c9ba5bc44abf5ef6d8d3084a, type: 2}
+  - {fileID: 11400000, guid: 9cb7a8e50e600754581f590f88f55ff4, type: 2}
+  - {fileID: 11400000, guid: 8e13ef680d4deb64f8032804285000eb, type: 2}
+  - {fileID: 11400000, guid: e162a4443a584d74b8255919777e76f3, type: 2}
+  - {fileID: 11400000, guid: da88a2141ea78334a8bfdfb90a0f7ec8, type: 2}
+  - {fileID: 11400000, guid: 6071fc58b464cbb419242c48768837bf, type: 2}
+  - {fileID: 11400000, guid: 13ac0b24400f9cf468d47e58374b64ee, type: 2}
+  - {fileID: 11400000, guid: 507d3d5eaea97da4d80e676b46cd461b, type: 2}
+  - {fileID: 11400000, guid: 446fc3574c61daf4ca51e655a9965bfb, type: 2}
+  - {fileID: 11400000, guid: e730eb537e8658a46b819d8e5c467f69, type: 2}
+  - {fileID: 11400000, guid: 9fcd2af4479cf214eb18e258e5851103, type: 2}
+  - {fileID: 11400000, guid: 9186639a18fff864ca0a388a7a73dd3a, type: 2}
+  - {fileID: 11400000, guid: 0cece11e8282be240b869e6c7941d93b, type: 2}
+  - {fileID: 11400000, guid: 6cffeee209cb1404a8aad4e3a2b8b47b, type: 2}
+  - {fileID: 11400000, guid: ed10559b1d344b84db03b36a25d5b146, type: 2}
+  - {fileID: 11400000, guid: a26a11fc0c67e9c468bb210a74ea7f58, type: 2}
+  - {fileID: 11400000, guid: 0fb95b8f4c8a32243a3edf16fdc56247, type: 2}
+  - {fileID: 11400000, guid: 83960e570f35fd24bae09b8953e06444, type: 2}
+  currentDeck: []
+  currentCards: []
+  card: {fileID: 1281056156189878519, guid: 785601cb4a8b0454a9a8d93e52f24cfb, type: 3}
+  cardEnter: {fileID: 1600948321}
+  moveOffsetTime: 0.5
+  moveTime: 0.4
+  initialMoveTime: 0.75
+  cardPosY: 0
