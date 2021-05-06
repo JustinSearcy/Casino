@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
-public enum CombatState { START, PLAYERTURN, ENEMYTURN, WIN, LOSE }
+public enum CombatState { START, PLAYERTURN, PLAYERATTACK, ENEMYTURN, WIN, LOSE }
 
 public class CombatManager : MonoBehaviour
 {
@@ -69,9 +69,9 @@ public class CombatManager : MonoBehaviour
             currentEnemies.Add(enemy);
             yield return new WaitForSeconds(enemyOffsetTime);
         }
-        SetTarget(currentEnemies[0]);
         yield return new WaitForSeconds(enemyOffsetTime);
         combatState = CombatState.PLAYERTURN;
+        SetTarget(currentEnemies[0]);
         PlayerTurn();
     }
 
@@ -102,6 +102,7 @@ public class CombatManager : MonoBehaviour
         }
         if(actions.currentActions[attackButton] != null)
         {
+            combatState = CombatState.PLAYERTURN;
             StartCoroutine(PlayerAction(attackButton));
         }
     }
@@ -171,7 +172,10 @@ public class CombatManager : MonoBehaviour
 
     public void SetTarget(GameObject newTarget)
     {
-        currentTarget = newTarget;
-        targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
+        if(combatState == CombatState.PLAYERTURN)
+        {
+            currentTarget = newTarget;
+            targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
+        }
     }
 }
