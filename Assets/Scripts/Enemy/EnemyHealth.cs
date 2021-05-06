@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int currentHealth = 100;
     [SerializeField] TextMeshPro enemyHealthText = null;
+    [SerializeField] float deathAnimTime = 1f;
 
     void Start()
     {
@@ -33,14 +34,18 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Damage Dealt");
         currentHealth -= damage;
         UpdateHealthText();
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            Die();
+            currentHealth = 0;
+            UpdateHealthText();
+            StartCoroutine(Die());
         }
     }
 
-    private void Die()
+    IEnumerator Die()
     {
+        //Add in death animation here
+        yield return new WaitForSeconds(deathAnimTime);
         FindObjectOfType<CombatManager>().EnemyDeath(this.gameObject);
         Destroy(this.gameObject);
     }

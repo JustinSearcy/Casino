@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
+public class WeightedDie : MonoBehaviour, IEnemyCombat
 {
     EnemyHealth health;
     ChipSystem chips;
@@ -36,19 +36,17 @@ public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
         }
     }
 
-    public void ActionOne()//Attack Action
+    public void ActionOne()
     {
-        chips.LoseChips(20);
-        Debug.Log("Enemy Attacks");
+        throw new System.NotImplementedException();
     }
 
-    public void ActionTwo()//Defensive Action
+    public void ActionThree()
     {
-        health.Heal(20);
-        Debug.Log("Enemy Heals");
+        throw new System.NotImplementedException();
     }
 
-    public void ActionThree()//Something Else to Add Later, special ability?
+    public void ActionTwo()
     {
         throw new System.NotImplementedException();
     }

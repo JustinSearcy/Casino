@@ -39,6 +39,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] CombatState combatState;
     [SerializeField] List<GameObject> currentEnemies = null;
     [SerializeField] GameObject currentTarget = null;
+    [SerializeField] float floorYPos = -1.95f;
 
     PlayerActions actions;
 
@@ -65,6 +66,10 @@ public class CombatManager : MonoBehaviour
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
             GameObject enemy = Instantiate(enemyPrefabs[i], enemySpawn.position, Quaternion.identity);
+            float offset =  enemy.GetComponent<Collider2D>().bounds.size.y / 2f;
+            Debug.Log(offset);
+            float yPos = floorYPos + offset;
+            enemy.transform.position = new Vector2(enemy.transform.position.x, yPos);
             LeanTween.moveX(enemy, enemyPos[i].position.x, moveTime).setEaseOutBack();
             currentEnemies.Add(enemy);
             yield return new WaitForSeconds(enemyOffsetTime);
@@ -102,7 +107,7 @@ public class CombatManager : MonoBehaviour
         }
         if(actions.currentActions[attackButton] != null)
         {
-            combatState = CombatState.PLAYERTURN;
+            combatState = CombatState.PLAYERATTACK;
             StartCoroutine(PlayerAction(attackButton));
         }
     }
@@ -151,7 +156,7 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
-        SetTarget(currentEnemies[0]);
+        OverrideSetTarget(currentEnemies[0]);
         if (currentEnemies.Count == 0)
         {
             combatState = CombatState.WIN;
@@ -177,5 +182,11 @@ public class CombatManager : MonoBehaviour
             currentTarget = newTarget;
             targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
         }
+    }
+
+    private void OverrideSetTarget(GameObject newTarget)
+    {
+        currentTarget = newTarget;
+        targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
     }
 }

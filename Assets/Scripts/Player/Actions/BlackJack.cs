@@ -18,6 +18,7 @@ public class Blackjack : MonoBehaviour, IAction
     [SerializeField] float pauseTime = 1f;
     [SerializeField] GameObject canvas = null;
     [SerializeField] GameObject hitParticles = null;
+    [SerializeField] GameObject damagePopup = null;
 
     GameObject currentTarget = null;
 
@@ -122,11 +123,13 @@ public class Blackjack : MonoBehaviour, IAction
         RemoveCards();
         GameObject particles = Instantiate(hitParticles, currentTarget.transform);
         yield return new WaitForSeconds(animTime);
+        GameObject text = Instantiate(damagePopup, currentTarget.transform);
+        text.GetComponent<DamagePopup>().UpdateText(damage);
         Destroy(particles, animTime);
         currentTarget.GetComponent<EnemyHealth>().TakeDamage(damage);
         deck.currentCards.Clear();
         FindObjectOfType<CombatManager>().TurnEnd();
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 2*animTime);
     }
 
     private void RemoveCards()
