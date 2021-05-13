@@ -19,6 +19,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3348020537525947491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829183778581187501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38f48a8d66b2adc46887f23a3a88ac01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
 --- !u!1001 &3390433856008661546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,10 +39,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_InstanceId
+      value: -39046
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_HasRenderer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePathHash
+      value: -659501563
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_UseRendererSilhouette
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].x
+      value: -0.8332155
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[0].y
+      value: -1.5435944
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].x
+      value: 0.901165
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[1].y
+      value: -1.5225065
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].x
+      value: 0.9107423
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[2].y
+      value: -1.411202
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].x
+      value: -0.82644105
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[3].y
+      value: -1.4069772
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[4].x
+      value: -0.88881016
+      objectReference: {fileID: 0}
+    - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_ShapePath.Array.data[4].y
+      value: 1.0679493
+      objectReference: {fileID: 0}
     - target: {fileID: 235999963630400193, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4458100411979618505, guid: 2f6c5223f15902a4185362ec738a1c2e, type: 3}
+    - target: {fileID: 235999963630400193, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41a712e3efbfcd940bfbd33579971165, type: 2}
     - target: {fileID: 1594155671533901361, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.7
