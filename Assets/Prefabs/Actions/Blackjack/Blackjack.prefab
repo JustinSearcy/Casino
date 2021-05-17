@@ -54,6 +54,7 @@ MonoBehaviour:
   canvas: {fileID: 8390901707169836678}
   hitParticles: {fileID: 1107893436532929431, guid: b85be5ab847ac194ebea6c5888c56acd, type: 3}
   damagePopup: {fileID: 2854229375512463313, guid: 7947c16fbc9ce5a4b8a0b211baf5d54a, type: 3}
+  bust: {fileID: 8259218084211573499, guid: 3418733fe97b8084089d429a9ef039b1, type: 3}
 --- !u!1 &1182454012042675057
 GameObject:
   m_ObjectHideFlags: 0

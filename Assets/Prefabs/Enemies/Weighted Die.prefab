@@ -102,6 +102,30 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 715870894923114622, guid: 494eed1e772aa9f4cb221de30921eac1, type: 3}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: strength
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: magDefense
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: physDefense
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: baseStrength
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: baseMagDefense
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: basePhysDefense
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1594155671533901361, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.05

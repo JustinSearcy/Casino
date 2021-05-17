@@ -10,6 +10,7 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] float shrinkTime = 1f;
     [SerializeField] float yPosFirstIncrease = 0.75f;
     [SerializeField] float yPosSecondIncrease = 0.5f;
+    [SerializeField] float textSize = 2f;
 
     void Start()
     {
@@ -19,7 +20,7 @@ public class DamagePopup : MonoBehaviour
     IEnumerator Display()
     {
         GameObject textPopup = this.gameObject;
-        LeanTween.scale(textPopup, Vector2.one, enlargeTime);
+        LeanTween.scale(textPopup, new Vector2(textSize, textSize), enlargeTime);
         LeanTween.moveY(textPopup, (textPopup.transform.position.y + yPosFirstIncrease), enlargeTime);
         yield return new WaitForSeconds(enlargeTime);
         LeanTween.scale(textPopup, Vector2.zero, shrinkTime);

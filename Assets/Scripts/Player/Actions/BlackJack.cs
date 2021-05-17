@@ -19,6 +19,7 @@ public class Blackjack : MonoBehaviour, IAction
     [SerializeField] GameObject canvas = null;
     [SerializeField] GameObject hitParticles = null;
     [SerializeField] GameObject damagePopup = null;
+    [SerializeField] GameObject bust = null;
 
     GameObject currentTarget = null;
 
@@ -74,10 +75,10 @@ public class Blackjack : MonoBehaviour, IAction
                         break;
                     }
                 }
-                if(currentScore > 21) //BUST
+                if(currentScore > 21) //BUST (Maybe have it deal Recoil Damage)
                 {
                     DisableButtons();
-                    CalculateDamage(1); //Figure out the damage when bust
+                    StartCoroutine(Bust());
                     Debug.Log("BUST");
                 }
             }
@@ -87,6 +88,18 @@ public class Blackjack : MonoBehaviour, IAction
                 Debug.Log("CONTINUE");
             }
         }
+    }
+
+    IEnumerator Bust()
+    {
+        yield return new WaitForSeconds(pauseTime);
+        GameObject bustEffect = Instantiate(bust, new Vector2(0, 1f), Quaternion.identity);
+        yield return new WaitForSeconds(3f);
+        canvas.SetActive(false);
+        RemoveCards();
+        Destroy(bustEffect);
+        deck.currentCards.Clear();
+        FindObjectOfType<CombatManager>().TurnEnd();
     }
 
     private void UpdateScoreText()
@@ -123,6 +136,7 @@ public class Blackjack : MonoBehaviour, IAction
         RemoveCards();
         GameObject particles = Instantiate(hitParticles, currentTarget.transform);
         yield return new WaitForSeconds(animTime);
+        FindObjectOfType<Shake>().CamShake();
         GameObject text = Instantiate(damagePopup, currentTarget.transform);
         text.GetComponent<DamagePopup>().UpdateText(damage);
         Destroy(particles, animTime);

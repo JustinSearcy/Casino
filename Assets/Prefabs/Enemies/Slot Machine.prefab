@@ -107,6 +107,38 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 41a712e3efbfcd940bfbd33579971165, type: 2}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: magic
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: strength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: baseMagic
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: magDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: physDefense
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: baseStrength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: baseMagDefense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 698808007023120519, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: basePhysDefense
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1594155671533901361, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 1.7

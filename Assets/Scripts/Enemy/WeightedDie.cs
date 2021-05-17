@@ -19,6 +19,9 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     public string DetermineAction()
     {
+        ActionOne();
+        return actionOneName;
+        /*
         if (chips.getChips() < 20) //Do the attack action if it can kill player
         {
             ActionOne();
@@ -34,11 +37,12 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
             ActionOne();
             return actionOneName;
         }
+        */
     }
 
-    public void ActionOne()
+    public void ActionOne() //Make a system for determining damage
     {
-        throw new System.NotImplementedException();
+        this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
     }
 
     public void ActionThree()
@@ -49,5 +53,22 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     public void ActionTwo()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void Roll()
+    {
+        FindObjectOfType<Shake>().CamShake();
+        int playerDefense = chips.gameObject.GetComponent<UnitStats>().physDefense;
+        int dieStrength = this.gameObject.GetComponent<UnitStats>().strength;
+        int damage = 0;
+        if(dieStrength <= playerDefense)
+        {
+            damage = dieStrength;
+        }
+        else
+        {
+            damage = dieStrength * ((playerDefense - dieStrength) + 1);
+        }
+        chips.LoseChips(damage);
     }
 }
