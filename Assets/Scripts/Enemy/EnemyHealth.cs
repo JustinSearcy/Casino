@@ -6,8 +6,8 @@ using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] int maxHealth = 100;
-    [SerializeField] int currentHealth = 100;
+    [SerializeField] public int maxHealth = 100;
+    [SerializeField] public int currentHealth = 100;
     //erializeField] TextMeshPro enemyHealthText = null;
     [SerializeField] float deathAnimTime = 1f;
     [SerializeField] GameObject healthBar = null;

@@ -11,8 +11,6 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     public string actionTwoName = "Heal";
     public string actionThreeName = "Something";
 
-    public int chipValue = 15;
-
     private void Start()
     {
         health = this.gameObject.GetComponent<EnemyHealth>();
