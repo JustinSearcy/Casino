@@ -11,6 +11,8 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     public string actionTwoName = "Heal";
     public string actionThreeName = "Something";
 
+    public int chipValue = 15;
+
     private void Start()
     {
         health = this.gameObject.GetComponent<EnemyHealth>();
@@ -67,7 +69,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         }
         else
         {
-            damage = dieStrength * ((playerDefense - dieStrength) + 1);
+            damage = dieStrength * ((dieStrength - playerDefense) + 1);
         }
         chips.LoseChips(damage);
     }

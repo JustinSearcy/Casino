@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ChipSystem : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ChipSystem : MonoBehaviour
 
     public void LoseChips(int amount)
     {
-        chipLoss();
+        chipLoss(amount);
         currentChips -= amount;
         FindObjectOfType<ChipCombatUI>().UpdateAndLoseChips(currentChips);
         if(currentChips <= 0)
@@ -30,9 +31,10 @@ public class ChipSystem : MonoBehaviour
         }
     }
 
-    private void chipLoss()
+    private void chipLoss(int amount)
     {
         chipLossText.SetActive(true);
+        chipLossText.GetComponent<TextMeshPro>().text = "-" + amount;
         LeanTween.moveLocalY(chipLossText, finalTextYPos, textTime);
         StartCoroutine(resetChipLoss());
     }

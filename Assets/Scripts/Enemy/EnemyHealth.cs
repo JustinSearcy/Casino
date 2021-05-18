@@ -8,13 +8,15 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int maxHealth = 100;
     [SerializeField] int currentHealth = 100;
-    [SerializeField] TextMeshPro enemyHealthText = null;
+    //erializeField] TextMeshPro enemyHealthText = null;
     [SerializeField] float deathAnimTime = 1f;
+    [SerializeField] GameObject healthBar = null;
+    [SerializeField] float healthBarTime = 0.4f;
 
     void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthText();
+        UpdateHealthBar();
     }
 
     public float GetHealthPercent() { return ((float)currentHealth)/((float)maxHealth); }
@@ -26,18 +28,18 @@ public class EnemyHealth : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
-        UpdateHealthText();
+        UpdateHealthBar();
     }
 
     public void TakeDamage(int damage)
     {
         Debug.Log("Damage Dealt");
         currentHealth -= damage;
-        UpdateHealthText();
+        UpdateHealthBar();
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            UpdateHealthText();
+            UpdateHealthBar();
             StartCoroutine(Die());
         }
     }
@@ -50,8 +52,9 @@ public class EnemyHealth : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void UpdateHealthText()
+    private void UpdateHealthBar()
     {
-        enemyHealthText.text = "" + currentHealth + "/" + maxHealth;
+        //enemyHealthText.text = "" + currentHealth + "/" + maxHealth;
+        LeanTween.scaleX(healthBar, GetHealthPercent(), healthBarTime).setEaseOutCirc();
     }
 }
