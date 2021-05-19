@@ -19,35 +19,32 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     public string DetermineAction()
     {
-        ActionOne();
-        return actionOneName;
-        /*
-        if (chips.getChips() < 20) //Do the attack action if it can kill player
+        float num = Random.Range(0, 1f);
+        if (num <= 0.5f) //50% chance to Perfect Roll
         {
             ActionOne();
             return actionOneName;
         }
-        else if (health.GetHealthPercent() < 0.25) //Do some kind of defensive action
+        else if (num <= 0.8) //30% chance to Snake Eyes
         {
             ActionTwo();
             return actionTwoName;
         }
-        else //Default Action
+        else //20% chance to Hot Roller
         {
-            ActionOne();
-            return actionOneName;
+            ActionThree();
+            return actionThreeName;
         }
-        */
     }
 
-    public void ActionOne() //Make a system for determining damage
+    public void ActionOne()
     {
         this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
     }
 
     public void ActionThree()
     {
-        throw new System.NotImplementedException();
+        this.gameObject.GetComponent<Animator>().SetTrigger("SnakeEyes");
     }
 
     public void ActionTwo()
@@ -63,12 +60,22 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         int damage = 0;
         if(dieStrength <= playerDefense)
         {
-            damage = dieStrength;
+            damage = 6;
         }
         else
         {
-            damage = dieStrength * ((dieStrength - playerDefense) + 1);
+            damage = 6 * (dieStrength - playerDefense);
         }
         chips.LoseChips(damage);
+    }
+
+    public void SnakeEyes()
+    {
+        Debug.Log("Snake Eyes");
+    }
+
+    public void HotRoller()
+    {
+        Debug.Log("Hot Roller");
     }
 }

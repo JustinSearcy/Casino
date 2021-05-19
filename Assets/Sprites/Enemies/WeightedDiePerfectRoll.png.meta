@@ -1,106 +1,94 @@
 fileFormatVersion: 2
-guid: 494eed1e772aa9f4cb221de30921eac1
+guid: 384dc4bb8de32d446b6509218cc6f375
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 715870894923114622
-    second: WeightedDie_0
+      213: -4757184670361441769
+    second: WeightedDiePerfectRoll_0
   - first:
-      213: 6912527161915669685
-    second: WeightedDie_1
+      213: 8659611591752166158
+    second: WeightedDiePerfectRoll_1
   - first:
-      213: 6954322384658815306
-    second: WeightedDie_2
+      213: -5124105890435381050
+    second: WeightedDiePerfectRoll_2
   - first:
-      213: 3269676955550458025
-    second: WeightedDie_3
+      213: 4957350297589566205
+    second: WeightedDiePerfectRoll_3
   - first:
-      213: -5945541145721879708
-    second: WeightedDie_4
+      213: -8246364626650635326
+    second: WeightedDiePerfectRoll_4
   - first:
-      213: -6066794211733338485
-    second: WeightedDie_5
+      213: -412463006795806506
+    second: WeightedDiePerfectRoll_5
   - first:
-      213: 4895216902195611779
-    second: WeightedDie_6
+      213: -4602360549400997763
+    second: WeightedDiePerfectRoll_6
   - first:
-      213: 5313933332805809337
-    second: WeightedDie_7
+      213: 7209100273314175389
+    second: WeightedDiePerfectRoll_7
   - first:
-      213: -6186124464644061209
-    second: WeightedDie_8
+      213: -7572499149907288180
+    second: WeightedDiePerfectRoll_8
   - first:
-      213: 958237409151050747
-    second: WeightedDie_9
+      213: -8400801941022785502
+    second: WeightedDiePerfectRoll_9
   - first:
-      213: 1651415496963336514
-    second: WeightedDie_10
+      213: -3747409975428258545
+    second: WeightedDiePerfectRoll_10
   - first:
-      213: -5786545980383989627
-    second: WeightedDie_11
+      213: -1103641510036645938
+    second: WeightedDiePerfectRoll_11
   - first:
-      213: -4849288897575021309
-    second: WeightedDie_12
+      213: 292882186826390920
+    second: WeightedDiePerfectRoll_12
   - first:
-      213: -7756281461111292388
-    second: WeightedDie_13
+      213: -5785087863621081259
+    second: WeightedDiePerfectRoll_13
   - first:
-      213: -1214417274424981295
-    second: WeightedDie_14
+      213: -4722458764143889540
+    second: WeightedDiePerfectRoll_14
   - first:
-      213: 8077162126802726861
-    second: WeightedDie_15
+      213: 2131072530030532195
+    second: WeightedDiePerfectRoll_15
   - first:
-      213: 8640761029647502774
-    second: WeightedDie_16
+      213: -8153086700765486106
+    second: WeightedDiePerfectRoll_16
   - first:
-      213: 244090640037145892
-    second: WeightedDie_17
+      213: -8067694376811105896
+    second: WeightedDiePerfectRoll_17
   - first:
-      213: -1222933406807247075
-    second: WeightedDie_18
+      213: 7124462166832470034
+    second: WeightedDiePerfectRoll_18
   - first:
-      213: -1264748140364275820
-    second: WeightedDie_19
+      213: -1143024664837993894
+    second: WeightedDiePerfectRoll_19
   - first:
-      213: 5813922364025812339
-    second: WeightedDie_20
+      213: 771107370858667786
+    second: WeightedDiePerfectRoll_20
   - first:
-      213: 7213612948575994688
-    second: WeightedDie_21
+      213: 9134399724632741649
+    second: WeightedDiePerfectRoll_21
   - first:
-      213: 4609421495945280333
-    second: WeightedDie_22
+      213: -7243065882929789953
+    second: WeightedDiePerfectRoll_22
   - first:
-      213: -8731869983713839525
-    second: WeightedDie_23
+      213: -6574524483899047783
+    second: WeightedDiePerfectRoll_23
   - first:
-      213: -4650420566480496407
-    second: WeightedDie_24
+      213: 2241334586789654249
+    second: WeightedDiePerfectRoll_24
   - first:
-      213: 525041302726557431
-    second: WeightedDie_25
+      213: 7015543825214707924
+    second: WeightedDiePerfectRoll_25
   - first:
-      213: 5379718756040677898
-    second: WeightedDie_26
+      213: 7175380690743191622
+    second: WeightedDiePerfectRoll_26
   - first:
-      213: 5239677820403865369
-    second: WeightedDie_27
+      213: -2084014977279895862
+    second: WeightedDiePerfectRoll_27
   - first:
-      213: 8356028068238087771
-    second: WeightedDie_28
-  - first:
-      213: 2156692462042016183
-    second: WeightedDie_29
-  - first:
-      213: 6365308395698267929
-    second: WeightedDie_30
-  - first:
-      213: 7903995584102423483
-    second: WeightedDie_31
-  - first:
-      213: 3614928359734717388
-    second: WeightedDie_32
+      213: -624150166213112466
+    second: WeightedDiePerfectRoll_28
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -178,7 +166,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 2
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -190,7 +178,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WeightedDie_0
+      name: WeightedDiePerfectRoll_0
       rect:
         serializedVersion: 2
         x: 0
@@ -204,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e78eeec39c84fe900800000000000000
-      internalID: 715870894923114622
+      spriteID: 71a2c283fb51bfdb0800000000000000
+      internalID: -4757184670361441769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_1
+      name: WeightedDiePerfectRoll_1
       rect:
         serializedVersion: 2
         x: 32
@@ -225,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bcf83264da3eef50800000000000000
-      internalID: 6912527161915669685
+      spriteID: e0b2e33bcde1d2870800000000000000
+      internalID: 8659611591752166158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_2
+      name: WeightedDiePerfectRoll_2
       rect:
         serializedVersion: 2
         x: 64
@@ -246,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a49d22ffc57b28060800000000000000
-      internalID: 6954322384658815306
+      spriteID: 6c8cc1167d483e8b0800000000000000
+      internalID: -5124105890435381050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_3
+      name: WeightedDiePerfectRoll_3
       rect:
         serializedVersion: 2
         x: 96
@@ -267,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a0add91ed9306d20800000000000000
-      internalID: 3269676955550458025
+      spriteID: dfac00b94db0cc440800000000000000
+      internalID: 4957350297589566205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_4
+      name: WeightedDiePerfectRoll_4
       rect:
         serializedVersion: 2
         x: 128
@@ -288,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46347cb24d13d7da0800000000000000
-      internalID: -5945541145721879708
+      spriteID: 2c3642c20170f8d80800000000000000
+      internalID: -8246364626650635326
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_5
+      name: WeightedDiePerfectRoll_5
       rect:
         serializedVersion: 2
         x: 160
@@ -309,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b860d34ceca6ecba0800000000000000
-      internalID: -6066794211733338485
+      spriteID: 6d842f4a413a64af0800000000000000
+      internalID: -412463006795806506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_6
+      name: WeightedDiePerfectRoll_6
       rect:
         serializedVersion: 2
         x: 192
@@ -330,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3888bd926dd4fe340800000000000000
-      internalID: 4895216902195611779
+      spriteID: d709ea4f6712120c0800000000000000
+      internalID: -4602360549400997763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_7
+      name: WeightedDiePerfectRoll_7
       rect:
         serializedVersion: 2
         x: 224
@@ -351,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b47ff53632eeb940800000000000000
-      internalID: 5313933332805809337
+      spriteID: d99101dc08edb0460800000000000000
+      internalID: 7209100273314175389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_8
+      name: WeightedDiePerfectRoll_8
       rect:
         serializedVersion: 2
         x: 256
@@ -372,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e7898c2398762aa0800000000000000
-      internalID: -6186124464644061209
+      spriteID: c8f14dbd42419e690800000000000000
+      internalID: -7572499149907288180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_9
+      name: WeightedDiePerfectRoll_9
       rect:
         serializedVersion: 2
         x: 288
@@ -393,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf360feb8d75c4d00800000000000000
-      internalID: 958237409151050747
+      spriteID: 220ccecd42b5a6b80800000000000000
+      internalID: -8400801941022785502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_10
+      name: WeightedDiePerfectRoll_10
       rect:
         serializedVersion: 2
         x: 320
@@ -414,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 249231915a10be610800000000000000
-      internalID: 1651415496963336514
+      spriteID: f05e7d26b768efbc0800000000000000
+      internalID: -3747409975428258545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_11
+      name: WeightedDiePerfectRoll_11
       rect:
         serializedVersion: 2
         x: 352
@@ -435,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5807fbad61f02bfa0800000000000000
-      internalID: -5786545980383989627
+      spriteID: ec7d3ead4e31fa0f0800000000000000
+      internalID: -1103641510036645938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_12
+      name: WeightedDiePerfectRoll_12
       rect:
         serializedVersion: 2
         x: 384
@@ -456,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3059bc6b07dd3bcb0800000000000000
-      internalID: -4849288897575021309
+      spriteID: 88d93d21cc6801400800000000000000
+      internalID: 292882186826390920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_13
+      name: WeightedDiePerfectRoll_13
       rect:
         serializedVersion: 2
         x: 416
@@ -477,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1e738c0b172c5490800000000000000
-      internalID: -7756281461111292388
+      spriteID: 557217e1d3d37bfa0800000000000000
+      internalID: -5785087863621081259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_14
+      name: WeightedDiePerfectRoll_14
       rect:
         serializedVersion: 2
         x: 448
@@ -498,14 +486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d80dc45ce5852fe0800000000000000
-      internalID: -1214417274424981295
+      spriteID: c73f5c056c4767eb0800000000000000
+      internalID: -4722458764143889540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_15
+      name: WeightedDiePerfectRoll_15
       rect:
         serializedVersion: 2
         x: 480
@@ -519,14 +507,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcfa051e828d71070800000000000000
-      internalID: 8077162126802726861
+      spriteID: 3661017dc27139d10800000000000000
+      internalID: 2131072530030532195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_16
+      name: WeightedDiePerfectRoll_16
       rect:
         serializedVersion: 2
         x: 512
@@ -540,14 +528,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6bd8d2130662ae770800000000000000
-      internalID: 8640761029647502774
+      spriteID: 6e369e1b7da6ade80800000000000000
+      internalID: -8153086700765486106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_17
+      name: WeightedDiePerfectRoll_17
       rect:
         serializedVersion: 2
         x: 544
@@ -561,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42d6964d42f236300800000000000000
-      internalID: 244090640037145892
+      spriteID: 891f1c175bac90090800000000000000
+      internalID: -8067694376811105896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_18
+      name: WeightedDiePerfectRoll_18
       rect:
         serializedVersion: 2
         x: 576
@@ -582,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d17bb4fbb84470fe0800000000000000
-      internalID: -1222933406807247075
+      spriteID: 21852cdf79c2fd260800000000000000
+      internalID: 7124462166832470034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_19
+      name: WeightedDiePerfectRoll_19
       rect:
         serializedVersion: 2
         x: 608
@@ -603,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 49f504b6446b27ee0800000000000000
-      internalID: -1264748140364275820
+      spriteID: a5a42d29f192320f0800000000000000
+      internalID: -1143024664837993894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_20
+      name: WeightedDiePerfectRoll_20
       rect:
         serializedVersion: 2
         x: 640
@@ -624,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 375357b26933fa050800000000000000
-      internalID: 5813922364025812339
+      spriteID: a0f57bb711683ba00800000000000000
+      internalID: 771107370858667786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_21
+      name: WeightedDiePerfectRoll_21
       rect:
         serializedVersion: 2
         x: 672
@@ -645,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 043c703e1c6eb1460800000000000000
-      internalID: 7213612948575994688
+      spriteID: 11719274728e3ce70800000000000000
+      internalID: 9134399724632741649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_22
+      name: WeightedDiePerfectRoll_22
       rect:
         serializedVersion: 2
         x: 704
@@ -666,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4b3ed5cd64f7ff30800000000000000
-      internalID: 4609421495945280333
+      spriteID: ff3083374f57b7b90800000000000000
+      internalID: -7243065882929789953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_23
+      name: WeightedDiePerfectRoll_23
       rect:
         serializedVersion: 2
         x: 736
@@ -687,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5637d3638a22d680800000000000000
-      internalID: -8731869983713839525
+      spriteID: 990c612b0d892c4a0800000000000000
+      internalID: -6574524483899047783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_24
+      name: WeightedDiePerfectRoll_24
       rect:
         serializedVersion: 2
         x: 768
@@ -708,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e852ce3223667fb0800000000000000
-      internalID: -4650420566480496407
+      spriteID: 9eee46c7ee1da1f10800000000000000
+      internalID: 2241334586789654249
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_25
+      name: WeightedDiePerfectRoll_25
       rect:
         serializedVersion: 2
         x: 800
@@ -729,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7febc657842594700800000000000000
-      internalID: 525041302726557431
+      spriteID: 4d89b1860f73c5160800000000000000
+      internalID: 7015543825214707924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_26
+      name: WeightedDiePerfectRoll_26
       rect:
         serializedVersion: 2
         x: 832
@@ -750,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0a9f45a4b998aa40800000000000000
-      internalID: 5379718756040677898
+      spriteID: 648e1ffa8b2149360800000000000000
+      internalID: 7175380690743191622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_27
+      name: WeightedDiePerfectRoll_27
       rect:
         serializedVersion: 2
         x: 864
@@ -771,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9175aa6773317b840800000000000000
-      internalID: 5239677820403865369
+      spriteID: ac653a47b671413e0800000000000000
+      internalID: -2084014977279895862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeightedDie_28
+      name: WeightedDiePerfectRoll_28
       rect:
         serializedVersion: 2
         x: 896
@@ -792,92 +780,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b565684814396f370800000000000000
-      internalID: 8356028068238087771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WeightedDie_29
-      rect:
-        serializedVersion: 2
-        x: 928
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b9e6c91e5c1eed10800000000000000
-      internalID: 2156692462042016183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WeightedDie_30
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9172863d24e165850800000000000000
-      internalID: 6365308395698267929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WeightedDie_31
-      rect:
-        serializedVersion: 2
-        x: 992
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bbb5ea84b12a0bd60800000000000000
-      internalID: 7903995584102423483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WeightedDie_32
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ccb2972c03eca2230800000000000000
-      internalID: 3614928359734717388
+      spriteID: e6dcd501bb29657f0800000000000000
+      internalID: -624150166213112466
       vertices: []
       indices: 
       edges: []

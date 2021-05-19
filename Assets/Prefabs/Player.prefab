@@ -543,15 +543,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStrength: 5
-  baseMagic: 2
-  basePhysDefense: 2
-  baseMagDefense: 1
+  baseMagic: 3
+  basePhysDefense: 4
+  baseMagDefense: 3
   baseCritChance: 0.1
-  strength: 5
-  magic: 2
-  physDefense: 2
-  magDefense: 1
+  strength: 0
+  magic: 0
+  physDefense: 0
+  magDefense: 0
   critChance: 0.1
+  chipValue: 15
+  unitName: 
 --- !u!114 &-8567703322549175395
 MonoBehaviour:
   m_ObjectHideFlags: 0

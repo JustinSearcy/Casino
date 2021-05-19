@@ -20,6 +20,7 @@ public class Blackjack : MonoBehaviour, IAction
     [SerializeField] GameObject hitParticles = null;
     [SerializeField] GameObject damagePopup = null;
     [SerializeField] GameObject bust = null;
+    [SerializeField] float blackjackMulti = 1.25f;
 
     GameObject currentTarget = null;
 
@@ -124,8 +125,8 @@ public class Blackjack : MonoBehaviour, IAction
         UnitStats playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<UnitStats>();
         UnitStats targetStats = currentTarget.GetComponent<UnitStats>();
         //float critMultiplier = CheckCrit(playerStats);
-        score = (score == 21) ? (int)(score * 1.25) : score; //Increase score if blackjack achieved
-        int damage = (int)((playerStats.strength - targetStats.physDefense) * score);
+        score = (score == 21) ? (int)(score * blackjackMulti) : score; //Increase score if blackjack achieved
+        int damage = (int)((playerStats.strength + score) - targetStats.physDefense);
         StartCoroutine(DealDamage(damage));
     }
 
