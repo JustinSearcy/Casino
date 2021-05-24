@@ -30,4 +30,24 @@ public class UnitStats : MonoBehaviour
         magDefense = baseMagDefense;
         critChance = baseCritChance;
     }
+
+    public void modifyStrength(float multiplier)
+    {
+        strength = (int)(strength * multiplier);
+    }
+
+    public void modifyMagic(float multiplier)
+    {
+        magic = (int)(magic * multiplier);
+    }
+
+    public void modifyPhysDefense(float multiplier)
+    {
+        physDefense = (int)(physDefense * multiplier);
+    }
+
+    public void modifyMagDefense(float multiplier)
+    {
+        magDefense = (int)(magDefense * multiplier);
+    }
 }

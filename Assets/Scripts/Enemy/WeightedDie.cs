@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WeightedDie : MonoBehaviour, IEnemyCombat
 {
+    [SerializeField] GameObject hotRollerParticles = null;
+    [SerializeField] GameObject poisonParticles = null;
+
     EnemyHealth health;
     ChipSystem chips;
 
@@ -42,14 +45,14 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
     }
 
-    public void ActionThree()
+    public void ActionTwo()
     {
         this.gameObject.GetComponent<Animator>().SetTrigger("SnakeEyes");
     }
 
-    public void ActionTwo()
+    public void ActionThree()
     {
-        throw new System.NotImplementedException();
+        HotRoller();
     }
 
     public void Roll()
@@ -71,11 +74,15 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     public void SnakeEyes()
     {
+        GameObject particles = Instantiate(poisonParticles, chips.gameObject.transform.position, Quaternion.identity);
+        Destroy(particles, 2f);
         Debug.Log("Snake Eyes");
     }
 
     public void HotRoller()
     {
+        hotRollerParticles.SetActive(true);
+        this.gameObject.GetComponent<UnitStats>().modifyStrength(2f);
         Debug.Log("Hot Roller");
     }
 }
