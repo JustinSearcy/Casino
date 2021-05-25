@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 698808007023120519}
   - component: {fileID: -8556157898481708820}
   - component: {fileID: 1846352354549424899}
+  - component: {fileID: -2652081961362192429}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -576,6 +577,8 @@ MonoBehaviour:
   physDefense: 1
   magDefense: 1
   critChance: 0.1
+  chipValue: 15
+  unitName: 
 --- !u!114 &-8556157898481708820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,3 +619,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xOffset: 1.375
   yOffset: 1.75
+--- !u!114 &-2652081961362192429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216711624123457927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492fb9d6711e3af4b87c120b36c0104a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poisonCounter: 0
+  poisonDamage: 10
+  isPoisoned: 0

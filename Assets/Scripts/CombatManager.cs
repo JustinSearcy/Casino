@@ -27,6 +27,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] float enemyOffsetTime = 0.5f;
     [SerializeField] float attackTime = 2f;
     [SerializeField] float bufferTime = 1.5f;
+    [SerializeField] float turnChangeTime = 2f;
+    [SerializeField] float statusTime = 1.5f;
 
     [Header("UI")]
     [SerializeField] TextMeshProUGUI combatText = null;
@@ -43,6 +45,8 @@ public class CombatManager : MonoBehaviour
 
     PlayerActions actions;
 
+    GameObject player;
+
     void Start()
     {
         combatState = CombatState.START;
@@ -58,7 +62,7 @@ public class CombatManager : MonoBehaviour
     IEnumerator SpawnCharacters() //Instantiate player/enemies move them to start position, set intial target
     {
         yield return new WaitForSeconds(waitToStartTime);
-        GameObject player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
+        player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
         FindObjectOfType<ChipCombatUI>().UpdateChipText(FindObjectOfType<ChipSystem>().getChips());
         LeanTween.moveX(player, playerPos.position.x, moveTime).setEaseOutBack();
         PlayerSetUp();
@@ -77,7 +81,7 @@ public class CombatManager : MonoBehaviour
         yield return new WaitForSeconds(enemyOffsetTime);
         combatState = CombatState.PLAYERTURN;
         SetTarget(currentEnemies[0]);
-        PlayerTurn();
+        StartCoroutine(PlayerTurn());
     }
 
     private void PlayerSetUp()
@@ -93,8 +97,15 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    private void PlayerTurn()
+    IEnumerator PlayerTurn()
     {
+        yield return new WaitForSeconds(turnChangeTime);
+        string effect = player.GetComponent<StatusEffects>().CheckStatusEffects();
+        if(effect != "")
+        {
+            combatText.text = effect + " took effect";
+        }
+        yield return new WaitForSeconds(statusTime);
         combatText.text = "Your Turn";
         playerMenu.SetActive(true);
     }
@@ -131,15 +142,23 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        yield return new WaitForSeconds(turnChangeTime);
         combatText.text = "Enemy Turn";
 
         for (int i = 0; i < currentEnemies.Count; i++)
         {
             yield return new WaitForSeconds(bufferTime);
+            string effect = currentEnemies[i].GetComponent<StatusEffects>().CheckStatusEffects();
+            if (effect != "")
+            {
+                combatText.text = effect + " took effect";
+            }
+            yield return new WaitForSeconds(statusTime);
             var enemyAttacks = currentEnemies[i].GetComponent<IEnemyCombat>();
             string action = enemyAttacks.DetermineAction();
             combatText.text = "Enemy uses " + action;
             yield return new WaitForSeconds(attackTime);
+            combatText.text = "";
             if(combatState == CombatState.LOSE)
             {
                 break;
@@ -148,7 +167,7 @@ public class CombatManager : MonoBehaviour
         if(combatState == CombatState.ENEMYTURN)
         {
             combatState = CombatState.PLAYERTURN;
-            PlayerTurn();
+            StartCoroutine(PlayerTurn());
         }
     }
 

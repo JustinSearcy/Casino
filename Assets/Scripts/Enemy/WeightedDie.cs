@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class WeightedDie : MonoBehaviour, IEnemyCombat
 {
+    [SerializeField] float timeBeforeAttack = 0.5f;
     [SerializeField] GameObject hotRollerParticles = null;
     [SerializeField] GameObject poisonParticles = null;
+    [SerializeField] float poisonTime = 1f;
+    [SerializeField] int poisonTurnLength = 3;
 
     EnemyHealth health;
     ChipSystem chips;
@@ -25,33 +28,36 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         float num = Random.Range(0, 1f);
         if (num <= 0.5f) //50% chance to Perfect Roll
         {
-            ActionOne();
+            StartCoroutine(ActionOne());
             return actionOneName;
         }
         else if (num <= 0.8) //30% chance to Snake Eyes
         {
-            ActionTwo();
+            StartCoroutine(ActionTwo());
             return actionTwoName;
         }
         else //20% chance to Hot Roller
         {
-            ActionThree();
+            StartCoroutine(ActionThree());
             return actionThreeName;
         }
     }
 
-    public void ActionOne()
+    IEnumerator ActionOne()
     {
+        yield return new WaitForSeconds(timeBeforeAttack);
         this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
     }
 
-    public void ActionTwo()
+    IEnumerator ActionTwo()
     {
+        yield return new WaitForSeconds(timeBeforeAttack);
         this.gameObject.GetComponent<Animator>().SetTrigger("SnakeEyes");
     }
 
-    public void ActionThree()
+    IEnumerator ActionThree()
     {
+        yield return new WaitForSeconds(timeBeforeAttack);
         HotRoller();
     }
 
@@ -74,9 +80,16 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     public void SnakeEyes()
     {
+        StartCoroutine(SnakeEyesAttack());
+    }
+
+    IEnumerator SnakeEyesAttack()
+    {
         GameObject particles = Instantiate(poisonParticles, chips.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         Debug.Log("Snake Eyes");
+        yield return new WaitForSeconds(poisonTime);
+        chips.gameObject.GetComponent<StatusEffects>().Poisoned(poisonTurnLength);
     }
 
     public void HotRoller()
