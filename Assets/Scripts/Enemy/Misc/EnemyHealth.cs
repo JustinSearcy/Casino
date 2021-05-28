@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float deathAnimTime = 1f;
     [SerializeField] GameObject healthBar = null;
     [SerializeField] float healthBarTime = 0.4f;
+    [SerializeField] GameObject damagePopup = null;
 
     void Start()
     {
@@ -35,6 +36,8 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("Damage Dealt");
         currentHealth -= damage;
+        GameObject text = Instantiate(damagePopup, this.gameObject.transform);
+        text.GetComponent<DamagePopup>().UpdateText(damage);
         UpdateHealthBar();
         if (currentHealth <= 0)
         {

@@ -3602,7 +3602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 5829183778581187501, guid: 4db918242e121c7498df325af870c59a, type: 3}
-  - {fileID: 5829183778581187501, guid: 4db918242e121c7498df325af870c59a, type: 3}
+  - {fileID: 3768303363765289752, guid: 1ed707c22d8240645a3a9478cb38911b, type: 3}
   playerPrefab: {fileID: 376196277309930286, guid: 17b4c2c2f5b27414e8ccf8dbcdf03805, type: 3}
   targetingCircle: {fileID: 621753350}
   playerSpawn: {fileID: 150679085}

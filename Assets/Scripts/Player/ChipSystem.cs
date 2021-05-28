@@ -9,13 +9,17 @@ public class ChipSystem : MonoBehaviour
     [SerializeField] int startingChips = 100;
     [SerializeField] int currentChips = 100;
     [SerializeField] GameObject chipLossText = null;
+    [SerializeField] Transform chipLossPos = null;
     [SerializeField] GameObject chipText = null;
     [SerializeField] float finalTextYPos = 2f;
     [SerializeField] float textTime = 1f;
 
+    Shake shake;
+
     private void Start()
     {
         currentChips = startingChips;
+        shake = FindObjectOfType<Shake>();
     }
 
     public int getChips() { return currentChips; } //Change to getter setter
@@ -33,17 +37,11 @@ public class ChipSystem : MonoBehaviour
 
     private void chipLoss(int amount)
     {
-        chipLossText.SetActive(true);
-        chipLossText.GetComponent<TextMeshPro>().text = "-" + amount;
-        LeanTween.moveLocalY(chipLossText, finalTextYPos, textTime);
-        StartCoroutine(resetChipLoss());
-    }
-
-    IEnumerator resetChipLoss()
-    {
-        yield return new WaitForSeconds(textTime);
-        chipLossText.transform.position = chipText.transform.position;
-        chipLossText.SetActive(false);
+        shake.CamShake();
+        GameObject newChipLossText = Instantiate(chipLossText, chipLossPos.position, Quaternion.identity);
+        newChipLossText.GetComponent<TextMeshPro>().text = "-" + amount;
+        LeanTween.moveLocalY(newChipLossText, finalTextYPos, textTime);
+        Destroy(newChipLossText, textTime);
     }
 
     private void GameOver()

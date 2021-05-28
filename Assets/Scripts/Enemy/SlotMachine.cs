@@ -8,6 +8,7 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     [SerializeField] float timeBeforeAttack = 0.5f;
     [SerializeField] float timeAfterAttack = 0.75f;
     [SerializeField] float timeBetweenJackpotAttacks = 0.25f;
+    [SerializeField] float luckyCloverTime = 2.5f;
 
     [Header("Spin Odds")]
     [SerializeField] float jackpotOdds = 0.1f;
@@ -19,6 +20,9 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     [Header("Damage")]
     [SerializeField] float backfireMinLoss = 0.15f;
     [SerializeField] float backfireMaxLoss = 0.2f;
+
+    [Header("Prefabs")]
+    [SerializeField] GameObject luckyCloverParticles = null;
 
     public string actionOneName = "Spin";
 
@@ -68,10 +72,19 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
 
     public void LuckyClover()
     {
+        StartCoroutine(LuckyCloverHit());
+    }
+
+    IEnumerator LuckyCloverHit()
+    {
         combatManager.CombatTextMessage("Slot Machine hit Lucky Clover");
         int magic = this.gameObject.GetComponent<UnitStats>().magic;
         int magicDefense = chips.gameObject.GetComponent<UnitStats>().magDefense;
         int damage = (magic * 4) - magicDefense;
+        Vector2 particlePos = new Vector2(chips.gameObject.transform.position.x, 5.5f);
+        GameObject particles = Instantiate(luckyCloverParticles, particlePos, Quaternion.identity);
+        Destroy(particles, 4f);
+        yield return new WaitForSeconds(luckyCloverTime);
         chips.LoseChips(damage);
         StartCoroutine(NextCharacter());
     }

@@ -31,8 +31,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f54e72acd9820949a627d09e481bb47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBeforeAttack: 0.5
+  timeAfterAttack: 1.5
   hotRollerParticles: {fileID: 4237564445182654100}
   poisonParticles: {fileID: 5526435885446672546, guid: 55bf059cb62edb946bd4c14afe952519, type: 3}
+  poisonTime: 1
+  poisonTurnLength: 3
   actionOneName: Perfect Roll
   actionTwoName: Snake Eyes
   actionThreeName: Hot Roller

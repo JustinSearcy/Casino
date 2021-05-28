@@ -543,6 +543,7 @@ MonoBehaviour:
   deathAnimTime: 1
   healthBar: {fileID: 9117042838255877006}
   healthBarTime: 0.6
+  damagePopup: {fileID: 2854229375512463313, guid: 7947c16fbc9ce5a4b8a0b211baf5d54a, type: 3}
 --- !u!114 &1199072165878020786
 MonoBehaviour:
   m_ObjectHideFlags: 0
