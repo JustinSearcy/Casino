@@ -121,9 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1395a62ae11a75846bc1da2caf1b4bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStrength: 5
+  baseStrength: 6
   baseMagic: 3
-  basePhysDefense: 4
+  basePhysDefense: 5
   baseMagDefense: 3
   baseCritChance: 0.1
   strength: 0

@@ -47,6 +47,8 @@ public class CombatManager : MonoBehaviour
 
     GameObject player;
 
+    int currentEnemyIndex = 0;
+
     void Start()
     {
         combatState = CombatState.START;
@@ -71,7 +73,6 @@ public class CombatManager : MonoBehaviour
         {
             GameObject enemy = Instantiate(enemyPrefabs[i], enemySpawn.position, Quaternion.identity);
             float offset =  enemy.GetComponent<Collider2D>().bounds.size.y / 2f;
-            Debug.Log(offset);
             float yPos = floorYPos + offset;
             enemy.transform.position = new Vector2(enemy.transform.position.x, yPos);
             LeanTween.moveX(enemy, enemyPos[i].position.x, moveTime).setEaseOutBack();
@@ -136,37 +137,43 @@ public class CombatManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        combatState = CombatState.ENEMYTURN;
-        StartCoroutine(EnemyTurn());
+        StartCoroutine(ChangeTurn());
     }
 
-    IEnumerator EnemyTurn()
+    IEnumerator ChangeTurn()
     {
+        combatState = CombatState.ENEMYTURN;
         yield return new WaitForSeconds(turnChangeTime);
         combatText.text = "Enemy Turn";
+        StartCoroutine(EnemyTurn(currentEnemies[0]));
+    }
 
-        for (int i = 0; i < currentEnemies.Count; i++)
+    IEnumerator EnemyTurn(GameObject enemy)
+    {
+        yield return new WaitForSeconds(bufferTime);
+        string effect = enemy.GetComponent<StatusEffects>().CheckStatusEffects();
+        if (effect != "")
         {
-            yield return new WaitForSeconds(bufferTime);
-            string effect = currentEnemies[i].GetComponent<StatusEffects>().CheckStatusEffects();
-            if (effect != "")
-            {
-                combatText.text = effect + " took effect";
-            }
-            yield return new WaitForSeconds(statusTime);
-            var enemyAttacks = currentEnemies[i].GetComponent<IEnemyCombat>();
-            string action = enemyAttacks.DetermineAction();
-            combatText.text = "Enemy uses " + action;
-            yield return new WaitForSeconds(attackTime);
-            combatText.text = "";
-            if(combatState == CombatState.LOSE)
-            {
-                break;
-            }
+            combatText.text = effect + " took effect";
         }
-        if(combatState == CombatState.ENEMYTURN)
+        yield return new WaitForSeconds(statusTime);
+        var enemyAttacks = enemy.GetComponent<IEnemyCombat>();
+        string action = enemyAttacks.DetermineAction();
+        combatText.text = "Enemy uses " + action;
+        currentEnemyIndex++;
+    }
+
+    public void AttackComplete()
+    {
+        combatText.text = "";
+        if (currentEnemyIndex < currentEnemies.Count)
+        {
+            StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
+        }
+        else
         {
             combatState = CombatState.PLAYERTURN;
+            currentEnemyIndex = 0;
             StartCoroutine(PlayerTurn());
         }
     }
@@ -175,9 +182,17 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
-        OverrideSetTarget(currentEnemies[0]);
-        if (currentEnemies.Count == 0)
+        if(currentEnemies.Count > 0)
         {
+            OverrideSetTarget(currentEnemies[0]);
+            if(combatState == CombatState.ENEMYTURN)
+            {
+                currentEnemyIndex--;
+            }
+        }
+        else
+        {
+            targetingCircle.SetActive(false);
             combatState = CombatState.WIN;
             PlayerWon();
         }
@@ -207,5 +222,10 @@ public class CombatManager : MonoBehaviour
     {
         currentTarget = newTarget;
         targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
+    }
+
+    public void CombatTextMessage(string text)
+    {
+        combatText.text = text;
     }
 }

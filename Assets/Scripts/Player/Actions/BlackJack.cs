@@ -61,7 +61,6 @@ public class Blackjack : MonoBehaviour, IAction
             {
                 DisableButtons();
                 CalculateDamage(currentScore);
-                Debug.Log("BLACKJACK");
             }
             else if(currentScore > 21)
             {
@@ -80,13 +79,11 @@ public class Blackjack : MonoBehaviour, IAction
                 {
                     DisableButtons();
                     StartCoroutine(Bust());
-                    Debug.Log("BUST");
                 }
             }
             else //NOTHING
             {
                 EnableButtons();
-                Debug.Log("CONTINUE");
             }
         }
     }

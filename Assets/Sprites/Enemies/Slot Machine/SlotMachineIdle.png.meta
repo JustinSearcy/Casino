@@ -3,38 +3,38 @@ guid: 2f6c5223f15902a4185362ec738a1c2e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4458100411979618505
-    second: SlotMachine_0
+      213: 2086493329331060636
+    second: SlotMachineIdle_0
   - first:
-      213: 6014739316221084628
-    second: SlotMachine_1
+      213: -3981541714360972525
+    second: SlotMachineIdle_1
   - first:
-      213: -5597336855770662752
-    second: SlotMachine_2
+      213: 4385800084095731694
+    second: SlotMachineIdle_2
   - first:
-      213: -8928719699414106203
-    second: SlotMachine_3
+      213: -998523608770101280
+    second: SlotMachineIdle_3
   - first:
-      213: -8049622506618104593
-    second: SlotMachine_4
+      213: 3249121937555456003
+    second: SlotMachineIdle_4
   - first:
-      213: -2633429268380942742
-    second: SlotMachine_5
+      213: -8813035559256586475
+    second: SlotMachineIdle_5
   - first:
-      213: -3443022978439448733
-    second: SlotMachine_6
+      213: 6913735285806942366
+    second: SlotMachineIdle_6
   - first:
-      213: -5077575172812711857
-    second: SlotMachine_7
+      213: -908019586866158111
+    second: SlotMachineIdle_7
   - first:
-      213: 4910987480914006332
-    second: SlotMachine_8
+      213: -308792779048631363
+    second: SlotMachineIdle_8
   - first:
-      213: 7803634054857533422
-    second: SlotMachine_9
+      213: 1916402643940166605
+    second: SlotMachineIdle_9
   - first:
-      213: 5820682053073988927
-    second: SlotMachine_10
+      213: -847846670454342829
+    second: SlotMachineIdle_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,232 +124,232 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlotMachine_0
+      name: SlotMachineIdle_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 737aeea9b45a122c0800000000000000
-      internalID: -4458100411979618505
+      spriteID: c9ffff8d0a6b4fc10800000000000000
+      internalID: 2086493329331060636
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_1
+      name: SlotMachineIdle_1
       rect:
         serializedVersion: 2
-        x: 33
+        x: 32
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d30fe76a85a87350800000000000000
-      internalID: 6014739316221084628
+      spriteID: 31b4d19e7e8beb8c0800000000000000
+      internalID: -3981541714360972525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_2
+      name: SlotMachineIdle_2
       rect:
         serializedVersion: 2
-        x: 65
+        x: 64
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a8769f19c34252b0800000000000000
-      internalID: -5597336855770662752
+      spriteID: ee7876480fd7ddc30800000000000000
+      internalID: 4385800084095731694
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_3
+      name: SlotMachineIdle_3
       rect:
         serializedVersion: 2
-        x: 97
+        x: 96
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5afb3616db0d61480800000000000000
-      internalID: -8928719699414106203
+      spriteID: 0efba6771188422f0800000000000000
+      internalID: -998523608770101280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_4
+      name: SlotMachineIdle_4
       rect:
         serializedVersion: 2
-        x: 129
+        x: 128
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe4d90d9afef94090800000000000000
-      internalID: -8049622506618104593
+      spriteID: 3000ce70033371d20800000000000000
+      internalID: 3249121937555456003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_5
+      name: SlotMachineIdle_5
       rect:
         serializedVersion: 2
-        x: 161
+        x: 160
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6e790d680e247bd0800000000000000
-      internalID: -2633429268380942742
+      spriteID: 51700a13adec1b580800000000000000
+      internalID: -8813035559256586475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_6
+      name: SlotMachineIdle_6
       rect:
         serializedVersion: 2
-        x: 193
+        x: 192
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 367fb90d7dce730d0800000000000000
-      internalID: -3443022978439448733
+      spriteID: e984b95ac9582ff50800000000000000
+      internalID: 6913735285806942366
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_7
+      name: SlotMachineIdle_7
       rect:
         serializedVersion: 2
-        x: 225
+        x: 224
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f48d7205844d889b0800000000000000
-      internalID: -5077575172812711857
+      spriteID: 1e5eeb32ff01663f0800000000000000
+      internalID: -908019586866158111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_8
+      name: SlotMachineIdle_8
       rect:
         serializedVersion: 2
-        x: 257
+        x: 256
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3115482815572440800000000000000
-      internalID: 4910987480914006332
+      spriteID: db3c99f7a92f6bbf0800000000000000
+      internalID: -308792779048631363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_9
+      name: SlotMachineIdle_9
       rect:
         serializedVersion: 2
-        x: 289
+        x: 288
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee7ace4d3d31c4c60800000000000000
-      internalID: 7803634054857533422
+      spriteID: dcb4ca61d0e689a10800000000000000
+      internalID: 1916402643940166605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlotMachine_10
+      name: SlotMachineIdle_10
       rect:
         serializedVersion: 2
-        x: 321
+        x: 320
         y: 0
-        width: 29
-        height: 50
+        width: 32
+        height: 54
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3d67fbec7737c050800000000000000
-      internalID: 5820682053073988927
+      spriteID: 35b329ff1f7db34f0800000000000000
+      internalID: -847846670454342829
       vertices: []
       indices: 
       edges: []
