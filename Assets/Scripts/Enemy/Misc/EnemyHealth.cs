@@ -14,8 +14,11 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] float healthBarTime = 0.4f;
     [SerializeField] GameObject damagePopup = null;
 
+    Shake camShake;
+
     void Start()
     {
+        camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
         UpdateHealthBar();
     }
@@ -36,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("Damage Dealt");
         currentHealth -= damage;
+        camShake.CamShake();
         GameObject text = Instantiate(damagePopup, this.gameObject.transform);
         text.GetComponent<DamagePopup>().UpdateText(damage);
         UpdateHealthBar();

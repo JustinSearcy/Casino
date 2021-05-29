@@ -10,6 +10,7 @@ public class EnemyTooltip : MonoBehaviour
     private GameObject tooltip;
     private UnitStats unitStats;
     private EnemyHealth health;
+    private CombatManager combatManager;
     private bool isActive = false;
 
     private void Awake()
@@ -17,6 +18,7 @@ public class EnemyTooltip : MonoBehaviour
         tooltip = GameObject.FindGameObjectWithTag("Tooltip");
         unitStats = this.gameObject.GetComponent<UnitStats>();
         health = this.gameObject.GetComponent<EnemyHealth>();
+        combatManager = FindObjectOfType<CombatManager>();
     }
     private void Update()
     {
@@ -30,9 +32,12 @@ public class EnemyTooltip : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        tooltip.SetActive(true);
-        isActive = true;
-        UpdateTooltip();
+        if (combatManager.combatState == CombatState.PLAYERTURN)
+        {
+            tooltip.SetActive(true);
+            isActive = true;
+            UpdateTooltip();
+        }
     }
 
     private void UpdateTooltip()

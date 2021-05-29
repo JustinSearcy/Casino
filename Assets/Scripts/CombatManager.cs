@@ -38,7 +38,7 @@ public class CombatManager : MonoBehaviour
     //Other Menu
 
     [Header("Misc")]
-    [SerializeField] CombatState combatState;
+    [SerializeField] public CombatState combatState;
     [SerializeField] List<GameObject> currentEnemies = null;
     [SerializeField] GameObject currentTarget = null;
     [SerializeField] float floorYPos = -1.95f;
@@ -81,7 +81,6 @@ public class CombatManager : MonoBehaviour
         }
         yield return new WaitForSeconds(enemyOffsetTime);
         combatState = CombatState.PLAYERTURN;
-        SetTarget(currentEnemies[0]);
         StartCoroutine(PlayerTurn());
     }
 
@@ -101,12 +100,15 @@ public class CombatManager : MonoBehaviour
     IEnumerator PlayerTurn()
     {
         yield return new WaitForSeconds(turnChangeTime);
-        string effect = player.GetComponent<StatusEffects>().CheckStatusEffects();
-        if(effect != "")
+        if(currentTarget == null)
         {
-            combatText.text = effect + " took effect";
+            SetTarget(currentEnemies[0]);
         }
-        yield return new WaitForSeconds(statusTime);
+        bool effectActive = player.GetComponent<StatusEffects>().CheckStatusEffects();
+        if(effectActive)
+        {
+            yield return new WaitForSeconds(statusTime);
+        }
         combatText.text = "Your Turn";
         playerMenu.SetActive(true);
     }
@@ -151,12 +153,11 @@ public class CombatManager : MonoBehaviour
     IEnumerator EnemyTurn(GameObject enemy)
     {
         yield return new WaitForSeconds(bufferTime);
-        string effect = enemy.GetComponent<StatusEffects>().CheckStatusEffects();
-        if (effect != "")
+        bool effectActive = enemy.GetComponent<StatusEffects>().CheckStatusEffects();
+        if (effectActive)
         {
-            combatText.text = effect + " took effect";
+            yield return new WaitForSeconds(statusTime);
         }
-        yield return new WaitForSeconds(statusTime);
         var enemyAttacks = enemy.GetComponent<IEnemyCombat>();
         string action = enemyAttacks.DetermineAction();
         combatText.text = "Enemy uses " + action;

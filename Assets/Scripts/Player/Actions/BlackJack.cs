@@ -133,8 +133,6 @@ public class Blackjack : MonoBehaviour, IAction
         RemoveCards();
         GameObject particles = Instantiate(hitParticles, currentTarget.transform);
         yield return new WaitForSeconds(animTime);
-        FindObjectOfType<Shake>().CamShake();
-        
         Destroy(particles, animTime);
         currentTarget.GetComponent<EnemyHealth>().TakeDamage(damage);
         deck.currentCards.Clear();
@@ -168,6 +166,7 @@ public class Blackjack : MonoBehaviour, IAction
 
     public void Stand()
     {
+        DisableButtons();
         CalculateDamage(currentScore);
     }
 

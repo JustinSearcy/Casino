@@ -10,22 +10,27 @@ public class StatusEffects : MonoBehaviour
 
     private bool isPlayer = false;
 
+    CombatManager combatManager;
+
     private void Start()
     {
         if(this.gameObject.tag == "Player")
         {
             isPlayer = true;
         }
+
+        combatManager = FindObjectOfType<CombatManager>();
     }
 
-    public string CheckStatusEffects()
+    public bool CheckStatusEffects()
     {
         if (isPoisoned)
         {
             Poison();
-            return "Poison";
+            combatManager.CombatTextMessage("Poison took effect!");
+            return true;
         }
-        return "";
+        return false;
     }
 
     private void Poison()
