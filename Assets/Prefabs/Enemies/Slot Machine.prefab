@@ -36,10 +36,10 @@ MonoBehaviour:
   timeBetweenJackpotAttacks: 0.5
   luckyCloverTime: 2.5
   jackpotOdds: 0.1
-  luckyCloverOdds: 0.4
-  backfireOdds: 0.15
+  luckyCloverOdds: 0.35
+  backfireOdds: 0.175
   freeSpinOdds: 0.15
-  nothingOdds: 0.2
+  nothingOdds: 0.225
   backfireMinLoss: 0.15
   backfireMaxLoss: 0.2
   luckyCloverParticles: {fileID: 2457826222846147121, guid: 2f4ded6ac70337f4c8be6768d08de78a, type: 3}
