@@ -4866,7 +4866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_InstanceId
-      value: -45392
+      value: -12240
       objectReference: {fileID: 0}
     - target: {fileID: -8556157898481708820, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_HasRenderer

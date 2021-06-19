@@ -13,11 +13,14 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] GameObject healthBar = null;
     [SerializeField] float healthBarTime = 0.4f;
     [SerializeField] GameObject damagePopup = null;
+    [SerializeField] float hitStunTime = 0.2f;
 
     Shake camShake;
+    Animator anim;
 
     void Start()
     {
+        anim = this.gameObject.GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
         UpdateHealthBar();
@@ -40,6 +43,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Damage Dealt");
         currentHealth -= damage;
         camShake.CamShake();
+        anim.SetTrigger("Hit");
         GameObject text = Instantiate(damagePopup, this.gameObject.transform);
         text.GetComponent<DamagePopup>().UpdateText(damage);
         UpdateHealthBar();
@@ -49,6 +53,16 @@ public class EnemyHealth : MonoBehaviour
             UpdateHealthBar();
             StartCoroutine(Die());
         }
+        else
+        {
+            StartCoroutine(HitStun());
+        }
+    }
+
+    IEnumerator HitStun()
+    {
+        yield return new WaitForSeconds(hitStunTime);
+        anim.SetTrigger("StopHit");
     }
 
     IEnumerator Die()
