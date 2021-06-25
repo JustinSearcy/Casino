@@ -136,7 +136,6 @@ public class Blackjack : MonoBehaviour, IAction
         Destroy(particles, animTime);
         currentTarget.GetComponent<EnemyHealth>().TakeDamage(damage);
         deck.currentCards.Clear();
-        FindObjectOfType<CombatManager>().TurnEnd();
         Destroy(this.gameObject, 2*animTime);
     }
 

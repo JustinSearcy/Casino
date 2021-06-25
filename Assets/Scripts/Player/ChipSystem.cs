@@ -27,6 +27,7 @@ public class ChipSystem : MonoBehaviour
     public void LoseChips(int amount)
     {
         chipLoss(amount);
+        FindObjectOfType<CombatManager>().LoseChips(amount);
         currentChips -= amount;
         FindObjectOfType<ChipCombatUI>().UpdateAndLoseChips(currentChips);
         if(currentChips <= 0)

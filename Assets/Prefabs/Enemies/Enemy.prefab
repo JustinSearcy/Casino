@@ -540,11 +540,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
-  deathAnimTime: 1
   healthBar: {fileID: 9117042838255877006}
   healthBarTime: 0.6
+  enemyDeathParticles: {fileID: 3573108279098606716, guid: 58366df2829980048bf3097f969e9c25, type: 3}
   damagePopup: {fileID: 2854229375512463313, guid: 7947c16fbc9ce5a4b8a0b211baf5d54a, type: 3}
   hitStunTime: 0.5
+  rotationFinal: -1080
+  rotationTime: 1.75
 --- !u!114 &1199072165878020786
 MonoBehaviour:
   m_ObjectHideFlags: 0

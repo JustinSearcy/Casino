@@ -11,7 +11,7 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     [SerializeField] float luckyCloverTime = 2.5f;
 
     [Header("Spin Odds")]
-    [SerializeField] float jackpotOdds = 0.1f;
+    //[SerializeField] float jackpotOdds = 0.1f;
     [SerializeField] float luckyCloverOdds = 0.4f;
     [SerializeField] float backfireOdds = 0.15f;
     [SerializeField] float freeSpinOdds = 0.15f;

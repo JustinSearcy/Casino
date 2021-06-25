@@ -42,6 +42,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] List<GameObject> currentEnemies = null;
     [SerializeField] GameObject currentTarget = null;
     [SerializeField] float floorYPos = -1.95f;
+    [SerializeField] int chipsLost = 0;
+    [SerializeField] int chipsWon = 0;
 
     PlayerActions actions;
 
@@ -147,6 +149,7 @@ public class CombatManager : MonoBehaviour
         combatState = CombatState.ENEMYTURN;
         yield return new WaitForSeconds(turnChangeTime);
         combatText.text = "Enemy Turn";
+        Debug.Log(currentEnemies[0]);
         StartCoroutine(EnemyTurn(currentEnemies[0]));
     }
 
@@ -183,6 +186,7 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
+        chipsWon += enemy.GetComponent<UnitStats>().chipValue;
         if(currentEnemies.Count > 0)
         {
             OverrideSetTarget(currentEnemies[0]);
@@ -201,7 +205,7 @@ public class CombatManager : MonoBehaviour
 
     private void PlayerWon()
     {
-        combatText.text = "You Won";
+        FindObjectOfType<BattleWin>().BattleWon(chipsLost, chipsWon);
     }
 
     public void PlayerLost()
@@ -228,5 +232,10 @@ public class CombatManager : MonoBehaviour
     public void CombatTextMessage(string text)
     {
         combatText.text = text;
+    }
+
+    public void LoseChips(int chips)
+    {
+        chipsLost += chips;
     }
 }
