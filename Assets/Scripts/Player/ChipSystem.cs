@@ -10,7 +10,7 @@ public class ChipSystem : MonoBehaviour
     [SerializeField] int currentChips = 100;
     [SerializeField] GameObject chipLossText = null;
     [SerializeField] Transform chipLossPos = null;
-    [SerializeField] GameObject chipText = null;
+    //[SerializeField] GameObject chipText = null;
     [SerializeField] float finalTextYPos = 2f;
     [SerializeField] float textTime = 1f;
 

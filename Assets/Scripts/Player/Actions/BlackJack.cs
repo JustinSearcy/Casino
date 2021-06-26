@@ -52,13 +52,13 @@ public class Blackjack : MonoBehaviour, IAction
 
     private void CalculateScore()
     {
+        DisableButtons();
         currentScore += deck.currentCards[deck.currentCards.Count - 1].GetComponent<CardDisplay>().cardValue;
         UpdateScoreText();
         if(deck.currentCards.Count > 1)
         {
             if(currentScore == 21) //BLACKJACK
             {
-                DisableButtons();
                 CalculateDamage(currentScore);
             }
             else if(currentScore > 21)
@@ -76,7 +76,6 @@ public class Blackjack : MonoBehaviour, IAction
                 }
                 if(currentScore > 21) //BUST (Maybe have it deal Recoil Damage)
                 {
-                    DisableButtons();
                     StartCoroutine(Bust());
                 }
             }
@@ -171,6 +170,7 @@ public class Blackjack : MonoBehaviour, IAction
 
     public void Hit()
     {
+        DisableButtons();
         StartCoroutine(DrawNewCard());
     }
 

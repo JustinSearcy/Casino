@@ -10,6 +10,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     [SerializeField] GameObject poisonParticles = null;
     [SerializeField] float poisonTime = 1f;
     [SerializeField] int poisonTurnLength = 3;
+    [SerializeField] float hotRollerTime = 1.2f;
 
     EnemyHealth health;
     ChipSystem chips;
@@ -46,22 +47,22 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         }
     }
 
-    IEnumerator ActionOne()
+    IEnumerator ActionOne()//Roll
     {
         yield return new WaitForSeconds(timeBeforeAttack);
         this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
     }
 
-    IEnumerator ActionTwo()
+    IEnumerator ActionTwo()//SnakeEyes
     {
         yield return new WaitForSeconds(timeBeforeAttack);
         this.gameObject.GetComponent<Animator>().SetTrigger("SnakeEyes");
     }
 
-    IEnumerator ActionThree()
+    IEnumerator ActionThree()//HotRoller
     {
         yield return new WaitForSeconds(timeBeforeAttack);
-        HotRoller();
+        StartCoroutine(HotRoller());
     }
 
     public void Roll()
@@ -87,7 +88,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         StartCoroutine(SnakeEyesAttack());
     }
 
-    IEnumerator SnakeEyesAttack()
+    private IEnumerator SnakeEyesAttack()
     {
         GameObject particles = Instantiate(poisonParticles, chips.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
@@ -97,10 +98,13 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         StartCoroutine(NextCharacter());
     }
 
-    public void HotRoller()
+    private IEnumerator HotRoller()
     {
+        FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
         hotRollerParticles.SetActive(true);
         this.gameObject.GetComponent<UnitStats>().modifyStrength(2f);
+        yield return new WaitForSeconds(hotRollerTime);
+        FindObjectOfType<CameraZoom>().ZoomCenter();
         StartCoroutine(NextCharacter());
     }
 
