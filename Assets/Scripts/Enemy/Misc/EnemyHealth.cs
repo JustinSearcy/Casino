@@ -112,6 +112,6 @@ public class EnemyHealth : MonoBehaviour
     private void UpdateHealthBar()
     {
         //enemyHealthText.text = "" + currentHealth + "/" + maxHealth;
-        LeanTween.scaleX(healthBar, GetHealthPercent(), healthBarTime).setEaseOutCirc();
+        LeanTween.scaleX(healthBar, GetHealthPercent(), healthBarTime).setEaseOutQuint();
     }
 }

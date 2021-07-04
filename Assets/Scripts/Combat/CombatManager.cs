@@ -141,7 +141,10 @@ public class CombatManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        StartCoroutine(ChangeTurn());
+        if(combatState != CombatState.WIN && combatState != CombatState.LOSE)
+        {
+            StartCoroutine(ChangeTurn());
+        }
     }
 
     IEnumerator ChangeTurn()
@@ -170,15 +173,18 @@ public class CombatManager : MonoBehaviour
     public void AttackComplete()
     {
         combatText.text = "";
-        if (currentEnemyIndex < currentEnemies.Count)
+        if(combatState != CombatState.WIN && combatState != CombatState.LOSE)
         {
-            StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
-        }
-        else
-        {
-            combatState = CombatState.PLAYERTURN;
-            currentEnemyIndex = 0;
-            StartCoroutine(PlayerTurn());
+            if (currentEnemyIndex < currentEnemies.Count)
+            {
+                StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
+            }
+            else
+            {
+                combatState = CombatState.PLAYERTURN;
+                currentEnemyIndex = 0;
+                StartCoroutine(PlayerTurn());
+            }
         }
     }
 

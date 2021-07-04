@@ -48,5 +48,6 @@ public class ChipSystem : MonoBehaviour
     private void GameOver()
     {
         FindObjectOfType<CombatManager>().PlayerLost();
+        FindObjectOfType<PlayerDeath>().Death();
     }
 }

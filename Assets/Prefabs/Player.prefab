@@ -107,7 +107,6 @@ MonoBehaviour:
   currentChips: 100
   chipLossText: {fileID: 2371315659937027575, guid: 8f24272901f974f4ea4aece398002e82, type: 3}
   chipLossPos: {fileID: 985875777869332271}
-  chipText: {fileID: 1078139479782141206}
   finalTextYPos: 1
   textTime: 1
 --- !u!114 &6284461149135348222
