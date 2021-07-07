@@ -3,10 +3,12 @@ using System.Collections;
 
 public class StatusEffects : MonoBehaviour
 {
+
     [Header("Poison")]
     [SerializeField] int poisonCounter = 0;
     [SerializeField] int poisonDamage = 10;
     [SerializeField] bool isPoisoned = false;
+    [SerializeField] GameObject poisonIcon;
 
     private bool isPlayer = false;
 
