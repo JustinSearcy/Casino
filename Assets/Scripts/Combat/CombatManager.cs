@@ -74,7 +74,7 @@ public class CombatManager : MonoBehaviour
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
             GameObject enemy = Instantiate(enemyPrefabs[i], enemySpawn.position, Quaternion.identity);
-            float offset =  enemy.GetComponent<Collider2D>().bounds.size.y / 2f;
+            float offset = enemy.GetComponent<Collider2D>().bounds.size.y / 2f;
             float yPos = floorYPos + offset;
             enemy.transform.position = new Vector2(enemy.transform.position.x, yPos);
             LeanTween.moveX(enemy, enemyPos[i].position.x, moveTime).setEaseOutBack();
@@ -91,7 +91,7 @@ public class CombatManager : MonoBehaviour
         actions = FindObjectOfType<PlayerActions>();
         for (int i = 0; i < 3; i++)
         {
-            if(actions.currentActions[i] != null)
+            if (actions.currentActions[i] != null)
             {
                 attackMenu.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actions.currentActions[i].name;
             }
@@ -102,12 +102,12 @@ public class CombatManager : MonoBehaviour
     IEnumerator PlayerTurn()
     {
         yield return new WaitForSeconds(turnChangeTime);
-        if(currentTarget == null)
+        if (currentTarget == null)
         {
             SetTarget(currentEnemies[0]);
         }
         bool effectActive = player.GetComponent<StatusEffects>().CheckStatusEffects();
-        if(effectActive)
+        if (effectActive)
         {
             yield return new WaitForSeconds(statusTime);
         }
@@ -117,11 +117,11 @@ public class CombatManager : MonoBehaviour
 
     public void OnAttackButton(int attackButton)
     {
-        if(combatState != CombatState.PLAYERTURN && currentTarget != null)
+        if (combatState != CombatState.PLAYERTURN && currentTarget != null)
         {
             return;
         }
-        if(actions.currentActions[attackButton] != null)
+        if (actions.currentActions[attackButton] != null)
         {
             combatState = CombatState.PLAYERATTACK;
             StartCoroutine(PlayerAction(attackButton));
@@ -141,7 +141,7 @@ public class CombatManager : MonoBehaviour
 
     public void TurnEnd()
     {
-        if(combatState != CombatState.WIN && combatState != CombatState.LOSE)
+        if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
         {
             StartCoroutine(ChangeTurn());
         }
@@ -173,7 +173,7 @@ public class CombatManager : MonoBehaviour
     public void AttackComplete()
     {
         combatText.text = "";
-        if(combatState != CombatState.WIN && combatState != CombatState.LOSE)
+        if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
         {
             if (currentEnemyIndex < currentEnemies.Count)
             {
@@ -193,10 +193,10 @@ public class CombatManager : MonoBehaviour
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
         chipsWon += enemy.GetComponent<UnitStats>().chipValue;
-        if(currentEnemies.Count > 0)
+        if (currentEnemies.Count > 0)
         {
             OverrideSetTarget(currentEnemies[0]);
-            if(combatState == CombatState.ENEMYTURN)
+            if (combatState == CombatState.ENEMYTURN)
             {
                 currentEnemyIndex--;
             }
@@ -222,7 +222,7 @@ public class CombatManager : MonoBehaviour
 
     public void SetTarget(GameObject newTarget)
     {
-        if(combatState == CombatState.PLAYERTURN)
+        if (combatState == CombatState.PLAYERTURN)
         {
             currentTarget = newTarget;
             targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -3);
