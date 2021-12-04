@@ -44,16 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb502048e919c7f45ba6f39a37ea6221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenDraws: 1
+  timeBetweenDraws: 0.75
   standButton: {fileID: 6909571141302875785}
   hitButton: {fileID: 8175953130292155907}
   scoreText: {fileID: 6145281603120969014}
   currentScore: 0
-  animTime: 0.5
-  pauseTime: 0.5
+  animTime: 2
+  pauseTime: 1
   canvas: {fileID: 8390901707169836678}
   hitParticles: {fileID: 1107893436532929431, guid: b85be5ab847ac194ebea6c5888c56acd, type: 3}
-  damagePopup: {fileID: 2854229375512463313, guid: 7947c16fbc9ce5a4b8a0b211baf5d54a, type: 3}
   bust: {fileID: 8259218084211573499, guid: 3418733fe97b8084089d429a9ef039b1, type: 3}
   blackjackMulti: 1.25
 --- !u!1 &1182454012042675057

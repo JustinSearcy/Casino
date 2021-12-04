@@ -32,7 +32,7 @@ public class EnemyTooltip : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (combatManager.combatState == CombatState.PLAYERTURN)
+        if (combatManager.combatState == CombatState.PLAYER_TURN)
         {
             tooltip.SetActive(true);
             isActive = true;

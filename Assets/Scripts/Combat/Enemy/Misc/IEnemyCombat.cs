@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IEnemyCombat
 {
-    string DetermineAction();
+    public void DetermineAction();
+
+    public void Action();
 }

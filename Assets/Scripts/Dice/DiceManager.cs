@@ -8,18 +8,31 @@ public class DiceManager : MonoBehaviour
     [SerializeField] List<GameObject> currentDice = null;
     [SerializeField] List<GameObject> selectedDice = null;
     [SerializeField] List<Transform> selectPos = null;
+    [SerializeField] List<Transform> rolledPos = null;
+    [SerializeField] GameObject selectPosParent = null;
+    [SerializeField] public GameObject selectedRolledDie = null;
     [SerializeField] Button rollButton = null;
     [SerializeField] int dicePickAmt = 4;
     [SerializeField] int diceSelectedAmt = 0;
-    [SerializeField] bool hasRolled = false;
     [SerializeField] float diceSelectTime = 0.2f;
     [SerializeField] float diceShiftTime = 0.1f;
+    [SerializeField] float rolledMoveTime = 0.25f;
+    [SerializeField] float waitToMoveTime = 0.3f;
 
     DiceLoader diceLoader;
+    CombatManager combatManager;
+
+    public bool diceLoaded = false;
+
+    private int diceRolled = 0;
+    private bool diceRollComplete = false;
+    private bool hasRolled = false;
 
     private void Start()
     {
         diceLoader = FindObjectOfType<DiceLoader>();
+        combatManager = FindObjectOfType<CombatManager>();
+        selectPosParent.SetActive(false);
     }
 
     public void AddDie(GameObject die)
@@ -34,11 +47,11 @@ public class DiceManager : MonoBehaviour
 
     public bool SelectDie(GameObject die)
     {
-        if (diceSelectedAmt < dicePickAmt && !hasRolled)
+        if (diceSelectedAmt < dicePickAmt && !hasRolled && diceLoaded)
         {
             selectedDice.Add(die);
             LeanTween.move(die, selectPos[diceSelectedAmt].position, diceSelectTime);
-            die.GetComponent<Dice>().setSelectIndex(diceSelectedAmt);
+            die.GetComponent<Dice>().SetSelectIndex(diceSelectedAmt);
             diceSelectedAmt++;
             if (diceSelectedAmt == dicePickAmt)
             {
@@ -83,6 +96,7 @@ public class DiceManager : MonoBehaviour
     public void RollDice()
     {
         hasRolled = true;
+        rollButton.interactable = false;
         foreach (GameObject die in selectedDice)
         {
             die.GetComponent<Dice>().Roll();
@@ -93,14 +107,16 @@ public class DiceManager : MonoBehaviour
     {
         Debug.Log("Dice Loaded");
         diceLoader.LoadDice(currentDice);
+        diceRollComplete = false;
     }
 
     public void UnloadDice()
     {
+        diceLoaded = false;
         StartCoroutine(UnloadDiceCoroutine());
     }
 
-    IEnumerator UnloadDiceCoroutine()
+    private IEnumerator UnloadDiceCoroutine()
     {
         foreach (GameObject die in selectedDice)
         {
@@ -108,5 +124,58 @@ public class DiceManager : MonoBehaviour
         }
         yield return new WaitForSeconds(diceSelectTime + 0.1f);
         diceLoader.UnloadDice();
+    }
+
+    public void DiceLoaded()
+    {
+        diceLoaded = true;
+        selectPosParent.SetActive(true);
+    }
+
+    public void DieRolled()
+    {
+        diceRolled++;
+        if (diceRolled >= selectedDice.Count)
+        {
+            diceRollComplete = true;
+            StartCoroutine(MoveRolledDice());
+            diceRolled = 0;
+        }
+    }
+
+    private IEnumerator MoveRolledDice()
+    {
+        yield return new WaitForSeconds(waitToMoveTime);
+        selectPosParent.SetActive(false);
+        for (int i = 0; i < selectedDice.Count; i++)
+        {
+            LeanTween.move(selectedDice[i], rolledPos[i], rolledMoveTime).setEaseOutQuad();
+        }
+        combatManager.ActionComplete(CombatManager.DICE_ROLLED);
+    }
+
+    public void SelectRolledDie(GameObject die)
+    {
+        if (selectedRolledDie != null)
+            selectedRolledDie.GetComponent<Dice>().DeselectDie();
+        selectedRolledDie = die;
+    }
+
+    public void TryAction(string targetType, GameObject currentActionTarget)
+    {
+        if (selectedRolledDie != null)
+        {
+            IDiceSide side = selectedRolledDie.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>();
+            ActionTargets target = side.ActionTarget;
+
+            if (targetType.Equals("Enemy"))
+            {
+                if (target == ActionTargets.SINGLE_TARGET_ENEMY)
+                {
+                    combatManager.SetActionTarget(currentActionTarget);
+                    side.Action();
+                }
+            }
+        }
     }
 }

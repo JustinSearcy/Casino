@@ -37,10 +37,14 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
         combatManager = FindObjectOfType<CombatManager>();
     }
 
-    public string DetermineAction()
+    public void DetermineAction()
+    {
+        
+    }
+
+    public void Action()
     {
         StartCoroutine(ActionOne());
-        return actionOneName;
     }
 
     IEnumerator ActionOne()
@@ -82,7 +86,6 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     IEnumerator LuckyCloverHit()
     {
         FindObjectOfType<CameraZoom>().ZoomCenter();
-        combatManager.CombatTextMessage("Slot Machine hit Lucky Clover");
         int magic = this.gameObject.GetComponent<UnitStats>().magic;
         int magicDefense = chips.gameObject.GetComponent<UnitStats>().magDefense;
         int damage = (magic * 4) - magicDefense;
@@ -96,14 +99,12 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
 
     public void Nothing()
     {
-        combatManager.CombatTextMessage("Slot Machine hit nothing");
         FindObjectOfType<CameraZoom>().ZoomCenter();
         StartCoroutine(NextCharacter());
     }
 
     public void Backfire()
     {
-        combatManager.CombatTextMessage("Slot Machine hit Backfire");
         FindObjectOfType<CameraZoom>().ZoomCenter();
         float healthLossPercent = Random.Range(backfireMinLoss, backfireMaxLoss);
         int healthLoss = (int)(health.currentHealth * healthLossPercent);
@@ -113,13 +114,11 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
 
     public void FreeSpin()
     {
-        combatManager.CombatTextMessage("Slot Machine hit Free Spin");
         DetermineAction();
     }
 
     public void Jackpot()
     {
-        combatManager.CombatTextMessage("Slot Machine hit the Jackpot");
         FindObjectOfType<CameraZoom>().ZoomCenter();
         StartCoroutine(HitJackpot());
     }

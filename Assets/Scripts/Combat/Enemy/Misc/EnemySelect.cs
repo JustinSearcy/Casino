@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class EnemySelect : MonoBehaviour
 {
+    CombatManager combatManager;
+    DiceManager diceManager;
+
+    private void Start()
+    {
+        combatManager = FindObjectOfType<CombatManager>();
+        diceManager = FindObjectOfType<DiceManager>();
+    }
+
     private void OnMouseDown()
     {
-        Debug.Log("New Target Selected");
-        FindObjectOfType<CombatManager>().SetTarget(this.gameObject);
+        Debug.Log("EnemyClicked");
+        if (combatManager.combatState == CombatState.PLAYER_ATTACK)
+            diceManager.TryAction("Enemy", gameObject);
     }
 }

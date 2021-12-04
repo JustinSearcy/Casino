@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         combatManager = FindObjectOfType<CombatManager>();
-        anim = this.gameObject.GetComponent<Animator>();
+        anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
         UpdateHealthBar();
@@ -93,7 +93,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void TurnCheck()
     {
-        if (combatManager.combatState == CombatState.PLAYERATTACK)
+        if (combatManager.combatState == CombatState.PLAYER_ATTACK)
         {
             combatManager.TurnEnd();
         }

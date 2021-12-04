@@ -15,6 +15,15 @@ public class DiceLoader : MonoBehaviour
     [SerializeField] float moveTime = 0.2f;
     [SerializeField] GameObject DiceParent = null;
 
+    CombatManager combatManager;
+    DiceManager diceManager;
+
+    private void Start()
+    {
+        combatManager = FindObjectOfType<CombatManager>();
+        diceManager = FindObjectOfType<DiceManager>();
+    }
+
     public void LoadDice(List<GameObject> currentDice)
     {
         int currentDiceAmt = currentDice.Count;
@@ -29,13 +38,15 @@ public class DiceLoader : MonoBehaviour
             int randIndex = Random.Range(0, currentDice.Count);
             GameObject newDie = Instantiate(currentDice[randIndex], spawnPos.position, Quaternion.identity);
             newDie.transform.parent = DiceParent.transform;
-            newDie.GetComponent<Dice>().setLoadIndex(i);
+            newDie.GetComponent<Dice>().SetLoadIndex(i);
             loadedDice.Add(newDie);
             float loadTime = firstLoadTime - (0.02f * i);
             LeanTween.moveX(newDie, loadPositions[i].position.x, loadTime).setEaseOutQuad();
             yield return new WaitForSeconds(loadInterval);
             currentDice.RemoveAt(randIndex);
         }
+        diceManager.DiceLoaded();
+        combatManager.ActionComplete(CombatManager.DICE_LOADED);
     }
 
     public void PlaceDieBackOnLoader(GameObject die)

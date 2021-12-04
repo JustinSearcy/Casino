@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Blackjack : MonoBehaviour, IAction
+public class BlackJack : MonoBehaviour, IAction
 {
     private string actionName = "Blackjack";
 
@@ -142,7 +142,7 @@ public class Blackjack : MonoBehaviour, IAction
     {
         for (int i = 0; i < deck.currentCards.Count; i++)
         {
-            Destroy(deck.currentCards[i].gameObject);
+            Destroy(deck.currentCards[i]);
         }
     }
 

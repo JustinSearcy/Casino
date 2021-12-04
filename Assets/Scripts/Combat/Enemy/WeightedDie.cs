@@ -11,40 +11,54 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     [SerializeField] float poisonTime = 1f;
     [SerializeField] int poisonTurnLength = 3;
     [SerializeField] float hotRollerTime = 1.2f;
+    [SerializeField] GameObject intent = null;
 
     EnemyHealth health;
     ChipSystem chips;
     CombatManager combatManager;
+    EnemyIntent enemyIntent;
 
-    public string actionOneName = "Attack";
-    public string actionTwoName = "Heal";
-    public string actionThreeName = "Something";
+    private bool isHotRoller = false;
+    private int currentAction;
 
     private void Start()
     {
         health = this.gameObject.GetComponent<EnemyHealth>();
         chips = FindObjectOfType<ChipSystem>();
         combatManager = FindObjectOfType<CombatManager>();
+        enemyIntent = FindObjectOfType<EnemyIntent>();
     }
 
-    public string DetermineAction()
+    public void DetermineAction()
     {
+        intent.SetActive(true);
         float num = Random.Range(0, 1f);
         if (num <= 0.5f) //50% chance to Perfect Roll
         {
-            StartCoroutine(ActionOne());
-            return actionOneName;
+            int damage = isHotRoller ? 12 : 6;
+            enemyIntent.SetAttack(intent, damage);
+            currentAction = 1;
         }
         else if (num <= 0.8) //30% chance to Snake Eyes
         {
-            StartCoroutine(ActionTwo());
-            return actionTwoName;
+            enemyIntent.SetSpecial(intent);
+            currentAction = 2;
         }
         else //20% chance to Hot Roller
-        {
-            StartCoroutine(ActionThree());
-            return actionThreeName;
+        { 
+            enemyIntent.SetSpecial(intent);
+            currentAction = 3;
         }
+    }
+
+    public void Action()
+    {
+        if (currentAction == 1)
+            StartCoroutine(ActionOne());
+        else if (currentAction == 2)
+            StartCoroutine(ActionTwo());
+        else
+            StartCoroutine(ActionThree());
     }
 
     IEnumerator ActionOne()//Roll
@@ -68,17 +82,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     public void Roll()
     {
         FindObjectOfType<Shake>().CamShake();
-        int playerDefense = chips.gameObject.GetComponent<UnitStats>().physDefense;
-        int dieStrength = this.gameObject.GetComponent<UnitStats>().strength;
-        int damage = 0;
-        if(dieStrength <= playerDefense)
-        {
-            damage = 6;
-        }
-        else
-        {
-            damage = 6 * (dieStrength - playerDefense);
-        }
+        int damage = isHotRoller ? 12 : 6;
         chips.LoseChips(damage);
         StartCoroutine(NextCharacter());
     }
@@ -93,7 +97,6 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         GameObject particles = Instantiate(poisonParticles, chips.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         yield return new WaitForSeconds(poisonTime);
-        FindObjectOfType<CombatManager>().CombatTextMessage("You've been poisoned!");
         chips.gameObject.GetComponent<StatusEffects>().Poisoned(poisonTurnLength);
         StartCoroutine(NextCharacter());
     }
@@ -102,7 +105,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     {
         FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
         hotRollerParticles.SetActive(true);
-        this.gameObject.GetComponent<UnitStats>().modifyStrength(2f);
+        isHotRoller = true;
         yield return new WaitForSeconds(hotRollerTime);
         FindObjectOfType<CameraZoom>().ZoomCenter();
         StartCoroutine(NextCharacter());

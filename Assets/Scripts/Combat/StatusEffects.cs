@@ -29,7 +29,6 @@ public class StatusEffects : MonoBehaviour
         if (isPoisoned)
         {
             Poison();
-            combatManager.CombatTextMessage("Poison took effect!");
             return true;
         }
         return false;
