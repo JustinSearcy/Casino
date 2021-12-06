@@ -136,6 +136,6 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     IEnumerator NextCharacter()
     {
         yield return new WaitForSeconds(timeAfterAttack);
-        combatManager.AttackComplete();
+        combatManager.ActionComplete(CombatManager.ENEMY_ACTION_COMPLETE);
     }
 }

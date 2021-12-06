@@ -27,10 +27,12 @@ public class EnemyHealth : MonoBehaviour
     Shake camShake;
     Animator anim;
     CombatManager combatManager;
+    ActionManager actionManager;
 
     void Start()
     {
         combatManager = FindObjectOfType<CombatManager>();
+        actionManager = FindObjectOfType<ActionManager>();
         anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
@@ -74,7 +76,7 @@ public class EnemyHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(hitStunTime);
         anim.SetTrigger("StopHit");
-        TurnCheck();
+        actionManager.ActionFinished();
     }
 
     IEnumerator Die()
@@ -85,18 +87,11 @@ public class EnemyHealth : MonoBehaviour
         GameObject particles = Instantiate(enemyDeathParticles, this.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         combatManager.EnemyDeath(this.gameObject);
-        TurnCheck();
         //DisableEnemy();
         //yield return new WaitForSeconds(2f); //Give time for combat manager to use this reference before destroying
+        if (combatManager.combatState != CombatState.WIN)
+            actionManager.ActionFinished();
         Destroy(this.gameObject);
-    }
-
-    private void TurnCheck()
-    {
-        if (combatManager.combatState == CombatState.PLAYER_ATTACK)
-        {
-            combatManager.TurnEnd();
-        }
     }
 
     private void DisableEnemy()

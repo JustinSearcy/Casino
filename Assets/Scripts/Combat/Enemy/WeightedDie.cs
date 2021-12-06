@@ -17,6 +17,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     ChipSystem chips;
     CombatManager combatManager;
     EnemyIntent enemyIntent;
+    Animator anim;
 
     private bool isHotRoller = false;
     private int currentAction;
@@ -27,6 +28,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         chips = FindObjectOfType<ChipSystem>();
         combatManager = FindObjectOfType<CombatManager>();
         enemyIntent = FindObjectOfType<EnemyIntent>();
+        anim = gameObject.transform.GetChild(0).GetComponent<Animator>();
     }
 
     public void DetermineAction()
@@ -64,13 +66,13 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     IEnumerator ActionOne()//Roll
     {
         yield return new WaitForSeconds(timeBeforeAttack);
-        this.gameObject.GetComponent<Animator>().SetTrigger("Roll");
+        anim.SetTrigger("Roll");
     }
 
     IEnumerator ActionTwo()//SnakeEyes
     {
         yield return new WaitForSeconds(timeBeforeAttack);
-        this.gameObject.GetComponent<Animator>().SetTrigger("SnakeEyes");
+        anim.SetTrigger("SnakeEyes");
     }
 
     IEnumerator ActionThree()//HotRoller
@@ -114,6 +116,6 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     IEnumerator NextCharacter()
     {
         yield return new WaitForSeconds(timeAfterAttack);
-        combatManager.AttackComplete();
+        combatManager.ActionComplete(CombatManager.ENEMY_ACTION_COMPLETE);
     }
 }

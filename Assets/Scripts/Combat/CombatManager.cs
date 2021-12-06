@@ -58,6 +58,9 @@ public class CombatManager : MonoBehaviour
     public const String ENEMY_INTENT = "Enemy Intent";
     public const String DICE_LOADED = "Dice Loaded";
     public const String DICE_ROLLED = "Dice Rolled";
+    public const String ALL_PLAYER_ACTIONS_COMPLETE = "All Player Actions Complete";
+    public const String ENEMY_ACTION_COMPLETE = "Enemy Action Complete";
+    public const String ALL_ENEMY_ACTIONS_COMPLETE = "All Enemy Actions Complete";
 
     int currentEnemyIndex = 0;
 
@@ -95,18 +98,18 @@ public class CombatManager : MonoBehaviour
         ActionComplete(CombatManager.SPAWN);
     }
 
-/*    private void PlayerSetUp()
-    {
-        actions = FindObjectOfType<PlayerActions>();
-        for (int i = 0; i < 3; i++)
-        {
-            if (actions.currentActions[i] != null)
-            {
-                attackMenu.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actions.currentActions[i].name;
-            }
-            //Disable button if no action available in slot?
-        }
-    }*/
+    //private void PlayerSetUp()
+    //{
+    //    actions = FindObjectOfType<PlayerActions>();
+    //    for (int i = 0; i < 3; i++)
+    //    {
+    //        if (actions.currentActions[i] != null)
+    //        {
+    //            attackMenu.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actions.currentActions[i].name;
+    //        }
+    //        //Disable button if no action available in slot?
+    //    }
+    //}
 
     IEnumerator EnemyIntent()
     {
@@ -121,56 +124,46 @@ public class CombatManager : MonoBehaviour
 
     
 
-    IEnumerator PlayerTurn()
-    {
-        yield return new WaitForSeconds(turnChangeTime);
-        bool effectActive = player.GetComponent<StatusEffects>().CheckStatusEffects();
-        if (effectActive)
-        {
-            yield return new WaitForSeconds(statusTime);
-        }
-        playerMenu.SetActive(true);
-    }
+    //IEnumerator PlayerTurn()
+    //{
+    //    yield return new WaitForSeconds(turnChangeTime);
+    //    bool effectActive = player.GetComponent<StatusEffects>().CheckStatusEffects();
+    //    if (effectActive)
+    //        yield return new WaitForSeconds(statusTime);
+    //    playerMenu.SetActive(true);
+    //}
 
-    public void OnAttackButton(int attackButton)
-    {
-        if (combatState != CombatState.PLAYER_TURN && currentTarget != null)
-        {
-            return;
-        }
-        if (actions.currentActions[attackButton] != null)
-        {
-            combatState = CombatState.PLAYER_ATTACK;
-            StartCoroutine(PlayerAction(attackButton));
-        }
-    }
+    //public void OnAttackButton(int attackButton)
+    //{
+    //    if (combatState != CombatState.PLAYER_TURN && currentTarget != null)
+    //    {
+    //        return;
+    //    }
+    //    if (actions.currentActions[attackButton] != null)
+    //    {
+    //        combatState = CombatState.PLAYER_ATTACK;
+    //        StartCoroutine(PlayerAction(attackButton));
+    //    }
+    //}
 
-    IEnumerator PlayerAction(int action)
-    {
-        attackMenu.SetActive(false);
-        itemMenu.SetActive(false);
-        //disable other menu too
-        GameObject currentAction = Instantiate(actions.currentActions[action]); //Delete action when done
-        //combatText.text = "You used " + currentAction.GetComponent<IAction>().ActionName;
-        currentAction.GetComponent<IAction>().StartAction(currentTarget);
-        yield return new WaitForSeconds(attackTime);
-    }
+    //IEnumerator PlayerAction(int action)
+    //{
+    //    attackMenu.SetActive(false);
+    //    itemMenu.SetActive(false);
+    //    //disable other menu too
+    //    GameObject currentAction = Instantiate(actions.currentActions[action]); //Delete action when done
+    //    //combatText.text = "You used " + currentAction.GetComponent<IAction>().ActionName;
+    //    currentAction.GetComponent<IAction>().StartAction(currentTarget);
+    //    yield return new WaitForSeconds(attackTime);
+    //}
 
-    public void TurnEnd()
-    {
-        if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
-        {
-            StartCoroutine(ChangeTurn());
-        }
-    }
-
-    IEnumerator ChangeTurn()
-    {
-        combatState = CombatState.ENEMY_TURN;
-        yield return new WaitForSeconds(turnChangeTime);
-        Debug.Log(currentEnemies[0]);
-        StartCoroutine(EnemyTurn(currentEnemies[0]));
-    }
+    //public void TurnEnd()
+    //{
+    //    if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
+    //    {
+    //        StartCoroutine(ChangeTurn());
+    //    }
+    //}
 
     IEnumerator EnemyTurn(GameObject enemy)
     {
@@ -180,45 +173,20 @@ public class CombatManager : MonoBehaviour
         {
             yield return new WaitForSeconds(statusTime);
         }
-        var enemyAttacks = enemy.GetComponent<IEnemyCombat>();
+        enemy.GetComponent<IEnemyCombat>().Action();
         //string action = enemyAttacks.DetermineAction();
         //combatText.text = "Enemy uses " + action;
         currentEnemyIndex++;
-    }
-
-    public void AttackComplete()
-    {
-        if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
-        {
-            if (currentEnemyIndex < currentEnemies.Count)
-            {
-                StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
-            }
-            else
-            {
-                combatState = CombatState.PLAYER_TURN;
-                currentEnemyIndex = 0;
-                StartCoroutine(PlayerTurn());
-            }
-        }
     }
 
     public void EnemyDeath(GameObject enemy)
     {
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
-        chipsWon += enemy.GetComponent<UnitStats>().chipValue;
-        if (currentEnemies.Count > 0)
-        {
-            OverrideSetTarget(currentEnemies[0]);
-            if (combatState == CombatState.ENEMY_TURN)
-            {
-                currentEnemyIndex--;
-            }
-        }
+        if (currentEnemies.Count > 0 && combatState == CombatState.ENEMY_TURN)
+            currentEnemyIndex--;
         else
         {
-            targetingCircle.SetActive(false);
             combatState = CombatState.WIN;
             PlayerWon();
         }
@@ -233,13 +201,6 @@ public class CombatManager : MonoBehaviour
     {
         combatState = CombatState.LOSE;
     }
-
-    private void OverrideSetTarget(GameObject newTarget)
-    {
-        currentTarget = newTarget;
-        targetingCircle.transform.position = new Vector2(newTarget.transform.position.x, -2);
-    }
-
 
     public void LoseChips(int chips)
     {
@@ -260,15 +221,40 @@ public class CombatManager : MonoBehaviour
                 combatState = CombatState.ENEMY_INTENT;
                 StartCoroutine(EnemyIntent());
                 break;
+
             case CombatManager.ENEMY_INTENT:
                 combatState = CombatState.PLAYER_TURN;
                 diceManager.LoadNewDice();
                 break;
+
             case CombatManager.DICE_LOADED:
                 break;
+
             case CombatManager.DICE_ROLLED:
                 combatState = CombatState.PLAYER_ATTACK;
                 break;
+
+            case CombatManager.ALL_PLAYER_ACTIONS_COMPLETE:
+                combatState = CombatState.ENEMY_TURN;
+                StartCoroutine(EnemyTurn(currentEnemies[0]));
+                break;
+
+            case CombatManager.ENEMY_ACTION_COMPLETE:
+                if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
+                {
+                    if (currentEnemyIndex < currentEnemies.Count)
+                        StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
+                    else
+                        ActionComplete(CombatManager.ALL_ENEMY_ACTIONS_COMPLETE);
+                }
+                break;
+
+            case CombatManager.ALL_ENEMY_ACTIONS_COMPLETE:
+                currentEnemyIndex = 0;
+                combatState = CombatState.ENEMY_INTENT;
+                StartCoroutine(EnemyIntent());
+                break;
+
             default:
                 Debug.LogError("I was not ready for this");
                 break;

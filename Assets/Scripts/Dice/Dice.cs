@@ -80,4 +80,10 @@ public class Dice : MonoBehaviour
     public void SetSelectIndex(int index) => selectIndex = index;
 
     public void DeselectDie() => isSelected = false;
+
+    public void DieActionComplete()
+    {
+        isSelected = false;
+        wasRolled = false;
+    }
 }
