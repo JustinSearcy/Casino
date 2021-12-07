@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("Stats")]
     [SerializeField] public int maxHealth = 100;
     [SerializeField] public int currentHealth = 100;
-    //serializeField] TextMeshPro enemyHealthText = null;
+    [SerializeField] TextMeshPro enemyHealthText = null;
 
     [Header("Health Bar")]
     [SerializeField] GameObject healthBar = null;
@@ -33,7 +33,7 @@ public class EnemyHealth : MonoBehaviour
     {
         combatManager = FindObjectOfType<CombatManager>();
         actionManager = FindObjectOfType<ActionManager>();
-        anim = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
+        anim = this.gameObject.GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
         UpdateHealthBar();
@@ -106,7 +106,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void UpdateHealthBar()
     {
-        //enemyHealthText.text = "" + currentHealth + "/" + maxHealth;
+        enemyHealthText.text = "" + currentHealth + "/" + maxHealth;
         LeanTween.scaleX(healthBar, GetHealthPercent(), healthBarTime).setEaseOutQuint();
     }
 }

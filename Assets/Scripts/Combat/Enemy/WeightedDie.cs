@@ -28,7 +28,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         chips = FindObjectOfType<ChipSystem>();
         combatManager = FindObjectOfType<CombatManager>();
         enemyIntent = FindObjectOfType<EnemyIntent>();
-        anim = gameObject.transform.GetChild(0).GetComponent<Animator>();
+        anim = gameObject.GetComponent<Animator>();
     }
 
     public void DetermineAction()

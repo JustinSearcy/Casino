@@ -59,6 +59,7 @@ public class CombatManager : MonoBehaviour
     public const String DICE_LOADED = "Dice Loaded";
     public const String DICE_ROLLED = "Dice Rolled";
     public const String ALL_PLAYER_ACTIONS_COMPLETE = "All Player Actions Complete";
+    public const String DICE_UNLOADED = "Dice Unloaded";
     public const String ENEMY_ACTION_COMPLETE = "Enemy Action Complete";
     public const String ALL_ENEMY_ACTIONS_COMPLETE = "All Enemy Actions Complete";
 
@@ -183,8 +184,10 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log("Enemy Killed");
         currentEnemies.Remove(enemy);
-        if (currentEnemies.Count > 0 && combatState == CombatState.ENEMY_TURN)
+        if (currentEnemies.Count > 0)
+        {
             currentEnemyIndex--;
+        }  
         else
         {
             combatState = CombatState.WIN;
@@ -235,6 +238,10 @@ public class CombatManager : MonoBehaviour
                 break;
 
             case CombatManager.ALL_PLAYER_ACTIONS_COMPLETE:
+                diceManager.UnloadDice();
+                break;
+
+            case CombatManager.DICE_UNLOADED:
                 combatState = CombatState.ENEMY_TURN;
                 StartCoroutine(EnemyTurn(currentEnemies[0]));
                 break;

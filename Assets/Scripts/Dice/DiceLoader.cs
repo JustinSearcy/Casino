@@ -69,5 +69,6 @@ public class DiceLoader : MonoBehaviour
             yield return new WaitForSeconds(loadInterval);
             count--;
         }
+        combatManager.ActionComplete(CombatManager.DICE_UNLOADED);
     }
 }

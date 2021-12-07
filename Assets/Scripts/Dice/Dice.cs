@@ -18,10 +18,14 @@ public class Dice : MonoBehaviour
     public int loadIndex;
     public int selectIndex;
 
+    private GameObject dieBackgroundSelect;
+
     private void Start()
     {
         diceManager = FindObjectOfType<DiceManager>();
-        sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        sprite = gameObject.GetComponent<SpriteRenderer>();
+        dieBackgroundSelect = gameObject.transform.GetChild(0).gameObject;
+        dieBackgroundSelect.SetActive(false);
         currentSide = sides[0];
         sprite.sprite = currentSide.GetComponent<SpriteRenderer>().sprite;
     }
@@ -66,24 +70,29 @@ public class Dice : MonoBehaviour
             {
                 diceManager.SelectRolledDie(gameObject);
                 isSelected = true;
+                dieBackgroundSelect.SetActive(true);
             }
             else if (diceManager.SelectDie(gameObject))
                 isSelected = true;
         }
         else
             if (diceManager.DeselectDie(gameObject))
-                isSelected = false;
+                DeselectDie();
     }
 
     public void SetLoadIndex(int index) => loadIndex = index;
 
     public void SetSelectIndex(int index) => selectIndex = index;
 
-    public void DeselectDie() => isSelected = false;
+    public void DeselectDie()
+    {
+        isSelected = false;
+        dieBackgroundSelect.SetActive(false);
+    }
 
     public void DieActionComplete()
     {
-        isSelected = false;
+        DeselectDie();
         wasRolled = false;
     }
 }
