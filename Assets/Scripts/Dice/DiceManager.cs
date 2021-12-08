@@ -22,6 +22,7 @@ public class DiceManager : MonoBehaviour
     DiceLoader diceLoader;
     CombatManager combatManager;
     ActionManager actionManager;
+    DiceSelectLine diceSelectLine;
 
     public bool diceLoaded = false;
 
@@ -34,6 +35,7 @@ public class DiceManager : MonoBehaviour
         diceLoader = FindObjectOfType<DiceLoader>();
         combatManager = FindObjectOfType<CombatManager>();
         actionManager = FindObjectOfType<ActionManager>();
+        diceSelectLine = FindObjectOfType<DiceSelectLine>();
         selectPosParent.SetActive(false);
     }
 
@@ -161,6 +163,7 @@ public class DiceManager : MonoBehaviour
             if (selectedRolledDie != null)
                 selectedRolledDie.GetComponent<Dice>().DeselectDie();
             selectedRolledDie = die;
+            diceSelectLine.setNewTarget(die.transform);
         }
     }
 
@@ -178,6 +181,7 @@ public class DiceManager : MonoBehaviour
                     combatManager.SetActionTarget(currentActionTarget);
                     actionManager.ManageAction(side);
                     actionInProgress = true;
+                    diceSelectLine.deactivateLine();
                 }
             }
         }
