@@ -35,15 +35,15 @@ public class DiceSelectLine : MonoBehaviour
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 stepSize = i / (float)numPoints;
                 Vector2 curvePoint = CalculateCurvePoint(mousePos);
-                points[i].transform.position = CalculateQuadraticBezierPoint(stepSize, currentTarget.position, mousePos, curvePoint);
+                points[i].transform.position = CalculateQuadraticBezierPoint(stepSize, currentTarget.position, curvePoint, mousePos);
             }
         }
     }
 
     private Vector2 CalculateCurvePoint(Vector2 mousePos)
     {
-        Vector2 orig = mousePos - new Vector2(currentTarget.position.x, currentTarget.position.y);
-        Vector2 perp = Vector2.Perpendicular(orig);
+        Vector2 middle = (mousePos + new Vector2(currentTarget.position.x, currentTarget.position.y)) / 2;
+        Vector2 perp = Vector2.Perpendicular(middle);
         return perp * curvePointDistance;
     }
 

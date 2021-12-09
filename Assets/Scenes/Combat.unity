@@ -1355,9 +1355,9 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   point: {fileID: 7392759831169594605, guid: 3c3f4deaf8ec33c4589b052255eee4f8, type: 3}
   points: []
-  spaceBetweenPoints: 1
   numPoints: 20
   lineActive: 0
+  curvePointDistance: 1.5
 --- !u!4 &1582056784
 Transform:
   m_ObjectHideFlags: 0

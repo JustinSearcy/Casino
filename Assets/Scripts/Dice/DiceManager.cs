@@ -158,13 +158,13 @@ public class DiceManager : MonoBehaviour
 
     public void SelectRolledDie(GameObject die)
     {
-        if (!actionInProgress)
-        {
+        //if (!actionInProgress)
+        //{
             if (selectedRolledDie != null)
                 selectedRolledDie.GetComponent<Dice>().DeselectDie();
             selectedRolledDie = die;
             diceSelectLine.setNewTarget(die.transform);
-        }
+        //}
     }
 
     public void TryAction(string targetType, GameObject currentActionTarget)
@@ -177,24 +177,29 @@ public class DiceManager : MonoBehaviour
             if (targetType.Equals("Enemy"))
             {
                 if (target == ActionTargets.SINGLE_TARGET_ENEMY)
-                {
-                    combatManager.SetActionTarget(currentActionTarget);
-                    actionManager.ManageAction(side);
-                    actionInProgress = true;
-                    diceSelectLine.deactivateLine();
-                }
+                    Action(currentActionTarget, side);
             }
         }
+    }
+
+    public void Action(GameObject target, IDiceSide side)
+    {
+        actionInProgress = true;
+        diceLoader.PlaceDieBackOnLoader(selectedRolledDie);
+        diceSelectLine.deactivateLine();
+
+        selectedRolledDie.GetComponent<Dice>().DieActionComplete();
+        selectedDice.Remove(selectedRolledDie);
+        selectedRolledDie = null;
+
+        combatManager.SetActionTarget(target);
+        actionManager.ManageAction(side);
     }
 
     public void ActionFinished()
     {
         Debug.Log("ACTION FINISHED");
         actionInProgress = false;
-        diceLoader.PlaceDieBackOnLoader(selectedRolledDie);
-        selectedRolledDie.GetComponent<Dice>().DieActionComplete();
-        selectedDice.Remove(selectedRolledDie);
-        selectedRolledDie = null;
         if (selectedDice.Count == 0)
             combatManager.ActionComplete(CombatManager.ALL_PLAYER_ACTIONS_COMPLETE);
     }

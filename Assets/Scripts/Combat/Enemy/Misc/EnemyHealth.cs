@@ -87,21 +87,9 @@ public class EnemyHealth : MonoBehaviour
         GameObject particles = Instantiate(enemyDeathParticles, this.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         combatManager.EnemyDeath(this.gameObject);
-        //DisableEnemy();
-        //yield return new WaitForSeconds(2f); //Give time for combat manager to use this reference before destroying
         if (combatManager.combatState != CombatState.WIN)
             actionManager.ActionFinished();
         Destroy(this.gameObject);
-    }
-
-    private void DisableEnemy()
-    {
-        for (int i = 0; i < this.transform.childCount; i++)
-        {
-            this.transform.GetChild(i).gameObject.SetActive(false);
-        }
-        this.GetComponent<SpriteRenderer>().enabled = false;
-        this.GetComponent<ShadowCaster2D>().enabled = false;
     }
 
     private void UpdateHealthBar()

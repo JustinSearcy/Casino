@@ -13,7 +13,7 @@ public class EnemySelect : MonoBehaviour
         diceManager = FindObjectOfType<DiceManager>();
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         Debug.Log("EnemyClicked");
         if (combatManager.combatState == CombatState.PLAYER_ATTACK)
