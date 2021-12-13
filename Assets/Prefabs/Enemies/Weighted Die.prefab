@@ -79,6 +79,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8624793203436694764, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5578336
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624793203436694764, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_Size.y
+      value: 1.9076226
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624793203436694764, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.00979048
+      objectReference: {fileID: 0}
+    - target: {fileID: 8624793203436694764, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.09848806
+      objectReference: {fileID: 0}
     - target: {fileID: 9216711624123457927, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_Name
       value: Weighted Die

@@ -11,9 +11,11 @@ public class Dice : MonoBehaviour
     [SerializeField] int maxRolls = 30;
     [SerializeField] int minRolls = 20;
     [SerializeField] private bool wasRolled = false;
+    [SerializeField] float outlineAlpha = 0.575f;
 
     DiceManager diceManager;
     SpriteRenderer sprite;
+    Material mat;
 
     public int loadIndex;
     public int selectIndex;
@@ -24,8 +26,8 @@ public class Dice : MonoBehaviour
     {
         diceManager = FindObjectOfType<DiceManager>();
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        dieBackgroundSelect = gameObject.transform.GetChild(0).gameObject;
-        dieBackgroundSelect.SetActive(false);
+        mat = gameObject.GetComponent<Renderer>().material;
+        mat.SetFloat("_OutlineAlpha", 0);
         currentSide = sides[0];
         sprite.sprite = currentSide.GetComponent<SpriteRenderer>().sprite;
     }
@@ -70,7 +72,7 @@ public class Dice : MonoBehaviour
             {
                 diceManager.SelectRolledDie(gameObject);
                 isSelected = true;
-                dieBackgroundSelect.SetActive(true);
+                mat.SetFloat("_OutlineAlpha", outlineAlpha);
             }
             else if (diceManager.SelectDie(gameObject))
                 isSelected = true;
@@ -87,7 +89,7 @@ public class Dice : MonoBehaviour
     public void DeselectDie()
     {
         isSelected = false;
-        dieBackgroundSelect.SetActive(false);
+        mat.SetFloat("_OutlineAlpha", 0);
     }
 
     public void DieActionComplete()

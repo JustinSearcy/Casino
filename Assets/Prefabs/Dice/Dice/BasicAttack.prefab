@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5852406452415789500, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: shaderTypes
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8068933624483079745, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: m_Name
       value: BasicAttack
@@ -56,12 +60,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0039692
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00021973252
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.1875
+      objectReference: {fileID: 0}
+    - target: {fileID: 8068933624483079757, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.1875
       objectReference: {fileID: 0}
     - target: {fileID: 8068933624483079758, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: sides.Array.data[0]
@@ -99,5 +119,9 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -7008412969330441016, guid: 381d4e7f239c05d4490ce44e6a7990e4, type: 3}
+    - target: {fileID: 8068933624483079759, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e5c827754706394c8c8e9b4e5498e63, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
