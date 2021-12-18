@@ -26,14 +26,14 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
 
     public string actionOneName = "Spin";
 
-    EnemyHealth health;
-    ChipSystem chips;
+    Health health;
+    Health playerHealth;
     CombatManager combatManager;
 
     private void Start()
     {
-        health = this.gameObject.GetComponent<EnemyHealth>();
-        chips = FindObjectOfType<ChipSystem>();
+        health = this.gameObject.GetComponent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         combatManager = FindObjectOfType<CombatManager>();
     }
 
@@ -72,10 +72,10 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
             this.gameObject.GetComponent<Animator>().SetTrigger("Jackpot");
         }
 
-        if(FindObjectOfType<CameraZoom>().gameObject.GetComponent<Camera>().orthographicSize == 5)
-        {
-            FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
-        }
+        //if(FindObjectOfType<CameraZoom>().gameObject.GetComponent<Camera>().orthographicSize == 5)
+        //{
+        //    FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
+        //}
     }
 
     public void LuckyClover()
@@ -87,13 +87,13 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     {
         FindObjectOfType<CameraZoom>().ZoomCenter();
         int magic = this.gameObject.GetComponent<UnitStats>().magic;
-        int magicDefense = chips.gameObject.GetComponent<UnitStats>().magDefense;
+        int magicDefense = playerHealth.gameObject.GetComponent<UnitStats>().magDefense;
         int damage = (magic * 4) - magicDefense;
-        Vector2 particlePos = new Vector2(chips.gameObject.transform.position.x, 5.5f);
+        Vector2 particlePos = new Vector2(playerHealth.gameObject.transform.position.x, 5.5f);
         GameObject particles = Instantiate(luckyCloverParticles, particlePos, Quaternion.identity);
         Destroy(particles, 4f);
         yield return new WaitForSeconds(luckyCloverTime);
-        chips.LoseChips(damage);
+        playerHealth.TakeDamage(damage);
         StartCoroutine(NextCharacter());
     }
 
@@ -127,7 +127,7 @@ public class SlotMachine : MonoBehaviour, IEnemyCombat
     {
         for (int i = 0; i < 3; i++)
         {
-            chips.LoseChips(7);
+            playerHealth.TakeDamage(7);
             yield return new WaitForSeconds(timeBetweenJackpotAttacks);
         }
         StartCoroutine(NextCharacter());

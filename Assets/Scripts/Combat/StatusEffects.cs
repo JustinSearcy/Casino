@@ -3,6 +3,8 @@ using System.Collections;
 
 public class StatusEffects : MonoBehaviour
 {
+    [Header("IMPORTANT")]
+    [SerializeField] bool isPlayer = false;
 
     [Header("Poison")]
     [SerializeField] int poisonCounter = 0;
@@ -10,17 +12,10 @@ public class StatusEffects : MonoBehaviour
     [SerializeField] bool isPoisoned = false;
     [SerializeField] GameObject poisonIcon;
 
-    private bool isPlayer = false;
-
     CombatManager combatManager;
 
     private void Start()
     {
-        if(this.gameObject.tag == "Player")
-        {
-            isPlayer = true;
-        }
-
         combatManager = FindObjectOfType<CombatManager>();
     }
 
@@ -37,13 +32,7 @@ public class StatusEffects : MonoBehaviour
     private void Poison()
     {
         poisonCounter--;
-        if (isPlayer) {
-            this.gameObject.GetComponent<ChipSystem>().LoseChips(poisonDamage);
-        }
-        else
-        {
-            this.gameObject.GetComponent<EnemyHealth>().TakeDamage(poisonDamage);
-        }
+        this.gameObject.GetComponent<Health>().TakeDamage(poisonDamage);
 
         if(poisonCounter <= 0)
         {

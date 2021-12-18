@@ -185,10 +185,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 6604302782418960715}
-  enlargeTime: 0.3
-  shrinkTime: 0.85
-  yPosFirstIncrease: 1.5
-  yPosSecondIncrease: 0.75
+  enlargeTime: 0.6
+  shrinkTime: 0.3
+  yPosFirstIncrease: 6
+  xPosMaxMovement: 2.5
+  textSize: 2
 --- !u!210 &357139739203159013
 SortingGroup:
   m_ObjectHideFlags: 0

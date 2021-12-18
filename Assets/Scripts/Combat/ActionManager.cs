@@ -8,6 +8,7 @@ public class ActionManager : MonoBehaviour
 
     CombatManager combatManager;
     DiceManager diceManager;
+    Health playerHealth;
 
     void Start()
     {
@@ -17,6 +18,8 @@ public class ActionManager : MonoBehaviour
 
     public void ManageAction(IDiceSide side)
     {
+        if (playerHealth == null)
+            playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         side.Action();
         actionStarted = true;
     }
@@ -32,7 +35,11 @@ public class ActionManager : MonoBehaviour
 
     public void DealDamageToCurrentTarget(int damage)
     {
-        combatManager.currentActionTarget.GetComponent<EnemyHealth>().TakeDamage(damage);
+        combatManager.currentActionTarget.GetComponent<Health>().TakeDamage(damage);
     }
 
+    public void AddDefenseToSelf(int defense)
+    {
+        playerHealth.AddDefense(defense);
+    }
 }

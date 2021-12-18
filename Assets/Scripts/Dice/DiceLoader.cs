@@ -14,6 +14,7 @@ public class DiceLoader : MonoBehaviour
     [SerializeField] float lastUnloadTime = 0.3f;
     [SerializeField] float moveTime = 0.2f;
     [SerializeField] GameObject DiceParent = null;
+    [SerializeField] List<GameObject> currentDiceCopy = null;
 
     CombatManager combatManager;
     DiceManager diceManager;
@@ -33,17 +34,18 @@ public class DiceLoader : MonoBehaviour
 
     IEnumerator LoadDiceCoroutine(int loadAmt, List<GameObject> currentDice)
     {
+        currentDiceCopy = new List<GameObject>(currentDice);
         for(int i = 0; i < loadAmt; i++)
         {
-            int randIndex = Random.Range(0, currentDice.Count);
-            GameObject newDie = Instantiate(currentDice[randIndex], spawnPos.position, Quaternion.identity);
+            int randIndex = Random.Range(0, currentDiceCopy.Count);
+            GameObject newDie = Instantiate(currentDiceCopy[randIndex], spawnPos.position, Quaternion.identity);
             newDie.transform.parent = DiceParent.transform;
             newDie.GetComponent<Dice>().SetLoadIndex(i);
             loadedDice.Add(newDie);
             float loadTime = firstLoadTime - (0.02f * i);
             LeanTween.moveX(newDie, loadPositions[i].position.x, loadTime).setEaseOutQuad();
             yield return new WaitForSeconds(loadInterval);
-            currentDice.RemoveAt(randIndex);
+            currentDiceCopy.RemoveAt(randIndex);
         }
         diceManager.DiceLoaded();
         combatManager.ActionComplete(CombatManager.DICE_LOADED);
@@ -66,6 +68,7 @@ public class DiceLoader : MonoBehaviour
         {
             float unloadTime = lastUnloadTime - (0.02f * count);
             LeanTween.moveX(die, destroyPos.position.x, unloadTime).setEaseInQuad();
+            Destroy(die, unloadTime);
             yield return new WaitForSeconds(loadInterval);
             count--;
         }

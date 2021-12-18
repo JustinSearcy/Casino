@@ -28,7 +28,6 @@ public class DiceManager : MonoBehaviour
 
     private int diceRolled = 0;
     private bool hasRolled = false;
-    private bool actionInProgress = false;
 
     private void Start()
     {
@@ -184,7 +183,6 @@ public class DiceManager : MonoBehaviour
 
     public void Action(GameObject target, IDiceSide side)
     {
-        actionInProgress = true;
         diceLoader.PlaceDieBackOnLoader(selectedRolledDie);
         diceSelectLine.deactivateLine();
 
@@ -199,7 +197,6 @@ public class DiceManager : MonoBehaviour
     public void ActionFinished()
     {
         Debug.Log("ACTION FINISHED");
-        actionInProgress = false;
         if (selectedDice.Count == 0)
             combatManager.ActionComplete(CombatManager.ALL_PLAYER_ACTIONS_COMPLETE);
     }

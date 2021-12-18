@@ -12,7 +12,6 @@ public class CombatManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] GameObject[] enemyPrefabs = null;
     [SerializeField] GameObject playerPrefab = null;
-    [SerializeField] GameObject targetingCircle = null;
 
     [Header("Transforms")]
     [SerializeField] Transform playerSpawn = null;
@@ -34,22 +33,14 @@ public class CombatManager : MonoBehaviour
     [SerializeField] float enemyIntentDelay = 0.5f;
     [SerializeField] float intentToDiceLoadDelay = 0.75f;
 
-    [Header("UI")]
-    [SerializeField] GameObject playerMenu = null;
-    [SerializeField] GameObject attackMenu = null;
-    [SerializeField] GameObject itemMenu = null;
-    //Other Menu
-
     [Header("Misc")]
     [SerializeField] public CombatState combatState;
     [SerializeField] List<GameObject> currentEnemies = null;
-    [SerializeField] GameObject currentTarget = null;
     [SerializeField] float floorYPos = -1.95f;
     [SerializeField] int chipsLost = 0;
     [SerializeField] int chipsWon = 0;
     [SerializeField] public GameObject currentActionTarget = null;
 
-    PlayerActions actions;
     DiceManager diceManager;
 
     GameObject player;
@@ -63,7 +54,7 @@ public class CombatManager : MonoBehaviour
     public const String ENEMY_ACTION_COMPLETE = "Enemy Action Complete";
     public const String ALL_ENEMY_ACTIONS_COMPLETE = "All Enemy Actions Complete";
 
-    int currentEnemyIndex = 0;
+    [SerializeField] int currentEnemyIndex = 0;
 
     void Start()
     {
@@ -81,7 +72,6 @@ public class CombatManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitToStartTime);
         player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
-        FindObjectOfType<ChipCombatUI>().UpdateChipText(FindObjectOfType<ChipSystem>().getChips());
         LeanTween.moveX(player, playerPos.position.x, moveTime).setEaseOutBack();
         //PlayerSetUp();
         yield return new WaitForSeconds(enemyWaitTime);
@@ -99,19 +89,6 @@ public class CombatManager : MonoBehaviour
         ActionComplete(CombatManager.SPAWN);
     }
 
-    //private void PlayerSetUp()
-    //{
-    //    actions = FindObjectOfType<PlayerActions>();
-    //    for (int i = 0; i < 3; i++)
-    //    {
-    //        if (actions.currentActions[i] != null)
-    //        {
-    //            attackMenu.transform.GetChild(i).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = actions.currentActions[i].name;
-    //        }
-    //        //Disable button if no action available in slot?
-    //    }
-    //}
-
     IEnumerator EnemyIntent()
     {
         yield return new WaitForSeconds(enemyIntentDelay);
@@ -123,49 +100,6 @@ public class CombatManager : MonoBehaviour
         ActionComplete(CombatManager.ENEMY_INTENT);      
     }
 
-    
-
-    //IEnumerator PlayerTurn()
-    //{
-    //    yield return new WaitForSeconds(turnChangeTime);
-    //    bool effectActive = player.GetComponent<StatusEffects>().CheckStatusEffects();
-    //    if (effectActive)
-    //        yield return new WaitForSeconds(statusTime);
-    //    playerMenu.SetActive(true);
-    //}
-
-    //public void OnAttackButton(int attackButton)
-    //{
-    //    if (combatState != CombatState.PLAYER_TURN && currentTarget != null)
-    //    {
-    //        return;
-    //    }
-    //    if (actions.currentActions[attackButton] != null)
-    //    {
-    //        combatState = CombatState.PLAYER_ATTACK;
-    //        StartCoroutine(PlayerAction(attackButton));
-    //    }
-    //}
-
-    //IEnumerator PlayerAction(int action)
-    //{
-    //    attackMenu.SetActive(false);
-    //    itemMenu.SetActive(false);
-    //    //disable other menu too
-    //    GameObject currentAction = Instantiate(actions.currentActions[action]); //Delete action when done
-    //    //combatText.text = "You used " + currentAction.GetComponent<IAction>().ActionName;
-    //    currentAction.GetComponent<IAction>().StartAction(currentTarget);
-    //    yield return new WaitForSeconds(attackTime);
-    //}
-
-    //public void TurnEnd()
-    //{
-    //    if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
-    //    {
-    //        StartCoroutine(ChangeTurn());
-    //    }
-    //}
-
     IEnumerator EnemyTurn(GameObject enemy)
     {
         yield return new WaitForSeconds(bufferTime);
@@ -175,9 +109,6 @@ public class CombatManager : MonoBehaviour
             yield return new WaitForSeconds(statusTime);
         }
         enemy.GetComponent<IEnemyCombat>().Action();
-        //string action = enemyAttacks.DetermineAction();
-        //combatText.text = "Enemy uses " + action;
-        currentEnemyIndex++;
     }
 
     public void EnemyDeath(GameObject enemy)
@@ -186,6 +117,7 @@ public class CombatManager : MonoBehaviour
         currentEnemies.Remove(enemy);
         if (currentEnemies.Count > 0)
         {
+            //Rework this later, I don't like it at all
             currentEnemyIndex--;
         }  
         else
@@ -243,12 +175,14 @@ public class CombatManager : MonoBehaviour
 
             case CombatManager.DICE_UNLOADED:
                 combatState = CombatState.ENEMY_TURN;
+                currentEnemyIndex = 0;
                 StartCoroutine(EnemyTurn(currentEnemies[0]));
                 break;
 
             case CombatManager.ENEMY_ACTION_COMPLETE:
                 if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
                 {
+                    currentEnemyIndex++;
                     if (currentEnemyIndex < currentEnemies.Count)
                         StartCoroutine(EnemyTurn(currentEnemies[currentEnemyIndex]));
                     else

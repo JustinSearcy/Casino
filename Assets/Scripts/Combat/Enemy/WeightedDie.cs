@@ -13,8 +13,8 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     [SerializeField] float hotRollerTime = 1.2f;
     [SerializeField] GameObject intent = null;
 
-    EnemyHealth health;
-    ChipSystem chips;
+    Health health;
+    Health playerHealth;
     CombatManager combatManager;
     EnemyIntent enemyIntent;
     Animator anim;
@@ -24,8 +24,8 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     private void Start()
     {
-        health = this.gameObject.GetComponent<EnemyHealth>();
-        chips = FindObjectOfType<ChipSystem>();
+        health = this.gameObject.GetComponent<Health>();
+        playerHealth = playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
         combatManager = FindObjectOfType<CombatManager>();
         enemyIntent = FindObjectOfType<EnemyIntent>();
         anim = gameObject.GetComponent<Animator>();
@@ -85,7 +85,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     {
         FindObjectOfType<Shake>().CamShake();
         int damage = isHotRoller ? 12 : 6;
-        chips.LoseChips(damage);
+        playerHealth.TakeDamage(damage);
         StartCoroutine(NextCharacter());
     }
 
@@ -96,20 +96,20 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     private IEnumerator SnakeEyesAttack()
     {
-        GameObject particles = Instantiate(poisonParticles, chips.gameObject.transform.position, Quaternion.identity);
+        GameObject particles = Instantiate(poisonParticles, playerHealth.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         yield return new WaitForSeconds(poisonTime);
-        chips.gameObject.GetComponent<StatusEffects>().Poisoned(poisonTurnLength);
+        playerHealth.gameObject.GetComponent<StatusEffects>().Poisoned(poisonTurnLength);
         StartCoroutine(NextCharacter());
     }
 
     private IEnumerator HotRoller()
     {
-        FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
+        //FindObjectOfType<CameraZoom>().ZoomTarget(this.gameObject.transform);
         hotRollerParticles.SetActive(true);
         isHotRoller = true;
         yield return new WaitForSeconds(hotRollerTime);
-        FindObjectOfType<CameraZoom>().ZoomCenter();
+        //FindObjectOfType<CameraZoom>().ZoomCenter();
         StartCoroutine(NextCharacter());
     }
 

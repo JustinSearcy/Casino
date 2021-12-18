@@ -6,8 +6,8 @@ public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
 {
     [SerializeField] float timeBeforeAttack = 0.5f;
 
-    EnemyHealth health;
-    ChipSystem chips;
+    Health health;
+    Health playerHealth;
 
     public string actionOneName = "Attack";
     public string actionTwoName = "Heal";
@@ -17,13 +17,13 @@ public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
 
     private void Start()
     {
-        health = this.gameObject.GetComponent<EnemyHealth>();
-        chips = FindObjectOfType<ChipSystem>();
+        health = this.gameObject.GetComponent<Health>();
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
     }
 
     public void DetermineAction()
     {
-        if (chips.getChips() < 20) //Do the attack action if it can kill player
+        if (playerHealth.currentHealth < 20) //Do the attack action if it can kill player
         {
             currentAction = 1;
         }
@@ -50,7 +50,7 @@ public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
     IEnumerator ActionOne()//Attack Action
     {
         yield return new WaitForSeconds(timeBeforeAttack);
-        chips.LoseChips(20);
+        playerHealth.TakeDamage(20);
         Debug.Log("Enemy Attacks");
     }
 
