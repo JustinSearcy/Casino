@@ -107,7 +107,7 @@ MonoBehaviour:
   currentSide: {fileID: 0}
   isSelected: 0
   rollIntervalTime: 0.03
-  maxRolls: 60
+  maxRolls: 50
   minRolls: 30
   wasRolled: 0
   outlineAlpha: 0.575

@@ -114,7 +114,9 @@ public class DiceManager : MonoBehaviour
     public void UnloadDice()
     {
         diceLoaded = false;
+        hasRolled = false;
         StartCoroutine(UnloadDiceCoroutine());
+        diceSelectedAmt = 0;
     }
 
     private IEnumerator UnloadDiceCoroutine()

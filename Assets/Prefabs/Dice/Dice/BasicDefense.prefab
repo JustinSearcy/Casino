@@ -102,11 +102,11 @@ PrefabInstance:
     - target: {fileID: 8068933624483079758, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: sides.Array.data[4]
       value: 
-      objectReference: {fileID: 461909136988679636}
+      objectReference: {fileID: 1742875835064446095, guid: 5dcf0eee0d63efb4a932fc2b60d8b82b, type: 3}
     - target: {fileID: 8068933624483079758, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: sides.Array.data[5]
       value: 
-      objectReference: {fileID: 461909136988679636}
+      objectReference: {fileID: 1742875835064446095, guid: 5dcf0eee0d63efb4a932fc2b60d8b82b, type: 3}
     - target: {fileID: 8068933624483079759, guid: b8f0bd2822bb4d9449dcc0994e2de69c, type: 3}
       propertyPath: m_Size.x
       value: 1.1875

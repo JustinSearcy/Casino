@@ -115,6 +115,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
 
     IEnumerator NextCharacter()
     {
+        intent.SetActive(false);
         yield return new WaitForSeconds(timeAfterAttack);
         combatManager.ActionComplete(CombatManager.ENEMY_ACTION_COMPLETE);
     }

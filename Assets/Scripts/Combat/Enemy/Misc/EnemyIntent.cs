@@ -8,7 +8,6 @@ public class EnemyIntent : MonoBehaviour
     [SerializeField] Sprite attackIcon = null;
     [SerializeField] Sprite randomIcon = null;
     [SerializeField] Sprite specialIcon = null;
-
     [SerializeField] float singleDigitOffset = 0.25f;
 
     public void SetAttack(GameObject intent, int amount)
