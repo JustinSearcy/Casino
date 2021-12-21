@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySelect : MonoBehaviour
+public class PlayerSelect : MonoBehaviour
 {
     [SerializeField] float outlineAlpha = 0.75f;
 
@@ -20,14 +20,14 @@ public class EnemySelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("EnemyClicked");
+        Debug.Log("PlayerClicked");
         if (combatManager.combatState == CombatState.PLAYER_ATTACK)
-            diceManager.TryAction("Enemy", gameObject);
+            diceManager.TryAction("Player", gameObject);
     }
 
     private void OnMouseEnter()
     {
-        if (combatManager.combatState == CombatState.PLAYER_ATTACK && diceManager.ValidAction("Enemy"))
+        if (combatManager.combatState == CombatState.PLAYER_ATTACK && diceManager.ValidAction("Player"))
             mat.SetFloat("_OutlineAlpha", outlineAlpha);
     }
 

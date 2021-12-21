@@ -100,6 +100,7 @@ public class DiceManager : MonoBehaviour
     {
         hasRolled = true;
         rollButton.interactable = false;
+        selectPosParent.SetActive(false);
         foreach (GameObject die in selectedDice)
         {
             die.GetComponent<Dice>().Roll();
@@ -149,7 +150,6 @@ public class DiceManager : MonoBehaviour
     private IEnumerator MoveRolledDice()
     {
         yield return new WaitForSeconds(waitToMoveTime);
-        selectPosParent.SetActive(false);
         for (int i = 0; i < selectedDice.Count; i++)
         {
             LeanTween.move(selectedDice[i], rolledPos[i], rolledMoveTime).setEaseOutQuad();
@@ -170,17 +170,31 @@ public class DiceManager : MonoBehaviour
 
     public void TryAction(string targetType, GameObject currentActionTarget)
     {
+        if (ValidAction(targetType))
+        {
+            IDiceSide side = selectedRolledDie.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>();
+            Action(currentActionTarget, side);
+        }
+    }
+
+    public bool ValidAction(string targetType)
+    {
         if (selectedRolledDie != null)
         {
             IDiceSide side = selectedRolledDie.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>();
             ActionTargets target = side.ActionTarget;
-
             if (targetType.Equals("Enemy"))
             {
                 if (target == ActionTargets.SINGLE_TARGET_ENEMY)
-                    Action(currentActionTarget, side);
+                    return true;
+            }
+            else if (targetType.Equals("Player"))
+            {
+                if (target == ActionTargets.SELF)
+                    return true;
             }
         }
+        return false;
     }
 
     public void Action(GameObject target, IDiceSide side)

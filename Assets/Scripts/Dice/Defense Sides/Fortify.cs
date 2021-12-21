@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fortify : MonoBehaviour
+public class Fortify : MonoBehaviour, IDiceSide
 {
     private ActionTargets actionTarget = ActionTargets.SELF;
     private ActionNames actionName = ActionNames.FORTIFY;

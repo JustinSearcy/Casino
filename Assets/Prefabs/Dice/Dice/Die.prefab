@@ -111,6 +111,8 @@ MonoBehaviour:
   minRolls: 30
   wasRolled: 0
   outlineAlpha: 0.575
+  shakeAmount: 3
+  shakeMultiplier: 2
   loadIndex: 0
   selectIndex: 0
 --- !u!61 &8068933624483079757

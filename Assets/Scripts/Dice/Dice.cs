@@ -12,6 +12,8 @@ public class Dice : MonoBehaviour
     [SerializeField] int minRolls = 20;
     [SerializeField] private bool wasRolled = false;
     [SerializeField] float outlineAlpha = 0.575f;
+    [SerializeField] float shakeAmount = 1f;
+    [SerializeField] float shakeMultiplier = 1f;
 
     DiceManager diceManager;
     SpriteRenderer sprite;
@@ -19,6 +21,9 @@ public class Dice : MonoBehaviour
 
     public int loadIndex;
     public int selectIndex;
+
+    private bool isRolling = false;
+    private Transform rollInitialPos;
 
     private GameObject dieBackgroundSelect;
 
@@ -32,8 +37,18 @@ public class Dice : MonoBehaviour
         sprite.sprite = currentSide.GetComponent<SpriteRenderer>().sprite;
     }
 
+    private void Update()
+    {
+        if (isRolling)
+        {
+            Vector2 shakePos = rollInitialPos.position + Random.insideUnitSphere * (Time.deltaTime * shakeAmount);
+            gameObject.transform.position = shakePos;
+        }
+    }
+
     public void Roll()
     {
+        rollInitialPos = gameObject.transform;
         StartCoroutine(RollAnim());
     }
 
@@ -43,6 +58,7 @@ public class Dice : MonoBehaviour
         int rollAmt = Random.Range(minRolls, maxRolls);
         float slowIncrement = 1 / rollAmt;
         float rollTime = rollAmt * rollIntervalTime;
+        isRolling = true;
         for (int i = 0; i < rollAmt; i++)
         {
             yield return new WaitForSeconds(rollIntervalTime);
@@ -52,6 +68,8 @@ public class Dice : MonoBehaviour
         diceManager.DieRolled();
         isSelected = false;
         wasRolled = true;
+        isRolling = false;
+        gameObject.transform.position = rollInitialPos.position;
     }
 
     private int GetNewSideIndex(int oldSideIndex)
