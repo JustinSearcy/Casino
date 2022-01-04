@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Experimental.Rendering.Universal;
 
 public class Health : MonoBehaviour
 {
@@ -33,6 +30,9 @@ public class Health : MonoBehaviour
     CombatManager combatManager;
     ActionManager actionManager;
 
+    GameObject block = null;
+    TextMeshPro blockText = null;
+
     void Start()
     {
         combatManager = FindObjectOfType<CombatManager>();
@@ -41,6 +41,9 @@ public class Health : MonoBehaviour
             anim = this.gameObject.GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
+        blockText = healthBar.transform.parent.GetChild(2).transform.GetChild(0).GetComponent<TextMeshPro>();
+        block = healthBar.transform.parent.GetChild(2).gameObject;
+        block.SetActive(false);
         UpdateHealthBar();
     }
 
@@ -59,6 +62,7 @@ public class Health : MonoBehaviour
     public void AddDefense(int defense)
     {
         currentDefense += defense;
+        UpdateBlockText();
     }
 
     public void TakeDamage(int damage)
@@ -72,6 +76,7 @@ public class Health : MonoBehaviour
         }
         else
             currentDefense = 0;
+        UpdateBlockText();
         currentHealth -= damage;
         camShake.CamShake();
         if (!isPlayer)
@@ -119,6 +124,12 @@ public class Health : MonoBehaviour
     {
         healthText.text = "" + currentHealth + "/" + maxHealth;
         LeanTween.scaleX(healthBar, GetHealthPercent(), healthBarTime).setEaseOutQuint();
+    }
+
+    private void UpdateBlockText()
+    {
+        block.SetActive(currentDefense > 0);
+        blockText.text = currentDefense.ToString();
     }
 
     private void GameOver()

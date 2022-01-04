@@ -129,6 +129,7 @@ public class CombatManager : MonoBehaviour
 
     private void PlayerWon()
     {
+        diceManager.selectedRolledDie = null;
         FindObjectOfType<BattleWin>().BattleWon(chipsLost, chipsWon);
     }
 

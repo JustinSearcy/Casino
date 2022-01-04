@@ -8,6 +8,18 @@ TextureImporter:
   - first:
       213: 6814578158600162819
     second: Defense_1
+  - first:
+      213: 4532900536657294410
+    second: Defense_2
+  - first:
+      213: -6042143837770739826
+    second: Defense_3
+  - first:
+      213: 9101652757797278865
+    second: Defense_4
+  - first:
+      213: 5555356935321191227
+    second: Defense_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -134,6 +146,90 @@ TextureImporter:
       bones: []
       spriteID: 30e8f75eabe329e50800000000000000
       internalID: 6814578158600162819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defense_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 218
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a44b2a1950918ee30800000000000000
+      internalID: 4532900536657294410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defense_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 218
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8f0cd3313ef52ca0800000000000000
+      internalID: -6042143837770739826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defense_4
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 218
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1941679e5f09f4e70800000000000000
+      internalID: 9101652757797278865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Defense_5
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 218
+        width: 38
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b33825af2b7981d40800000000000000
+      internalID: 5555356935321191227
       vertices: []
       indices: 
       edges: []
