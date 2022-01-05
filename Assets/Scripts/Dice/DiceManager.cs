@@ -7,6 +7,7 @@ public class DiceManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> currentDice = null;
     [SerializeField] List<GameObject> selectedDice = null;
+    [SerializeField] public GameObject[] selectedDiceCopy = null;
     [SerializeField] List<Transform> selectPos = null;
     [SerializeField] List<Transform> rolledPos = null;
     [SerializeField] GameObject selectPosParent = null;
@@ -154,18 +155,20 @@ public class DiceManager : MonoBehaviour
         {
             LeanTween.move(selectedDice[i], rolledPos[i], rolledMoveTime).setEaseOutQuad();
         }
+        selectedDiceCopy = null;
+        selectedDice.CopyTo(selectedDiceCopy);
         combatManager.ActionComplete(CombatManager.DICE_ROLLED);
     }
 
     public void SelectRolledDie(GameObject die)
     {
-        //if (!actionInProgress)
-        //{
+        if(combatManager.NoVictoryOrDefeat())
+        {
             if (selectedRolledDie != null)
                 selectedRolledDie.GetComponent<Dice>().DeselectDie();
             selectedRolledDie = die;
             diceSelectLine.setNewTarget(die.transform);
-        //}
+        }
     }
 
     public void TryAction(string targetType, GameObject currentActionTarget)

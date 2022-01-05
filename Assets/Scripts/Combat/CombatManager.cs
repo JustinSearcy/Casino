@@ -46,6 +46,7 @@ public class CombatManager : MonoBehaviour
     GameObject player;
 
     public const String SPAWN = "Spawn";
+    public const String NEW_TURN = "New Turn";
     public const String ENEMY_INTENT = "Enemy Intent";
     public const String DICE_LOADED = "Dice Loaded";
     public const String DICE_ROLLED = "Dice Rolled";
@@ -87,6 +88,16 @@ public class CombatManager : MonoBehaviour
         }
         yield return new WaitForSeconds(enemyOffsetTime);
         ActionComplete(CombatManager.SPAWN);
+    }
+
+    private void NewTurn()
+    {
+        player.GetComponent<Health>().ClearDefense();
+        foreach(GameObject enemy in currentEnemies)
+        {
+            enemy.GetComponent<Health>().ClearDefense();
+        }
+        ActionComplete(CombatManager.NEW_TURN);
     }
 
     IEnumerator EnemyIntent()
@@ -148,12 +159,20 @@ public class CombatManager : MonoBehaviour
         currentActionTarget = target;
     }
 
+    public bool NoVictoryOrDefeat()
+    {
+        return combatState != CombatState.WIN && combatState != CombatState.LOSE;
+    }
 
     public void ActionComplete(String action)
     {
         switch(action)
         {
             case CombatManager.SPAWN:
+                NewTurn();
+                break;
+
+            case CombatManager.NEW_TURN:
                 combatState = CombatState.ENEMY_INTENT;
                 StartCoroutine(EnemyIntent());
                 break;

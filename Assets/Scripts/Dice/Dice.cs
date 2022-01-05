@@ -78,7 +78,6 @@ public class Dice : MonoBehaviour
         while (newSideIndex == oldSideIndex)
         {
             newSideIndex = Random.Range(0, sides.Length);
-            Debug.Log(newSideIndex);
         }
         return newSideIndex;
     }

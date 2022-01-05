@@ -23,6 +23,9 @@ public class Health : MonoBehaviour
     [SerializeField] float hitStunTime = 0.2f;
     [SerializeField] int rotationFinal = -1080;
     [SerializeField] float rotationTime = 1.3f;
+    [SerializeField] Vector3 initScale = new Vector3(0.4f, 1.6f);
+    [SerializeField] Vector3 largerScale = new Vector3(0.5f, 2f);
+    [SerializeField] float scaleTime = 0.2f;
     //[SerializeField] float deathAnimTime = 1f;
 
     Shake camShake;
@@ -62,6 +65,13 @@ public class Health : MonoBehaviour
     public void AddDefense(int defense)
     {
         currentDefense += defense;
+        UpdateBlockText();
+        actionManager.ActionFinished();
+    }
+
+    public void ClearDefense()
+    {
+        currentDefense = 0;
         UpdateBlockText();
     }
 
@@ -129,6 +139,7 @@ public class Health : MonoBehaviour
     private void UpdateBlockText()
     {
         block.SetActive(currentDefense > 0);
+        LeanTween.scale(block, largerScale, scaleTime).setLoopPingPong(1);
         blockText.text = currentDefense.ToString();
     }
 
