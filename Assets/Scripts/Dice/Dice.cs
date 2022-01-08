@@ -19,6 +19,8 @@ public class Dice : MonoBehaviour
     SpriteRenderer sprite;
     Material mat;
 
+    GameObject diceToolTip;
+
     public int loadIndex;
     public int selectIndex;
 
@@ -26,6 +28,8 @@ public class Dice : MonoBehaviour
     private Transform rollInitialPos;
 
     private GameObject dieBackgroundSelect;
+
+    private Dictionary<GameObject, int> uniqueSides;
 
     private void Start()
     {
@@ -35,6 +39,24 @@ public class Dice : MonoBehaviour
         mat.SetFloat("_OutlineAlpha", 0);
         currentSide = sides[0];
         sprite.sprite = currentSide.GetComponent<SpriteRenderer>().sprite;
+        DiceToolTip[] tooltip = Resources.FindObjectsOfTypeAll<DiceToolTip>();
+        if (tooltip.Length > 0)
+            diceToolTip = tooltip[0].gameObject;
+        IdentifySides();
+    }
+
+    private void IdentifySides()
+    {
+        for (int i = 0; i < sides.Length; i++)
+        {
+            if (uniqueSides.ContainsKey(sides[i])) {
+                uniqueSides[sides[i]]++;
+            }
+            else
+            {
+                uniqueSides.Add(sides[i], 1);
+            }
+        }
     }
 
     private void Update()
@@ -80,6 +102,17 @@ public class Dice : MonoBehaviour
             newSideIndex = Random.Range(0, sides.Length);
         }
         return newSideIndex;
+    }
+
+    private void OnMouseOver()
+    {
+        diceToolTip.SetActive(true);
+        diceToolTip.GetComponent<DiceToolTip>().UpdateTooltip(uniqueSides);
+    }
+
+    private void OnMouseExit()
+    {
+        diceToolTip.SetActive(false);
     }
 
     private void OnMouseDown()
