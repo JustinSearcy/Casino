@@ -19,6 +19,11 @@ public class Fortify : MonoBehaviour, IDiceSide
         get => actionName;
     }
 
+    public string Description
+    {
+        get => "Gain " + defense + " Defense For This Turn ";
+    }
+
     public void Action()
     {
         FindObjectOfType<ActionManager>().AddDefenseToSelf(defense);

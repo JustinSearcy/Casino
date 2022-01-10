@@ -7,7 +7,7 @@ public class DiceManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> currentDice = null;
     [SerializeField] List<GameObject> selectedDice = null;
-    [SerializeField] public GameObject[] selectedDiceCopy = null;
+    [SerializeField] public List<GameObject> selectedDiceCopy = new List<GameObject>();
     [SerializeField] List<Transform> selectPos = null;
     [SerializeField] List<Transform> rolledPos = null;
     [SerializeField] GameObject selectPosParent = null;
@@ -19,16 +19,18 @@ public class DiceManager : MonoBehaviour
     [SerializeField] float diceShiftTime = 0.1f;
     [SerializeField] float rolledMoveTime = 0.25f;
     [SerializeField] float waitToMoveTime = 0.3f;
+    [SerializeField] GameObject diceToolTip = null;
 
     DiceLoader diceLoader;
     CombatManager combatManager;
     ActionManager actionManager;
     DiceSelectLine diceSelectLine;
+    DiceToolTip tooltip;
 
     public bool diceLoaded = false;
+    public bool hasRolled = false;
 
     private int diceRolled = 0;
-    private bool hasRolled = false;
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class DiceManager : MonoBehaviour
         combatManager = FindObjectOfType<CombatManager>();
         actionManager = FindObjectOfType<ActionManager>();
         diceSelectLine = FindObjectOfType<DiceSelectLine>();
+        tooltip = diceToolTip.GetComponent<DiceToolTip>();
         selectPosParent.SetActive(false);
     }
 
@@ -151,12 +154,12 @@ public class DiceManager : MonoBehaviour
     private IEnumerator MoveRolledDice()
     {
         yield return new WaitForSeconds(waitToMoveTime);
+        selectedDiceCopy.Clear();
         for (int i = 0; i < selectedDice.Count; i++)
         {
             LeanTween.move(selectedDice[i], rolledPos[i], rolledMoveTime).setEaseOutQuad();
+            selectedDiceCopy.Add(selectedDice[i]);
         }
-        selectedDiceCopy = null;
-        selectedDice.CopyTo(selectedDiceCopy);
         combatManager.ActionComplete(CombatManager.DICE_ROLLED);
     }
 
@@ -218,5 +221,22 @@ public class DiceManager : MonoBehaviour
         Debug.Log("ACTION FINISHED");
         if (selectedDice.Count == 0)
             combatManager.ActionComplete(CombatManager.ALL_PLAYER_ACTIONS_COMPLETE);
+    }
+
+    public void DisplayToolTip(Dictionary<GameObject, int> uniqueSides)
+    {
+        diceToolTip.SetActive(true);
+        tooltip.UpdateTooltip(uniqueSides); 
+    }
+
+    public void DisplayRolledToolTip(GameObject die)
+    {
+        diceToolTip.SetActive(true);
+        tooltip.UpdateRolledTooltip(die);
+    }
+
+    public void RemoveToolTip()
+    {
+        diceToolTip.SetActive(false);
     }
 }

@@ -16,10 +16,8 @@ public class Dice : MonoBehaviour
     [SerializeField] float shakeMultiplier = 1f;
 
     DiceManager diceManager;
-    SpriteRenderer sprite;
+    public SpriteRenderer sprite;
     Material mat;
-
-    GameObject diceToolTip;
 
     public int loadIndex;
     public int selectIndex;
@@ -29,7 +27,7 @@ public class Dice : MonoBehaviour
 
     private GameObject dieBackgroundSelect;
 
-    private Dictionary<GameObject, int> uniqueSides;
+    private Dictionary<GameObject, int> uniqueSides = new Dictionary<GameObject, int>();
 
     private void Start()
     {
@@ -39,9 +37,6 @@ public class Dice : MonoBehaviour
         mat.SetFloat("_OutlineAlpha", 0);
         currentSide = sides[0];
         sprite.sprite = currentSide.GetComponent<SpriteRenderer>().sprite;
-        DiceToolTip[] tooltip = Resources.FindObjectsOfTypeAll<DiceToolTip>();
-        if (tooltip.Length > 0)
-            diceToolTip = tooltip[0].gameObject;
         IdentifySides();
     }
 
@@ -104,15 +99,23 @@ public class Dice : MonoBehaviour
         return newSideIndex;
     }
 
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        diceToolTip.SetActive(true);
-        diceToolTip.GetComponent<DiceToolTip>().UpdateTooltip(uniqueSides);
+        if(!isRolling)
+        {
+            if (!diceManager.hasRolled)
+                diceManager.DisplayToolTip(uniqueSides);
+            else if (diceManager.hasRolled && wasRolled)
+                diceManager.DisplayRolledToolTip(gameObject);
+        }
     }
 
     private void OnMouseExit()
     {
-        diceToolTip.SetActive(false);
+        if(!isRolling)
+        {
+            diceManager.RemoveToolTip();
+        }
     }
 
     private void OnMouseDown()

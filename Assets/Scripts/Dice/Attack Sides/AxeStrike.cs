@@ -19,6 +19,11 @@ public class AxeAttack : MonoBehaviour, IDiceSide
         get => actionName;
     }
 
+    public string Description
+    {
+        get => "Deal " + damage + " Damage To A Single Enemy";
+    }
+
     public void Action()
     {
         FindObjectOfType<ActionManager>().DealDamageToCurrentTarget(damage);

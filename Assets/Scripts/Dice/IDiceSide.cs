@@ -11,5 +11,7 @@ public interface IDiceSide
 
     ActionNames ActionName { get; }
 
+    public string Description { get; }
+
     public void Action();
 }

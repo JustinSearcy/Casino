@@ -21,6 +21,11 @@ public class DualStrike : MonoBehaviour
         get => actionName;
     }
 
+    public string Description
+    {
+        get => "Deal " + damage + " Damage To A Single Enemy " + attackTimes + " Times";
+    }
+
     public void Action()
     {
         StartCoroutine(Attack());

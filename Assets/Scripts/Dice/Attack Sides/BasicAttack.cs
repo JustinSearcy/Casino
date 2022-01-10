@@ -8,6 +8,7 @@ public class BasicAttack : MonoBehaviour, IDiceSide
     private ActionNames actionName = ActionNames.BASIC_ATTACK;
 
     [SerializeField] int damage = 5;
+    
 
     public ActionTargets ActionTarget
     {
@@ -17,6 +18,11 @@ public class BasicAttack : MonoBehaviour, IDiceSide
     public ActionNames ActionName
     {
         get => actionName;
+    }
+
+    public string Description
+    {
+        get => "Deal " + damage + " Damage To A Single Enemy";
     }
 
     public void Action()

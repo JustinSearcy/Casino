@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class DiceTooltipItem : MonoBehaviour
+public class DiceToolTipItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject diceSideSprite = null;
+    [SerializeField] GameObject amountText = null;
+    [SerializeField] GameObject descriptionText = null;
+
+    Image image;
+    TextMeshProUGUI amount;
+    TextMeshProUGUI description;
+
+    private void Awake()
     {
-        
+        image = diceSideSprite.GetComponent<Image>();
+        amount = amountText.GetComponent<TextMeshProUGUI>();
+        description = descriptionText.GetComponent<TextMeshProUGUI>();
+        amount.text = "x1";
+        description.text = "Dice Side Description";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateItem(GameObject side, int count)
     {
-        
+        image.sprite = side.GetComponent<SpriteRenderer>().sprite;
+        amount.text = "x" + count;
+        description.text = side.GetComponent<IDiceSide>().Description;
     }
 }
