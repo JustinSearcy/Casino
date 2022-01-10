@@ -7,7 +7,7 @@ public class DiceToolTip : MonoBehaviour
 {
     [SerializeField] Vector2 tooltipItemSize = new Vector2(400f, 75f);
     [SerializeField] Vector3 offset = new Vector3(50, 50, 0);
-    [SerializeField] Vector3 rolledOffset = new Vector3(0, -150f, 0);
+    [SerializeField] Vector3 rolledOffset = new Vector3(0, -75f, 0);
     [SerializeField] List<GameObject> tooltipItems;
     [SerializeField] GameObject rolledTooltip = null;
     [SerializeField] RectTransform canvasRectTransform;
