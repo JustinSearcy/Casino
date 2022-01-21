@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicDefense : MonoBehaviour, IDiceSide
+public class Chestplate : MonoBehaviour, IDiceSide
 {
     private ActionTargets actionTarget = ActionTargets.SELF;
-    private ActionNames actionName = ActionNames.BASIC_DEFENSE;
+    private ActionNames actionName = ActionNames.CHESTPLATE;
 
-    [SerializeField] int defense = 5;
+    [SerializeField] int defense = 3;
 
     public ActionTargets ActionTarget
     {
@@ -21,11 +21,12 @@ public class BasicDefense : MonoBehaviour, IDiceSide
 
     public string Description
     {
-        get => "Gain " + defense + " Defense For This Turn";
+        get => "Gain " + defense + " Defense For Each Unique Armor Piece Rolled This Turn";
     }
 
     public void Action()
     {
-        FindObjectOfType<ActionManager>().AddDefenseToSelf(defense);
+        int totalDefense = 0;
+        FindObjectOfType<ActionManager>().AddDefenseToSelf(totalDefense);
     }
 }
