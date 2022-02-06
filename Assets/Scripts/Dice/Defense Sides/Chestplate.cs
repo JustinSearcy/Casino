@@ -24,6 +24,16 @@ public class Chestplate : MonoBehaviour, IDiceSide
         get => "Gain " + defense + " Defense For Each Unique Armor Piece Rolled This Turn";
     }
 
+    public string RolledDescription
+    {
+        get => "Gain " + getUpdatedDefense() + " Defense For Each Unique Armor Piece Rolled This Turn";
+    }
+
+    public int getUpdatedDefense()
+    {
+        return defense * FindObjectOfType<DiceGroups>().uniqueRolledInGroup(DiceGroups.ARMORGROUP);
+    }
+
     public void Action()
     {
         int totalDefense = 0;

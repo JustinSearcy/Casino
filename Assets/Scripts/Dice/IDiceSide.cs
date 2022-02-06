@@ -13,5 +13,7 @@ public interface IDiceSide
 
     public string Description { get; }
 
+    public string RolledDescription { get; }
+
     public void Action();
 }

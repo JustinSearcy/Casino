@@ -24,6 +24,11 @@ public class BasicDefense : MonoBehaviour, IDiceSide
         get => "Gain " + defense + " Defense For This Turn";
     }
 
+    public string RolledDescription
+    {
+        get => "Gain " + defense + " Defense For This Turn";
+    }
+
     public void Action()
     {
         FindObjectOfType<ActionManager>().AddDefenseToSelf(defense);

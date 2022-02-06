@@ -59,6 +59,6 @@ public class DiceToolTip : MonoBehaviour
         {
             tooltipItems[i].SetActive(false);
         }
-        rolledTooltip.GetComponent<TextMeshProUGUI>().text = die.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>().Description;
+        rolledTooltip.GetComponent<TextMeshProUGUI>().text = die.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>().RolledDescription;
     }
 }

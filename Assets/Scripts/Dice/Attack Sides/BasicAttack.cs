@@ -25,6 +25,11 @@ public class BasicAttack : MonoBehaviour, IDiceSide
         get => "Deal " + damage + " Damage To A Single Enemy";
     }
 
+    public string RolledDescription
+    {
+        get => "Deal " + damage + " Damage To A Single Enemy";
+    }
+
     public void Action()
     {
         FindObjectOfType<ActionManager>().DealDamageToCurrentTarget(damage);
