@@ -11,6 +11,9 @@ public class TripleShuriken : MonoBehaviour, IDiceSide
     [SerializeField] int attackTimes = 3;
     [SerializeField] float timeBetweenAttacks = 0.2f;
 
+    Buffs buffs;
+    DiceManager manager;
+
     public ActionTargets ActionTarget
     {
         get => actionTarget;
@@ -23,12 +26,38 @@ public class TripleShuriken : MonoBehaviour, IDiceSide
 
     public string Description
     {
-        get => "Deal " + damage + " Damage To A Single Enemy " + attackTimes + " Times";
+        get => "Deal " + GetUpdatedColor() + " Damage To A Single Enemy " + attackTimes + " Times";
     }
 
     public string RolledDescription
     {
-        get => "Deal " + damage + " Damage To A Single Enemy " + attackTimes + " Times";
+        get => "Deal " + GetUpdatedRolledColor() + " Damage To A Single Enemy " + attackTimes + " Times";
+    }
+
+    public string GetUpdatedColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(damage, GetUpdatedVal());
+    }
+
+    public string GetUpdatedRolledColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(damage, GetUpdatedRolledVal());
+    }
+
+    public int GetUpdatedVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.attackBuff;
+        return (int)(damage * buff);
+    }
+
+    public int GetUpdatedRolledVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.attackBuff;
+        return (int)(damage * buff);
     }
 
     public void Action()
@@ -44,7 +73,7 @@ public class TripleShuriken : MonoBehaviour, IDiceSide
         {
             if(combatManager.NoVictoryOrDefeat())
             {
-                actionManager.DealDamageToCurrentTarget(damage);
+                actionManager.DealDamageToCurrentTarget(GetUpdatedRolledVal());
                 yield return new WaitForSeconds(timeBetweenAttacks);
             }
                 

@@ -17,13 +17,14 @@ public class DiceGroups : MonoBehaviour
 
     public int uniqueRolledInGroup(string group)
     {
-        HashSet<GameObject> diceSet = new HashSet<GameObject>();
+        HashSet<ActionNames> diceSet = new HashSet<ActionNames>();
         List<GameObject> rolledDice = diceManager.selectedDiceCopy;
         List<ActionNames> diceGroup = getActionGroup(group);
         foreach (GameObject die in rolledDice)
         {
-            if (diceGroup.Contains(die.GetComponent<IDiceSide>().ActionName))
-                diceSet.Add(die);
+            ActionNames name = die.GetComponent<Dice>().currentSide.GetComponent<IDiceSide>().ActionName;
+            if (diceGroup.Contains(name))
+                diceSet.Add(name);
         }
         return diceSet.Count;
     }

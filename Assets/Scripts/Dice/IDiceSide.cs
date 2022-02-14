@@ -15,5 +15,13 @@ public interface IDiceSide
 
     public string RolledDescription { get; }
 
+    public string GetUpdatedColor();
+
+    public string GetUpdatedRolledColor();
+
+    public int GetUpdatedVal();
+
+    public int GetUpdatedRolledVal();
+
     public void Action();
 }

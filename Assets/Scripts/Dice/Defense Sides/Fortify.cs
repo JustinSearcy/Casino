@@ -9,6 +9,9 @@ public class Fortify : MonoBehaviour, IDiceSide
 
     [SerializeField] int defense = 8;
 
+    Buffs buffs;
+    DiceManager manager;
+
     public ActionTargets ActionTarget
     {
         get => actionTarget;
@@ -21,16 +24,42 @@ public class Fortify : MonoBehaviour, IDiceSide
 
     public string Description
     {
-        get => "Gain " + defense + " Defense For This Turn ";
+        get => "Gain " + GetUpdatedColor() + " Defense For This Turn ";
     }
 
     public string RolledDescription
     {
-        get => "Gain " + defense + " Defense For This Turn ";
+        get => "Gain " + GetUpdatedRolledColor() + " Defense For This Turn ";
+    }
+
+    public string GetUpdatedColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(defense, GetUpdatedVal());
+    }
+
+    public string GetUpdatedRolledColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(defense, GetUpdatedRolledVal());
+    }
+
+    public int GetUpdatedVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.defenseBuff;
+        return (int)(defense * buff);
+    }
+
+    public int GetUpdatedRolledVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.defenseBuff;
+        return (int)(defense * buff);
     }
 
     public void Action()
     {
-        FindObjectOfType<ActionManager>().AddDefenseToSelf(defense);
+        FindObjectOfType<ActionManager>().AddDefenseToSelf(GetUpdatedRolledVal());
     }
 }

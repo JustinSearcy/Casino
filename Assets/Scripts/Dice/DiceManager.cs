@@ -239,4 +239,20 @@ public class DiceManager : MonoBehaviour
     {
         diceToolTip.SetActive(false);
     }
+
+    public string GetDescriptionColor(int origValue, int newValue)
+    {
+        if (origValue > newValue)
+        {
+            return $"<color=red>{newValue}</color>";
+        }
+        else if (origValue < newValue)
+        {
+            return $"<color=green>{newValue}</color>";
+        }
+        else
+        {
+            return $"{origValue}";
+        }
+    }
 }

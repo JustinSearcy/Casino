@@ -504,6 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5383195241639099243}
   - component: {fileID: 5383195241639099242}
+  - component: {fileID: 2220163634145574274}
   m_Layer: 0
   m_Name: DiceManager
   m_TagString: Untagged
@@ -543,11 +544,12 @@ MonoBehaviour:
   - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
   - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
   - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
-  - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
-  - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
-  - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
-  - {fileID: 461909136988679636, guid: 083d9026a0389e94ebff6aff178c1636, type: 3}
+  - {fileID: 461909136988679636, guid: ce5fd165b250f734c9f481357d7730ab, type: 3}
+  - {fileID: 461909136988679636, guid: ce5fd165b250f734c9f481357d7730ab, type: 3}
+  - {fileID: 461909136988679636, guid: ce5fd165b250f734c9f481357d7730ab, type: 3}
+  - {fileID: 461909136988679636, guid: ce5fd165b250f734c9f481357d7730ab, type: 3}
   selectedDice: []
+  selectedDiceCopy: []
   selectPos:
   - {fileID: 5383195243133216279}
   - {fileID: 5383195242168405290}
@@ -559,6 +561,7 @@ MonoBehaviour:
   - {fileID: 1618302980}
   - {fileID: 1789710828}
   selectPosParent: {fileID: 5383195242779180857}
+  selectedRolledDie: {fileID: 0}
   rollButton: {fileID: 0}
   dicePickAmt: 4
   diceSelectedAmt: 0
@@ -566,7 +569,21 @@ MonoBehaviour:
   diceShiftTime: 0.1
   rolledMoveTime: 0.5
   waitToMoveTime: 0.3
+  diceToolTip: {fileID: 0}
   diceLoaded: 0
+  hasRolled: 0
+--- !u!114 &2220163634145574274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383195241639099241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16312f2c0fa2f474980a5e7f44e89bee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5383195242168405289
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +857,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5383195242779180857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.39, z: 0}
+  m_LocalPosition: {x: 0, y: 6.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5383195243133216279}

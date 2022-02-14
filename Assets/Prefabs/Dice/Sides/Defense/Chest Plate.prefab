@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9022800066329221138
+--- !u!114 &-6742196652980654215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1742875835064446095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a27c2817a628b488d67739e83b0793, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cc0335e97696e148b32207a8ae6c588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defense: 8
+  defense: 3
+  defenseIncrease: 2
 --- !u!1001 &4533119037902900001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22,7 +23,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2794254772224632750, guid: bdf654f694a62b542ad14c04fa24d5de, type: 3}
       propertyPath: m_Name
-      value: Fortify 2
+      value: Chest Plate
       objectReference: {fileID: 0}
     - target: {fileID: 6637161572515595783, guid: bdf654f694a62b542ad14c04fa24d5de, type: 3}
       propertyPath: m_RootOrder

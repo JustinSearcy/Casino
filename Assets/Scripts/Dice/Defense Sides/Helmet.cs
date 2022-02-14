@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chestplate : MonoBehaviour, IDiceSide
+public class Helmet : MonoBehaviour, IDiceSide
 {
     private ActionTargets actionTarget = ActionTargets.SELF;
-    private ActionNames actionName = ActionNames.CHESTPLATE;
+    private ActionNames actionName = ActionNames.HELMET;
 
     [SerializeField] int defense = 3;
 

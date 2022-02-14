@@ -9,6 +9,9 @@ public class AxeAttack : MonoBehaviour, IDiceSide
 
     [SerializeField] int damage = 8;
 
+    Buffs buffs;
+    DiceManager manager;
+
     public ActionTargets ActionTarget
     {
         get => actionTarget;
@@ -21,16 +24,42 @@ public class AxeAttack : MonoBehaviour, IDiceSide
 
     public string Description
     {
-        get => "Deal " + damage + " Damage To A Single Enemy";
+        get => "Deal " + GetUpdatedColor() + " Damage To A Single Enemy";
     }
 
     public string RolledDescription
     {
-        get => "Deal " + damage + " Damage To A Single Enemy";
+        get => "Deal " + GetUpdatedRolledColor() + " Damage To A Single Enemy";
+    }
+
+    public string GetUpdatedColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(damage, GetUpdatedVal());
+    }
+
+    public string GetUpdatedRolledColor()
+    {
+        manager = manager == null ? FindObjectOfType<DiceManager>() : manager;
+        return manager.GetDescriptionColor(damage, GetUpdatedRolledVal());
+    }
+
+    public int GetUpdatedVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.attackBuff;
+        return (int)(damage * buff);
+    }
+
+    public int GetUpdatedRolledVal()
+    {
+        buffs = buffs == null ? GameObject.FindGameObjectWithTag("Player").GetComponent<Buffs>() : buffs;
+        float buff = buffs.attackBuff;
+        return (int)(damage * buff);
     }
 
     public void Action()
     {
-        FindObjectOfType<ActionManager>().DealDamageToCurrentTarget(damage);
+        FindObjectOfType<ActionManager>().DealDamageToCurrentTarget(GetUpdatedRolledVal());
     }
 }
