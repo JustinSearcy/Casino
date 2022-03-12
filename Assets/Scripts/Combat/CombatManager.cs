@@ -27,7 +27,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] float attackTime = 2f;
     [SerializeField] float bufferTime = 1.5f;
     [SerializeField] float turnChangeTime = 2f;
-    [SerializeField] float statusTime = 1.5f;
 
     [Header("Timing")]
     [SerializeField] float enemyIntentDelay = 0.5f;
@@ -42,7 +41,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public GameObject currentActionTarget = null;
 
     DiceManager diceManager;
-
+    StatusManager playerStatus;
     GameObject player;
 
     public const String SPAWN = "Spawn";
@@ -54,6 +53,8 @@ public class CombatManager : MonoBehaviour
     public const String DICE_UNLOADED = "Dice Unloaded";
     public const String ENEMY_ACTION_COMPLETE = "Enemy Action Complete";
     public const String ALL_ENEMY_ACTIONS_COMPLETE = "All Enemy Actions Complete";
+    public const String PLAYER_STATUS_EFFECT = "Player Status Effects Complete";
+    public const String ENEMY_STATUS_EFFECT = "Enemy Status Effects Complete";
 
     [SerializeField] int currentEnemyIndex = 0;
 
@@ -73,6 +74,7 @@ public class CombatManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitToStartTime);
         player = Instantiate(playerPrefab, playerSpawn.position, Quaternion.identity);
+        playerStatus = player.GetComponent<StatusManager>();
         LeanTween.moveX(player, playerPos.position.x, moveTime).setEaseOutBack();
         //PlayerSetUp();
         yield return new WaitForSeconds(enemyWaitTime);
@@ -111,14 +113,20 @@ public class CombatManager : MonoBehaviour
         ActionComplete(CombatManager.ENEMY_INTENT);      
     }
 
-    IEnumerator EnemyTurn(GameObject enemy)
+    IEnumerator PlayerTurn()
     {
         yield return new WaitForSeconds(bufferTime);
-        bool effectActive = enemy.GetComponent<StatusEffects>().CheckStatusEffects();
-        if (effectActive)
-        {
-            yield return new WaitForSeconds(statusTime);
-        }
+        yield return StartCoroutine(playerStatus.HandleStatusEffects());
+        Debug.Log("Finished status handling");
+        ActionComplete(CombatManager.PLAYER_STATUS_EFFECT);
+    }
+
+    IEnumerator EnemyTurn(GameObject enemy)
+    {
+        Debug.Log("Enemy Turn");
+        yield return new WaitForSeconds(bufferTime);
+        yield return StartCoroutine(enemy.GetComponent<StatusManager>().HandleStatusEffects());
+        Debug.Log("Finished status handling");
         enemy.GetComponent<IEnemyCombat>().Action();
     }
 
@@ -169,37 +177,50 @@ public class CombatManager : MonoBehaviour
         switch(action)
         {
             case CombatManager.SPAWN:
+                Debug.Log(CombatManager.SPAWN);
                 NewTurn();
                 break;
 
             case CombatManager.NEW_TURN:
+                Debug.Log(CombatManager.NEW_TURN);
                 combatState = CombatState.ENEMY_INTENT;
                 StartCoroutine(EnemyIntent());
                 break;
 
             case CombatManager.ENEMY_INTENT:
+                Debug.Log(CombatManager.ENEMY_INTENT);
+                StartCoroutine(PlayerTurn());
+                break;
+
+            case CombatManager.PLAYER_STATUS_EFFECT:
+                Debug.Log(CombatManager.PLAYER_STATUS_EFFECT);
                 combatState = CombatState.PLAYER_TURN;
                 diceManager.LoadNewDice();
                 break;
 
             case CombatManager.DICE_LOADED:
+                Debug.Log(CombatManager.DICE_LOADED);
                 break;
 
             case CombatManager.DICE_ROLLED:
+                Debug.Log(CombatManager.DICE_ROLLED);
                 combatState = CombatState.PLAYER_ATTACK;
                 break;
 
             case CombatManager.ALL_PLAYER_ACTIONS_COMPLETE:
+                Debug.Log(CombatManager.ALL_PLAYER_ACTIONS_COMPLETE);
                 diceManager.UnloadDice();
                 break;
 
             case CombatManager.DICE_UNLOADED:
+                Debug.Log(CombatManager.DICE_UNLOADED);
                 combatState = CombatState.ENEMY_TURN;
                 currentEnemyIndex = 0;
                 StartCoroutine(EnemyTurn(currentEnemies[0]));
                 break;
 
             case CombatManager.ENEMY_ACTION_COMPLETE:
+                Debug.Log(CombatManager.ENEMY_ACTION_COMPLETE);
                 if (combatState != CombatState.WIN && combatState != CombatState.LOSE)
                 {
                     currentEnemyIndex++;
@@ -211,6 +232,7 @@ public class CombatManager : MonoBehaviour
                 break;
 
             case CombatManager.ALL_ENEMY_ACTIONS_COMPLETE:
+                Debug.Log(CombatManager.ALL_ENEMY_ACTIONS_COMPLETE);
                 currentEnemyIndex = 0;
                 combatState = CombatState.ENEMY_INTENT;
                 StartCoroutine(EnemyIntent());

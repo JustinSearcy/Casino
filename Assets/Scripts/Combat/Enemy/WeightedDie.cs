@@ -9,7 +9,6 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
     [SerializeField] GameObject hotRollerParticles = null;
     [SerializeField] GameObject poisonParticles = null;
     [SerializeField] float poisonTime = 1f;
-    [SerializeField] int poisonTurnLength = 3;
     [SerializeField] float hotRollerTime = 1.2f;
     [SerializeField] GameObject intent = null;
 
@@ -99,7 +98,7 @@ public class WeightedDie : MonoBehaviour, IEnemyCombat
         GameObject particles = Instantiate(poisonParticles, playerHealth.gameObject.transform.position, Quaternion.identity);
         Destroy(particles, 2f);
         yield return new WaitForSeconds(poisonTime);
-        playerHealth.gameObject.GetComponent<StatusEffects>().Poisoned(poisonTurnLength);
+        playerHealth.gameObject.GetComponent<StatusManager>().Poisoned();
         StartCoroutine(NextCharacter());
     }
 

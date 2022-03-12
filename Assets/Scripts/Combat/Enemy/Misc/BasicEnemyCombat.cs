@@ -51,14 +51,12 @@ public class BasicEnemyCombat : MonoBehaviour, IEnemyCombat
     {
         yield return new WaitForSeconds(timeBeforeAttack);
         playerHealth.TakeDamage(20);
-        Debug.Log("Enemy Attacks");
     }
 
     IEnumerator ActionTwo()//Defensive Action
     {
         yield return new WaitForSeconds(timeBeforeAttack);
         health.Heal(20);
-        Debug.Log("Enemy Heals");
     }
 
     IEnumerator ActionThree()//Something Else to Add Later, special ability?

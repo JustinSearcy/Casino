@@ -20,14 +20,12 @@ public class EnemySelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("EnemyClicked");
         if (combatManager.combatState == CombatState.PLAYER_ATTACK)
             diceManager.TryAction("Enemy", gameObject);
     }
 
     private void OnMouseEnter()
     {
-        Debug.Log("Mouse Over Enemy");
         if (combatManager.combatState == CombatState.PLAYER_ATTACK && diceManager.ValidAction("Enemy"))
             mat.SetFloat("_OutlineAlpha", outlineAlpha);
     }

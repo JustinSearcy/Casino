@@ -77,7 +77,6 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Damage Dealt");
         int actualDamage = currentDefense - damage;
         if (actualDamage < 0)
         {

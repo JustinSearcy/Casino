@@ -68,7 +68,7 @@ public class DiceLoader : MonoBehaviour
         {
             float unloadTime = lastUnloadTime - (0.02f * count);
             LeanTween.moveX(die, destroyPos.position.x, unloadTime).setEaseInQuad();
-            Destroy(die, unloadTime);
+            Destroy(die, unloadTime + 0.05f);
             yield return new WaitForSeconds(loadInterval);
             count--;
         }

@@ -20,8 +20,8 @@ public class ActionManager : MonoBehaviour
     {
         if (playerHealth == null)
             playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
-        side.Action();
         actionStarted = true;
+        side.Action();
     }
 
     public void ActionFinished()

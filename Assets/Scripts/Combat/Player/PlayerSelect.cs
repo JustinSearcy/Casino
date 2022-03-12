@@ -20,7 +20,6 @@ public class PlayerSelect : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("PlayerClicked");
         if (combatManager.combatState == CombatState.PLAYER_ATTACK)
             diceManager.TryAction("Player", gameObject);
     }
