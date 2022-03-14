@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.IO;
 
 public class MapGeneration : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] int pathLength = 10;
 
     [Header("Path Display")]
-    [SerializeField] Vector2 startPos = new Vector2(0f, -4.5f);
-    [SerializeField] Vector2 stopPos = new Vector2(0f, 4.5f);
+    [SerializeField] public Vector2 startPos = new Vector2(0f, -4.5f);
+    [SerializeField] public Vector2 stopPos = new Vector2(0f, 4.5f);
     [SerializeField] float yPathMax = -3f;
     [SerializeField] float yPathMin = 3f;
     [SerializeField] float xPathMin = -6;
@@ -21,14 +22,17 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] float yMaxOffset = 0.5f;
 
     [Header("Path Line")]
-    [SerializeField] GameObject line = null;
-    [SerializeField] GameObject lines = null;
+    [SerializeField] public GameObject line = null;
+    [SerializeField] public GameObject lines = null;
     [SerializeField] float pathSplitChance = 0.2f;
 
 
-    [Header("Misc")]
-    [SerializeField] GameObject placeholderIcon = null;
-    [SerializeField] GameObject nodes = null;
+    [Header("Nodes")]
+    [SerializeField] public GameObject placeholderNode = null;
+    [SerializeField] public GameObject fightNode = null;
+    [SerializeField] public GameObject eventNode = null;
+    [SerializeField] public GameObject itemNode = null;
+    [SerializeField] public GameObject nodes = null;
 
     [Header("Debug")]
     [SerializeField] Dictionary<int, List<GameObject>> layers;
@@ -41,6 +45,8 @@ public class MapGeneration : MonoBehaviour
     private List<GameObject> currentLayer;
     private List<GameObject> nodeConnections;
 
+    string path;
+
     void Start()
     {
         GenerateMap();
@@ -48,9 +54,11 @@ public class MapGeneration : MonoBehaviour
 
    private void GenerateMap()
     {
+        path = Application.dataPath + "/Map.txt";
+        File.WriteAllText(path, ""); //Overide any existing text
         layers = new Dictionary<int, List<GameObject>>();
         connections = new Dictionary<GameObject, List<GameObject>>();
-        GameObject start = Instantiate(placeholderIcon, startPos, Quaternion.identity);
+        GameObject start = Instantiate(placeholderNode, startPos, Quaternion.identity);
         int nodeCount = 1;
         int layerCount = 0;
         start.transform.parent = nodes.transform;
@@ -71,7 +79,8 @@ public class MapGeneration : MonoBehaviour
                 float xPos = xPathMin + (xStepSize * j);
                 float xOffset = Random.Range(-xMaxOffset, xMaxOffset);
                 float yOffset = Random.Range(-yMaxOffset, yMaxOffset);
-                GameObject newNode = Instantiate(placeholderIcon, new Vector2(xPos + xOffset, yPos + yOffset), Quaternion.identity);
+                GameObject node = DetermineNode(i);
+                GameObject newNode = Instantiate(node, new Vector2(xPos + xOffset, yPos + yOffset), Quaternion.identity);
                 newNode.transform.parent = nodes.transform;
                 newNode.name = "node: " + nodeCount;
                 nodeCount++;
@@ -84,13 +93,30 @@ public class MapGeneration : MonoBehaviour
             layerCount++;
         }
 
-        GameObject stop = Instantiate(placeholderIcon, stopPos, Quaternion.identity);
+        GameObject stop = Instantiate(placeholderNode, stopPos, Quaternion.identity);
         stop.transform.parent = nodes.transform;
         stop.name = "stop";
         allNodes.Add(stop);
         layers.Add(layerCount, new List<GameObject>() { stop });
 
         AddConnections();
+   }
+
+    private GameObject DetermineNode(int row) //Also change based on level, determine that later
+    {
+        float rand = Random.Range(0, 1f);
+        if (row == 0)
+            return fightNode;
+        else if(row > 0) //Change up when more nodes
+        {
+            if (rand > 0.5)
+                return fightNode;
+            else if (rand > 0.25)
+                return itemNode;
+            else
+                return eventNode;
+        }
+        return fightNode; //In case something goes wrong
     }
 
     private void AddConnections()
@@ -103,32 +129,30 @@ public class MapGeneration : MonoBehaviour
                 int nextCount = nextLayer.Count;
 
                 if (i == 0)
-                {
                     ConnectFirstLayer();
-                }
                 else if(i == layers.Count - 2)
-                {
                     ConnectFinalLayer();
-                }
                 else
                 {
+                    string mapRow = "";
+                    
                     for (int j = 0; j < currentCount; j++)
                     {
+                        mapRow += GetNodeType(currentLayer[j]) + ",";
                         if (currentCount == nextCount)
-                        {
-                            SameSizeConnection(j, currentCount);
-                        }
+                            mapRow += SameSizeConnection(j, currentCount);
                         else if (currentCount < nextCount)
-                        {
-                            SmallToLargeConnection(currentCount, nextCount, j);
-                        }
+                            mapRow += SmallToLargeConnection(currentCount, nextCount, j);
                         else
-                        {
-                            LargeToSmallConnection(currentCount, nextCount, j);
-                        }
+                            mapRow += LargeToSmallConnection(currentCount, nextCount, j);
                         connections.Add(currentLayer[j], new List<GameObject>(currentConnections));
                         currentConnections.Clear();
+                        mapRow += $",{currentLayer[j].transform.localPosition.x},{currentLayer[j].transform.localPosition.y}";
+                        if (j < currentCount - 1)
+                            mapRow += "|";
                     }
+                    mapRow += "\n";
+                    File.AppendAllText(path, mapRow);
                 }
             }
             currentConnections.Clear();
@@ -139,110 +163,140 @@ public class MapGeneration : MonoBehaviour
     private void ConnectFirstLayer()
     {
         foreach (GameObject node in nextLayer)
-        {
             currentConnections.Add(node);
-        }
         connections.Add(currentLayer[0], new List<GameObject>(currentConnections));
     }
 
     private void ConnectFinalLayer()
     {
-        foreach (GameObject node in currentLayer)
+        string mapRow = "";
+        for (int i = 0; i < currentLayer.Count; i++)
         {
-            connections.Add(node, new List<GameObject>() { allNodes[allNodes.Count - 1] });
+            connections.Add(currentLayer[i], new List<GameObject>() { allNodes[allNodes.Count - 1] });
+            mapRow += $"{GetNodeType(currentLayer[i])},0,{currentLayer[i].transform.localPosition.x},{currentLayer[i].transform.localPosition.y}";
+            if (i < currentLayer.Count - 1)
+                mapRow += "|";
+        }
+        File.AppendAllText(path, mapRow);
+        
+    }
+
+    private string GetNodeType(GameObject node)
+    {
+        switch (node.tag)
+        {
+            case "FightNode":
+                return "F";
+            case "ItemNode":
+                return "I";
+            case "EventNode":
+                return "E";
+            default:
+                return "Node Not Found";
         }
     }
 
-    private void SameSizeConnection(int j, int currentCount)
+    private string SameSizeConnection(int j, int currentCount)
     {
         currentConnections.Add(nextLayer[j]);
+        string output = j.ToString();
         if (Split())
         {
             if (j == 0)
             {
                 currentConnections.Add(nextLayer[j + 1]);
+                output += (j + 1).ToString();
             }
             else if (j == currentCount - 1)
             {
                 currentConnections.Add(nextLayer[j - 1]);
-            }
+                output += (j - 1).ToString();
+            }    
             else
-            {
-                SplitLeftOrRight(j);
-            }
+                output += SplitLeftOrRight(j);
         }
+        return output;
     }
 
-    private void SmallToLargeConnection(int currentCount, int nextCount, int j)
+    private string SmallToLargeConnection(int currentCount, int nextCount, int j)
     {
         int difference = nextCount - currentCount;
         if (j == 0)
         {
             currentConnections.Add(nextLayer[0]);
             currentConnections.Add(nextLayer[1]);
+            return "01";
         }
         else if (j == currentCount - 1)
         {
             currentConnections.Add(nextLayer[j + difference - 1]);
             currentConnections.Add(nextLayer[j + difference]);
+            return (j + difference - 1).ToString() + (j + difference).ToString();
         }
         else
         {
             if (difference == 1)
             {
                 currentConnections.Add(nextLayer[j]);
+                string output = j.ToString();
                 if (Split())
-                {
-                    SplitLeftOrRight(j);
-                }
+                    output += SplitLeftOrRight(j);
+                return output;
             }
             else
             {
                 currentConnections.Add(nextLayer[j + 1]);
                 currentConnections.Add(nextLayer[j + 2]);
+                return (j + difference - 1).ToString() + (j + difference).ToString();
             }
         }
     }
 
-    private void LargeToSmallConnection(int currentCount, int nextCount, int j)
+    private string LargeToSmallConnection(int currentCount, int nextCount, int j)
     {
         if (j == 0)
         {
             currentConnections.Add(nextLayer[0]);
+            string output = "0";
             if (Split())
             {
                 currentConnections.Add(nextLayer[1]);
+                output += "1";
             }
+            return output;
         }
         else if (j == currentCount - 1)
         {
             currentConnections.Add(nextLayer[nextCount - 1]);
+            return (nextCount - 1).ToString();
         }
         else
         {
             currentConnections.Add(nextLayer[(j / 2) + 1]);
+            return ((j / 2) + 1).ToString();
         }
+            
     }
 
     private bool Split()
     {
         float rand = Random.Range(0, 1f);
         if(rand < pathSplitChance)
-        {
             return true;
-        }
         return false;
     }
 
-    private void SplitLeftOrRight(int j)
+    private string SplitLeftOrRight(int j)
     {
         if (SplitDirection())
         {
             currentConnections.Add(nextLayer[j - 1]);
-        }
+            return (j - 1).ToString();
+        } 
         else
         {
             currentConnections.Add(nextLayer[j + 1]);
+            return (j + 1).ToString();
         }
     }
 
@@ -250,9 +304,7 @@ public class MapGeneration : MonoBehaviour
     {
         float rand = Random.Range(0, 1f);
         if (rand < 0.5f)
-        {
             return true;
-        }
         return false;
     }
 
@@ -273,14 +325,10 @@ public class MapGeneration : MonoBehaviour
     public void DeleteMap()
     {
         foreach (Transform node in nodes.transform)
-        {
             Destroy(node.gameObject);
-        }
 
         foreach (Transform line in lines.transform)
-        {
             Destroy(line.gameObject);
-        }
 
         allNodes.Clear();
 
