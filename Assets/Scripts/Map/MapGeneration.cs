@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class MapGeneration : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class MapGeneration : MonoBehaviour
 
         for (int i = 0; i < pathLength; i++)
         {
-            int rowOptions = Random.Range(minPathOptions, maxPathOptions + 1);
+            int rowOptions = UnityEngine.Random.Range(minPathOptions, maxPathOptions + 1);
             float xStepSize = (Mathf.Abs(xPathMin) + Mathf.Abs(xPathMax)) / (rowOptions - 1);
             float yStepSize = (Mathf.Abs(yPathMin) + Mathf.Abs(yPathMax)) / (pathLength - 1);
             float yPos = yPathMin + (yStepSize * i);
@@ -77,8 +78,8 @@ public class MapGeneration : MonoBehaviour
             for (int j = 0; j < rowOptions; j++)
             {
                 float xPos = xPathMin + (xStepSize * j);
-                float xOffset = Random.Range(-xMaxOffset, xMaxOffset);
-                float yOffset = Random.Range(-yMaxOffset, yMaxOffset);
+                float xOffset = UnityEngine.Random.Range(-xMaxOffset, xMaxOffset);
+                float yOffset = UnityEngine.Random.Range(-yMaxOffset, yMaxOffset);
                 GameObject node = DetermineNode(i);
                 GameObject newNode = Instantiate(node, new Vector2(xPos + xOffset, yPos + yOffset), Quaternion.identity);
                 newNode.transform.parent = nodes.transform;
@@ -104,7 +105,7 @@ public class MapGeneration : MonoBehaviour
 
     private GameObject DetermineNode(int row) //Also change based on level, determine that later
     {
-        float rand = Random.Range(0, 1f);
+        float rand = UnityEngine.Random.Range(0, 1f);
         if (row == 0)
             return fightNode;
         else if(row > 0) //Change up when more nodes
@@ -147,7 +148,7 @@ public class MapGeneration : MonoBehaviour
                             mapRow += LargeToSmallConnection(currentCount, nextCount, j);
                         connections.Add(currentLayer[j], new List<GameObject>(currentConnections));
                         currentConnections.Clear();
-                        mapRow += $",{currentLayer[j].transform.localPosition.x},{currentLayer[j].transform.localPosition.y}";
+                        mapRow += $",{Math.Round(currentLayer[j].transform.localPosition.x, 2)},{Math.Round(currentLayer[j].transform.localPosition.y, 2)}";
                         if (j < currentCount - 1)
                             mapRow += "|";
                     }
@@ -173,7 +174,7 @@ public class MapGeneration : MonoBehaviour
         for (int i = 0; i < currentLayer.Count; i++)
         {
             connections.Add(currentLayer[i], new List<GameObject>() { allNodes[allNodes.Count - 1] });
-            mapRow += $"{GetNodeType(currentLayer[i])},0,{currentLayer[i].transform.localPosition.x},{currentLayer[i].transform.localPosition.y}";
+            mapRow += $"{GetNodeType(currentLayer[i])},0,{Math.Round(currentLayer[i].transform.localPosition.x, 2)},{Math.Round(currentLayer[i].transform.localPosition.y, 2)}";
             if (i < currentLayer.Count - 1)
                 mapRow += "|";
         }
@@ -280,7 +281,7 @@ public class MapGeneration : MonoBehaviour
 
     private bool Split()
     {
-        float rand = Random.Range(0, 1f);
+        float rand = UnityEngine.Random.Range(0, 1f);
         if(rand < pathSplitChance)
             return true;
         return false;
@@ -302,7 +303,7 @@ public class MapGeneration : MonoBehaviour
 
     private bool SplitDirection() //Return true to split left, false to split right
     {
-        float rand = Random.Range(0, 1f);
+        float rand = UnityEngine.Random.Range(0, 1f);
         if (rand < 0.5f)
             return true;
         return false;

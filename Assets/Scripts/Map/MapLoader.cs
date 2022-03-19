@@ -28,11 +28,7 @@ public class MapLoader : MonoBehaviour
     {
         if (File.Exists(Application.dataPath + "/Map.txt")) {
             Debug.Log("File Found");
-            string[] map = File.ReadAllLines(Application.dataPath + "/Map.txt");
-            layers.Clear();
-            futureConnections.Clear();
-            connections.Clear();
-            allNodes.Clear();
+            string[] map = Initialize();
             GameObject start = Instantiate(mapGen.placeholderNode, mapGen.startPos, Quaternion.identity);
             start.transform.parent = mapGen.nodes.transform;
             layers.Add(new List<GameObject>() { start });
@@ -46,6 +42,15 @@ public class MapLoader : MonoBehaviour
             AddConnections(start, end);
             DrawLines();
         }
+    }
+
+    private string[] Initialize()
+    {
+        layers.Clear();
+        futureConnections.Clear();
+        connections.Clear();
+        allNodes.Clear();
+        return File.ReadAllLines(Application.dataPath + "/Map.txt");
     }
 
     private void CreateRow(string row)
@@ -62,10 +67,12 @@ public class MapLoader : MonoBehaviour
         string[] data = node.Split(',');
         GameObject nodeType = GetNodeType(data[0]);
         Vector2 pos = new Vector2(float.Parse(data[2]), float.Parse(data[3])); //maybe check with try parse first?
-        GameObject newNode = Instantiate(nodeType, pos, Quaternion.identity);
+        GameObject newNode = Instantiate(nodeType, Vector2.zero, Quaternion.identity);
         newNode.transform.parent = mapGen.nodes.transform;
+        newNode.transform.localPosition = pos;
         currentLayer.Add(newNode);
         futureConnections.Add(newNode, data[1]);
+        newNode.name = "node: " + allNodes.Count;
         allNodes.Add(newNode);
     }
 
@@ -88,15 +95,13 @@ public class MapLoader : MonoBehaviour
     {
         connections.Add(start, layers[1]); //Connect start node to every node in first layer
 
-        List<GameObject> currentConnections = new List<GameObject>();
         for (int i = 1; i < layers.Count - 2; i++)
         {
             Debug.Log("layer: " + i);
             foreach (GameObject node in layers[i])
             {
-                currentConnections.Clear();
+                List<GameObject> currentConnections = new List<GameObject>();
                 string connect = futureConnections[node];
-                Debug.Log(node.name);
                 for (int j = 0; j < connect.Length; j++)
                 {
                     int index = Int32.Parse(connect[j].ToString());
