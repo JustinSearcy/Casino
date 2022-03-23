@@ -5,7 +5,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
-public class MapGeneration : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
     [Header("Main Path Options")]
     [SerializeField] int minPathOptions = 3;
@@ -36,7 +36,7 @@ public class MapGeneration : MonoBehaviour
     [SerializeField] public GameObject nodes = null;
 
     [Header("Debug")]
-    [SerializeField] Dictionary<int, List<GameObject>> layers;
+    [SerializeField] public List<List<GameObject>> layers;
     [SerializeField] Dictionary<GameObject, List<GameObject>> connections;
     [SerializeField] List<GameObject> currentLayerList = null;
     [SerializeField] List<GameObject> currentConnections = null;
@@ -48,16 +48,11 @@ public class MapGeneration : MonoBehaviour
 
     string path;
 
-    void Start()
-    {
-        GenerateMap();
-    }
-
-   private void GenerateMap()
-    {
+   public Dictionary<GameObject, List<GameObject>> GenerateMap()
+   {
         path = Application.dataPath + "/Map.txt";
         File.WriteAllText(path, ""); //Overide any existing text
-        layers = new Dictionary<int, List<GameObject>>();
+        layers = new List<List<GameObject>>();
         connections = new Dictionary<GameObject, List<GameObject>>();
         GameObject start = Instantiate(placeholderNode, startPos, Quaternion.identity);
         int nodeCount = 1;
@@ -65,7 +60,7 @@ public class MapGeneration : MonoBehaviour
         start.transform.parent = nodes.transform;
         start.name = "start";
         allNodes.Add(start);
-        layers.Add(layerCount, new List<GameObject>() { start });
+        layers.Add(new List<GameObject>() { start });
         layerCount++;
 
         for (int i = 0; i < pathLength; i++)
@@ -89,7 +84,7 @@ public class MapGeneration : MonoBehaviour
                 allNodes.Add(newNode);
             }
 
-            layers.Add(layerCount, new List<GameObject>(currentLayerList));
+            layers.Add(new List<GameObject>(currentLayerList));
             currentLayerList.Clear();
             layerCount++;
         }
@@ -98,9 +93,11 @@ public class MapGeneration : MonoBehaviour
         stop.transform.parent = nodes.transform;
         stop.name = "stop";
         allNodes.Add(stop);
-        layers.Add(layerCount, new List<GameObject>() { stop });
+        layers.Add(new List<GameObject>() { stop });
 
         AddConnections();
+
+        return connections;
    }
 
     private GameObject DetermineNode(int row) //Also change based on level, determine that later
@@ -122,54 +119,49 @@ public class MapGeneration : MonoBehaviour
 
     private void AddConnections()
     {
-        for(int i = 0; i < layers.Count - 1; i++)
+        currentConnections.Clear();
+        ConnectFirstLayer();
+        currentConnections.Clear();
+        for (int i = 1; i < layers.Count - 2; i++)
         {
-            if(layers.TryGetValue(i + 1, out nextLayer) && layers.TryGetValue(i, out currentLayer))
-            {
-                int currentCount = currentLayer.Count;
-                int nextCount = nextLayer.Count;
-
-                if (i == 0)
-                    ConnectFirstLayer();
-                else if(i == layers.Count - 2)
-                    ConnectFinalLayer();
-                else
-                {
-                    string mapRow = "";
+            currentLayer = layers[i];
+            nextLayer = layers[i + 1];
+            int currentCount = currentLayer.Count;
+            int nextCount = nextLayer.Count; 
+            string mapRow = "";
                     
-                    for (int j = 0; j < currentCount; j++)
-                    {
-                        mapRow += GetNodeType(currentLayer[j]) + ",";
-                        if (currentCount == nextCount)
-                            mapRow += SameSizeConnection(j, currentCount);
-                        else if (currentCount < nextCount)
-                            mapRow += SmallToLargeConnection(currentCount, nextCount, j);
-                        else
-                            mapRow += LargeToSmallConnection(currentCount, nextCount, j);
-                        connections.Add(currentLayer[j], new List<GameObject>(currentConnections));
-                        currentConnections.Clear();
-                        mapRow += $",{Math.Round(currentLayer[j].transform.localPosition.x, 2)},{Math.Round(currentLayer[j].transform.localPosition.y, 2)}";
-                        if (j < currentCount - 1)
-                            mapRow += "|";
-                    }
-                    mapRow += "\n";
-                    File.AppendAllText(path, mapRow);
-                }
+            for (int j = 0; j < currentCount; j++)
+            {
+                mapRow += GetNodeType(currentLayer[j]) + ",";
+                if (currentCount == nextCount)
+                    mapRow += SameSizeConnection(j, currentCount);
+                else if (currentCount < nextCount)
+                    mapRow += SmallToLargeConnection(currentCount, nextCount, j);
+                else
+                    mapRow += LargeToSmallConnection(currentCount, nextCount, j);
+                connections.Add(currentLayer[j], new List<GameObject>(currentConnections));
+                currentConnections.Clear();
+                mapRow += $",{Math.Round(currentLayer[j].transform.localPosition.x, 2)},{Math.Round(currentLayer[j].transform.localPosition.y, 2)}";
+                if (j < currentCount - 1)
+                    mapRow += "|";
             }
+            mapRow += "\n";
+            File.AppendAllText(path, mapRow);
             currentConnections.Clear();
         }
+        ConnectFinalLayer();
         DrawLines();
     }
 
     private void ConnectFirstLayer()
     {
-        foreach (GameObject node in nextLayer)
-            currentConnections.Add(node);
-        connections.Add(currentLayer[0], new List<GameObject>(currentConnections));
+        currentConnections.AddRange(layers[1]);
+        connections.Add(layers[0][0], new List<GameObject>(currentConnections));
     }
 
     private void ConnectFinalLayer()
     {
+        currentLayer = layers[layers.Count - 2];
         string mapRow = "";
         for (int i = 0; i < currentLayer.Count; i++)
         {
@@ -309,7 +301,7 @@ public class MapGeneration : MonoBehaviour
         return false;
     }
 
-    private void DrawLines()
+    public void DrawLines()
     {
         for(int i = 0; i <= connections.Count; i++)
         {

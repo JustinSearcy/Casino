@@ -59,6 +59,22 @@ PrefabInstance:
       propertyPath: m_TagString
       value: ItemNode
       objectReference: {fileID: 0}
+    - target: {fileID: 7338138720114606402, guid: 6f7653c08faa1484bb9f088bf0cc54f6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9436674
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338138720114606402, guid: 6f7653c08faa1484bb9f088bf0cc54f6, type: 3}
+      propertyPath: m_Size.y
+      value: 0.7183368
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338138720114606402, guid: 6f7653c08faa1484bb9f088bf0cc54f6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0010431558
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338138720114606402, guid: 6f7653c08faa1484bb9f088bf0cc54f6, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.0761534
+      objectReference: {fileID: 0}
     - target: {fileID: 8858128287519926756, guid: 6f7653c08faa1484bb9f088bf0cc54f6, type: 3}
       propertyPath: m_Sprite
       value: 

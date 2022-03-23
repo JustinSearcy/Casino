@@ -6,17 +6,17 @@ using System;
 
 public class MapLoader : MonoBehaviour
 {
-    MapGeneration mapGen;
+    MapGenerator mapGen;
 
     Dictionary<GameObject, string> futureConnections;
     Dictionary<GameObject, List<GameObject>> connections;
-    List<List<GameObject>> layers;
+    public List<List<GameObject>> layers;
     List<GameObject> currentLayer;
     List<GameObject> allNodes;
 
-    private void Start()
+    private void Awake()
     {
-        mapGen = FindObjectOfType<MapGeneration>();
+        mapGen = FindObjectOfType<MapGenerator>();
         futureConnections = new Dictionary<GameObject, string>();
         layers = new List<List<GameObject>>();
         currentLayer = new List<GameObject>();
@@ -24,24 +24,24 @@ public class MapLoader : MonoBehaviour
         allNodes = new List<GameObject>();
     }
 
-    public void LoadMap()
+    public Dictionary<GameObject, List<GameObject>> LoadMap()
     {
-        if (File.Exists(Application.dataPath + "/Map.txt")) {
-            Debug.Log("File Found");
-            string[] map = Initialize();
-            GameObject start = Instantiate(mapGen.placeholderNode, mapGen.startPos, Quaternion.identity);
-            start.transform.parent = mapGen.nodes.transform;
-            layers.Add(new List<GameObject>() { start });
-            allNodes.Add(start);
-            foreach (string row in map)
-                CreateRow(row);
-            GameObject end = Instantiate(mapGen.placeholderNode, mapGen.stopPos, Quaternion.identity);
-            end.transform.parent = mapGen.nodes.transform;
-            layers.Add(new List<GameObject>() { end });
-            allNodes.Add(end);
-            AddConnections(start, end);
-            DrawLines();
-        }
+        Debug.Log("File Found");
+        string[] map = Initialize();
+        GameObject start = Instantiate(mapGen.placeholderNode, mapGen.startPos, Quaternion.identity);
+        start.transform.parent = mapGen.nodes.transform;
+        layers.Add(new List<GameObject>() { start });
+        allNodes.Add(start);
+        foreach (string row in map)
+            CreateRow(row);
+        GameObject end = Instantiate(mapGen.placeholderNode, mapGen.stopPos, Quaternion.identity);
+        end.transform.parent = mapGen.nodes.transform;
+        layers.Add(new List<GameObject>() { end });
+        allNodes.Add(end);
+        AddConnections(start, end);
+        DrawLines();
+
+        return connections;
     }
 
     private string[] Initialize()
