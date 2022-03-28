@@ -904,6 +904,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentNode: {fileID: 0}
   nextAvailableNodes: []
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4286874756
 --- !u!1 &1063539275
 GameObject:
   m_ObjectHideFlags: 0

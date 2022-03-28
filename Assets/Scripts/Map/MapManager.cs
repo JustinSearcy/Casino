@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private List<List<GameObject>> layers;
     [SerializeField] private GameObject currentNode;
     [SerializeField] private List<GameObject> nextAvailableNodes;
+    [SerializeField] private Color32 disabledColor;
 
     MapGenerator generator;
     MapLoader loader;
@@ -27,6 +28,7 @@ public class MapManager : MonoBehaviour
             layers = loader.layers;   
             currentNode = layers[0][0]; //For now before entire system set
             SetNextAvailableNodes(currentNode); //PLEASE REMOVE LATER
+            UpdateDisabledNodes();
         }
         else
         {
@@ -37,9 +39,47 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void SetNextAvailableNodes(GameObject currentNode)
+    private void UpdateDisabledNodes()
     {
-        nextAvailableNodes = connections[currentNode];
+        int currentLayer = 0;
+        for (int i = 0; i < layers.Count; i++)
+        {
+            if (layers[i].Contains(currentNode)) {
+                currentLayer = i;
+                break;
+            }
+        }
+
+        if (currentLayer > 0)
+        {
+            for (int i = 1; i <= currentLayer; i++)
+            {
+                foreach (GameObject node in layers[i])
+                {
+                    if (node != currentNode)
+                        node.GetComponent<SpriteRenderer>().color = disabledColor;
+                }
+            }
+        }
+    }
+
+    public void SelectNewNode(GameObject nextNode)
+    {
+        if(ValidNextNode(nextNode)) //Maybe disable selecting another node at this point
+        {
+            currentNode = nextNode;
+            //Do not set next available for last node
+            if (currentNode != layers[layers.Count - 1][0])
+            {
+                SetNextAvailableNodes(currentNode);
+                UpdateDisabledNodes();
+            }
+        }
+    }
+
+    private void SetNextAvailableNodes(GameObject node)
+    {
+        nextAvailableNodes = connections[node];
     }
 
     public bool ValidNextNode(GameObject nextNode)
