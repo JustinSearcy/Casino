@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     [SerializeField] float healthBarTime = 0.4f;
 
     [Header("Animations")]
+    [SerializeField] GameObject sprite = null;
     [SerializeField] GameObject enemyDeathParticles = null;
     [SerializeField] GameObject damagePopup = null;
     [SerializeField] float hitStunTime = 0.2f;
@@ -41,7 +42,7 @@ public class Health : MonoBehaviour
         combatManager = FindObjectOfType<CombatManager>();
         actionManager = FindObjectOfType<ActionManager>();
         if (!isPlayer)
-            anim = this.gameObject.GetComponent<Animator>();
+            anim = sprite.GetComponent<Animator>();
         camShake = FindObjectOfType<Shake>();
         currentHealth = maxHealth;
         blockText = healthBar.transform.parent.GetChild(2).transform.GetChild(0).GetComponent<TextMeshPro>();

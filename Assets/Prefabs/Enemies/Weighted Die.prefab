@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4481412872843334721, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 1962670759979589226}
     - target: {fileID: 2328002559012266590, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -125,3 +129,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+--- !u!1 &1962670759979589226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5809409573136989429, guid: 52cf91b199fb9284c9bbe933ecdf612f, type: 3}
+  m_PrefabInstance: {fileID: 5450452391326671519}
+  m_PrefabAsset: {fileID: 0}

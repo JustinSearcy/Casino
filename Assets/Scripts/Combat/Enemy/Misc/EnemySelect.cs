@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemySelect : MonoBehaviour
 {
-    [SerializeField] float outlineAlpha = 0.75f;
+    [SerializeField] private float outlineAlpha = 0.75f;
+    [SerializeField] private GameObject sprite = null;
 
     CombatManager combatManager;
     DiceManager diceManager;
@@ -14,7 +15,7 @@ public class EnemySelect : MonoBehaviour
     {
         combatManager = FindObjectOfType<CombatManager>();
         diceManager = FindObjectOfType<DiceManager>();
-        mat = gameObject.GetComponent<Renderer>().material;
+        mat = sprite.GetComponent<Renderer>().material;
         mat.SetFloat("_OutlineAlpha", 0);
     }
 

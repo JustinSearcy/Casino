@@ -25,7 +25,7 @@ public class StatusManager : MonoBehaviour
     private void Start()
     {
 
-        statusGrid = FindGameObjectInChildWithTag(gameObject, "StatusGrid");
+        statusGrid = Helper.FindGameObjectInChildWithTag(gameObject, "StatusGrid");
         allStatus = new Dictionary<Status, bool>();
         combatManager = FindObjectOfType<CombatManager>();
         poison = FindObjectOfType<Poison>();
@@ -96,18 +96,5 @@ public class StatusManager : MonoBehaviour
             UpdateIcon(poisonIcon, poisonCounter);
         }
         
-    }
-
-    public static GameObject FindGameObjectInChildWithTag(GameObject parent, string tag)
-    {
-        Transform t = parent.transform;
-        foreach (Transform tr in t)
-        {
-            if (tr.tag == tag)
-            {
-                return tr.gameObject;
-            }
-        }
-        return null;
     }
 }
